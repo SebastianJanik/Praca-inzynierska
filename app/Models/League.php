@@ -5,22 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fmatch extends Model
+class League extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'date',
-        'town',
-        'protocol',
-        'round_id'
+        'name'
     ];
 
     public function teams(){
-        return $this->belongsToMany(Team::class);
-    }
-
-    public function users(){
         return $this->belongsToMany(Team::class);
     }
 }
