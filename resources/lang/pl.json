@@ -1,0 +1,16 @@
+{
+    "Name": "Imie",
+    "Surname": "Nazwisko",
+    "Polish": "Polski",
+    "English": "Angielski",
+    "Date of birth": "Data urodzin",
+    "Street": "Ulica",
+    "House number": "Numer domu",
+    "Apartament number": "Numer mieszkania",
+    "E-Mail Address": "Adres E-Mail",
+    "Postal code": "Kod pocztowy",
+    "Password": "Hasło",
+    "Confirm password": "Powtórz hasło",
+    "Register": "Zarejestruj",
+    "Login": "Zaloguj"
+}
