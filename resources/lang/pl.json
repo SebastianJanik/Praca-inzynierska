@@ -1,5 +1,6 @@
 {
-    "Name": "Imie",
+    "Name": "Nazwa",
+    "First name": "Imie",
     "Surname": "Nazwisko",
     "Polish": "Polski",
     "English": "Angielski",
@@ -9,8 +10,13 @@
     "Apartament number": "Numer mieszkania",
     "E-Mail Address": "Adres E-Mail",
     "Postal code": "Kod pocztowy",
+    "Town": "Miasto",
     "Password": "Hasło",
     "Confirm password": "Powtórz hasło",
     "Register": "Zarejestruj",
-    "Login": "Zaloguj"
+    "Login": "Zaloguj",
+    "Add team": "Zgłoś drużynę",
+    "Add player": "Zgłoś gracz",
+    "Create league": "Utwórz ligę",
+    "League name": "Nazwa ligi"
 }

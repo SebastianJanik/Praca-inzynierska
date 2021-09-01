@@ -10,7 +10,6 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'league_id',
         'name',
         'street',
         'house_number',

@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\LeaguesController;
+use App\Http\Controllers\TeamsController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 
@@ -23,4 +24,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/leagues/create', [LeaguesController::class, 'create'])->name('leagues_create');
+Route::post('/leagues', [LeaguesController::class, 'store'])->name('leagues_store');
+
+Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams_create');
+Route::post('/teams', [TeamsController::class, 'store'])->name('teams_store');
 
