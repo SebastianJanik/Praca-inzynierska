@@ -17,7 +17,7 @@ class CreateMatchesTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('town');
-            $table->binary('protocol');
+            $table->string('protocol');
             $table->foreignId('round_id')->constrained('rounds')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

@@ -17,15 +17,25 @@
                         <a href="{{route('leagues_create')}}">
                             <button>{{__('Create league')}}</button>
                         </a>
-                    </div>
-                    <div class="card-button">
-                        <a href="{{route('teams_create')}}">
-                            <button>{{__('Add player')}}</button>
+                        <a href="{{route('leagues_index')}}">
+                            <button>{{__('View league')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
                         <a href="{{route('teams_create')}}">
                             <button>{{__('Add team')}}</button>
+                        </a>
+                    </div>
+                    <div class="card-button">
+                        <a href="{{route('seasons_create')}}">
+                            <button>{{__('Add season')}}</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-button">
+                        <a href="{{route('team_users_find')}}">
+                            <button>{{__('Add player')}}</button>
                         </a>
                     </div>
                 </div>

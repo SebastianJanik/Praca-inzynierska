@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fmatch extends Model
+class Matches extends Model
 {
     use HasFactory;
 
@@ -21,6 +21,7 @@ class Fmatch extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(User::class);
     }
+
 }

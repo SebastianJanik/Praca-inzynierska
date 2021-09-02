@@ -18,13 +18,15 @@ class TeamsController extends Controller
 
     public function store()
     {
-        $data = request()->validate([
-            'name' => 'required',
-            'street' => 'required',
-            'house_number' => 'required',
-            'postal_code' => 'size:6',
-            'town' => 'required'
-                                    ]);
+        $data = request()->validate(
+            [
+                'name' => 'required',
+                'street' => 'required',
+                'house_number' => 'required',
+                'postal_code' => 'size:6',
+                'town' => 'required'
+            ]
+        );
         Team::create($data);
         return view('teams.store');
     }

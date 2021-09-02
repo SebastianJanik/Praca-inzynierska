@@ -13,7 +13,7 @@ class Round extends Model
         'season_id'
     ];
 
-    public function fmatches(){
-        return $this->belongsToMany(Fmatch::class);
+    public function matches(){
+        return $this->belongsToMany(Matches::class);
     }
 }

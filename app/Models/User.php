@@ -50,6 +50,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class);
     }
     public function matches(){
-        return $this->belongsToMany(Fmatch::class);
+        return $this->belongsToMany(Matches::class);
     }
 }

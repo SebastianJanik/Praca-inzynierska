@@ -22,6 +22,8 @@ class CreateMatchUsersTable extends Migration
             $table->integer('asists');
             $table->time('start_min');
             $table->time('end_min');
+            $table->timestamps();
+
         });
     }
 

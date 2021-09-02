@@ -15,8 +15,11 @@
     "Confirm password": "Powtórz hasło",
     "Register": "Zarejestruj",
     "Login": "Zaloguj",
-    "Add team": "Zgłoś drużynę",
-    "Add player": "Zgłoś gracz",
+    "Add team": "Utwórz drużynę",
+    "Add player": "Zgłoś gracza",
     "Create league": "Utwórz ligę",
-    "League name": "Nazwa ligi"
+    "League name": "Nazwa ligi",
+    "Number of teams": "Liczba drużyn",
+    "Add season": "Utwórz sezon",
+    "Season name": "Nazwa sezonu"
 }
