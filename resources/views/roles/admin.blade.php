@@ -34,8 +34,8 @@
                 </div>
                 <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('team_users_find')}}">
-                            <button>{{__('Add player')}}</button>
+                        <a href="{{route('team_users_apply')}}">
+                            <button>{{__('Apply to the team')}}</button>
                         </a>
                     </div>
                 </div>

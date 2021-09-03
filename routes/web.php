@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\TeamUsers\ApplyController;
+use App\Http\Controllers\ApplyEndControler;
 use App\Http\Controllers\LeaguesController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\TeamsController;
@@ -39,5 +41,7 @@ Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons_stor
 
 Route::post('/players/create', [TeamUsersController::class, 'create'])->name('team_users_create');
 Route::post('/players', [TeamUsersController::class, 'store'])->name('team_users_store');
-Route::get('/players/find', [TeamUsersController::class, 'find'])->name('team_users_find');
+Route::get('/players/apply', [TeamUsersController::class, 'apply'])->name('team_users_apply');
 
+Route::apiResource('applies', ApplyController::class);
+Route::apiResource('appliesend', ApplyEndControler::class);

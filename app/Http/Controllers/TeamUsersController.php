@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\League;
 use App\Models\Team;
+use App\Models\TeamUsers;
 use App\Models\User;
 
 class TeamUsersController extends Controller
 {
-    public function find()
+    public function apply()
     {
-        return view('team_users.find');
+        $leagues = League::all();
+        $teams = Team::all();
+        return view('team_users.apply', array(
+            'leagues' => $leagues,
+            'teams' => $teams
+        ));
+//        return view('team_users.apply');
     }
 
     public function create()
@@ -28,6 +36,12 @@ class TeamUsersController extends Controller
 
     public function store()
     {
-
+        $data = request()->validate(
+            [
+                'team' => 'required',
+            ]
+        );
+//        TeamUsers::create($data);
+        return view('team_users.store');
     }
 }

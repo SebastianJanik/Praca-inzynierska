@@ -14,8 +14,10 @@ class CreateTeamUsersTable extends Migration
     public function up()
     {
         Schema::create('team_users', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('team_id')->nullable()->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('status');
             $table->date('join_date');
             $table->date('left_date');
             $table->timestamps();
