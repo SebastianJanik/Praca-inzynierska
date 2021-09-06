@@ -1881,11 +1881,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       applies: '',
-      fields: {}
+      fields: {},
+      succes: false
     };
   },
   mounted: function mounted() {
@@ -1901,6 +1903,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/appliesend', this.fields).then(function (response) {
         _this2.fields = {};
+        _this2.succes = true;
       })["catch"](function (error) {
         console.log('Error');
       });
@@ -37573,10 +37576,30 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "form-group row" }, [
-        _c("label", {
-          staticClass: "col-md-4 col-form-label text-md-right",
-          attrs: { for: "team" }
-        }),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.succes,
+                expression: "succes"
+              }
+            ],
+            staticClass: "alert alert-success"
+          },
+          [_vm._v("Udalo sie utworzyc")]
+        ),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "col-md-4 col-form-label text-md-right",
+            attrs: { for: "select-league" }
+          },
+          [_vm._v("Nazwa ligi22")]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
           _c(
@@ -37586,11 +37609,11 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.team,
-                  expression: "fields.team"
+                  value: _vm.fields.league,
+                  expression: "fields.league"
                 }
               ],
-              attrs: { id: "team" },
+              attrs: { id: "select-league" },
               on: {
                 change: function($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -37603,16 +37626,18 @@ var render = function() {
                     })
                   _vm.$set(
                     _vm.fields,
-                    "team",
+                    "league",
                     $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                   )
                 }
               }
             },
             _vm._l(_vm.applies, function(apply) {
-              return _c("option", { domProps: { value: apply.id } }, [
-                _vm._v(_vm._s(apply.name))
-              ])
+              return _c(
+                "option",
+                { staticClass: "apply.id", domProps: { value: apply.id } },
+                [_vm._v(_vm._s(apply.name))]
+              )
             }),
             0
           )

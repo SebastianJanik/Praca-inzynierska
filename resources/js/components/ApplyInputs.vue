@@ -3,18 +3,19 @@
         <!--        @csrf-->
 
         <div class="form-group row">
-            <label for="team" class="col-md-4 col-form-label text-md-right"></label>
+            <div class="alert alert-success" v-show="succes">Udalo sie utworzyc</div>
+            <label for="select-league" class="col-md-4 col-form-label text-md-right">Nazwa ligi22</label>
             <div class="col-md-6">
                 <!--                <input id="team" type="text"-->
                 <!--                       class="form-control @error('team') is-invalid @enderror" name="team"-->
                 <!--                       required autocomplete="team" list="teams"-->
                 <!--                       autofocus>-->
-                <select id="team" v-model="fields.team">
+                <select id="select-league" v-model="fields.league">
                     <!--                    @foreach($teams as $team)-->
                     <!--                    <option value="{{$team->name}}"></option>-->
                     <!--                    @endforeach-->
 <!--                                        <option>{{ applies.name }}</option>-->
-                    <option v-for="apply in applies" :value="apply.id">{{ apply.name }}</option>
+                    <option v-for="apply in applies" class="apply.id" :value="apply.id">{{ apply.name }}</option>
                 </select>
                 <!--                @error('user')-->
                 <!--                <span class="invalid-feedback" role="alert">-->
@@ -39,7 +40,8 @@ export default {
     data() {
         return {
             applies: '',
-            fields: {}
+            fields: {},
+            succes: false
         }
     },
     mounted() {
@@ -52,6 +54,7 @@ export default {
         submit() {
             axios.post('/appliesend', this.fields).then(response => {
                 this.fields = {};
+                this.succes = true;
             }).catch(error =>{
                 console.log('Error');
             });
