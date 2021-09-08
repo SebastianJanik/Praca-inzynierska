@@ -12,7 +12,7 @@ class ApplyEndController extends Controller
     {
         $data = request()->validate(
             [
-                'league' => ' ',
+                'league' => 'required',
             ]
         );
         $data['join_date'] = date('Y-m-d');

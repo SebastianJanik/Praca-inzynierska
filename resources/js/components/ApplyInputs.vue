@@ -1,34 +1,22 @@
 <template>
     <form method="POST" @submit.prevent="submit">
         <!--        @csrf-->
+        <div class="alert alert-success" v-show="succes">Udalo sie utworzyc</div>
 
         <div class="form-group row">
-            <div class="alert alert-success" v-show="succes">Udalo sie utworzyc</div>
-            <label for="select-league" class="col-md-4 col-form-label text-md-right">Nazwa ligi22</label>
+            <label for="league" class="col-md-4 col-form-label text-md-right">Nazwa ligi22</label>
             <div class="col-md-6">
-                <!--                <input id="team" type="text"-->
-                <!--                       class="form-control @error('team') is-invalid @enderror" name="team"-->
-                <!--                       required autocomplete="team" list="teams"-->
-                <!--                       autofocus>-->
-                <select id="select-league" v-model="fields.league">
-                    <!--                    @foreach($teams as $team)-->
-                    <!--                    <option value="{{$team->name}}"></option>-->
-                    <!--                    @endforeach-->
-<!--                                        <option>{{ applies.name }}</option>-->
-                    <option v-for="apply in applies" class="apply.id" :value="apply.id">{{ apply.name }}</option>
+                <select id="league" name="league" v-model="fields.league">
+                    <option v-for="league in leagues" class="apply.id" :value="league.id">{{ league.name }}</option>
                 </select>
-                <!--                @error('user')-->
-                <!--                <span class="invalid-feedback" role="alert">-->
-                <!--                                        <strong>{{ $message }}</strong>-->
-                <!--                                    </span>-->
-                <!--                @enderror-->
+                <div class="alert alert-danger" v-if="errors && errors.league">{{ errors.league[0] }}</div>
             </div>
         </div>
 
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    <!--                    {{ __('Apply') }}-->
+                                        {{ ('Apply') }}
                 </button>
             </div>
         </div>
@@ -39,23 +27,29 @@
 export default {
     data() {
         return {
-            applies: '',
+            leagues: '',
+            teams: '',
             fields: {},
-            succes: false
+            succes: false,
+            errors: {}
         }
     },
     mounted() {
         axios.get('/applies')
             .then(response => {
-                this.applies = response.data.data;
+                this.leagues = response.data.leagues;
+                this.teams = response.data.teams;
             })
     },
     methods: {
         submit() {
             axios.post('/appliesend', this.fields).then(response => {
                 this.fields = {};
+                this.errors = {};
                 this.succes = true;
-            }).catch(error =>{
+            }).catch(error => {
+                this.errors = error.response.data.errors;
+                this.succes = false;
                 console.log('Error');
             });
         }

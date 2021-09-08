@@ -1870,31 +1870,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      applies: '',
+      leagues: '',
+      teams: '',
       fields: {},
-      succes: false
+      succes: false,
+      errors: {}
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('/applies').then(function (response) {
-      _this.applies = response.data.data;
+      _this.leagues = response.data.leagues;
+      _this.teams = response.data.teams;
     });
   },
   methods: {
@@ -1903,8 +1894,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/appliesend', this.fields).then(function (response) {
         _this2.fields = {};
+        _this2.errors = {};
         _this2.succes = true;
       })["catch"](function (error) {
+        _this2.errors = error.response.data.errors;
+        _this2.succes = false;
         console.log('Error');
       });
     }
@@ -37575,28 +37569,28 @@ var render = function() {
       }
     },
     [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.succes,
+              expression: "succes"
+            }
+          ],
+          staticClass: "alert alert-success"
+        },
+        [_vm._v("Udalo sie utworzyc")]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.succes,
-                expression: "succes"
-              }
-            ],
-            staticClass: "alert alert-success"
-          },
-          [_vm._v("Udalo sie utworzyc")]
-        ),
-        _vm._v(" "),
         _c(
           "label",
           {
             staticClass: "col-md-4 col-form-label text-md-right",
-            attrs: { for: "select-league" }
+            attrs: { for: "league" }
           },
           [_vm._v("Nazwa ligi22")]
         ),
@@ -37613,7 +37607,7 @@ var render = function() {
                   expression: "fields.league"
                 }
               ],
-              attrs: { id: "select-league" },
+              attrs: { id: "league", name: "league" },
               on: {
                 change: function($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -37632,37 +37626,43 @@ var render = function() {
                 }
               }
             },
-            _vm._l(_vm.applies, function(apply) {
+            _vm._l(_vm.leagues, function(league) {
               return _c(
                 "option",
-                { staticClass: "apply.id", domProps: { value: apply.id } },
-                [_vm._v(_vm._s(apply.name))]
+                { staticClass: "apply.id", domProps: { value: league.id } },
+                [_vm._v(_vm._s(league.name))]
               )
             }),
             0
-          )
+          ),
+          _vm._v(" "),
+          _vm.errors && _vm.errors.league
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _vm._v(_vm._s(_vm.errors.league[0]))
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "form-group row mb-0" }, [
+        _c("div", { staticClass: "col-md-6 offset-md-4" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            [
+              _vm._v(
+                "\n                                    " +
+                  _vm._s("Apply") +
+                  "\n            "
+              )
+            ]
+          )
+        ])
+      ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row mb-0" }, [
-      _c("div", { staticClass: "col-md-6 offset-md-4" }, [
-        _c("button", {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submit" }
-        })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
