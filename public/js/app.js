@@ -1870,15 +1870,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js"));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       leagues: '',
       teams: '',
+      league_teams: [],
       fields: {},
       succes: false,
-      errors: {}
+      errors: {},
+      visible: {
+        teams: false
+      }
     };
   },
   mounted: function mounted() {
@@ -1889,17 +1903,31 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
       _this.teams = response.data.teams;
     });
   },
-  methods: {
-    submit: function submit() {
+  watch: {
+    'fields.league': function fieldsLeague(value) {
       var _this2 = this;
 
+      this.league_teams = [];
+      this.visible.teams = true;
+      this.teams.forEach(function (team) {
+        if (team.league_id == value) {
+          _this2.league_teams.push(team);
+        }
+      });
+    },
+    'fields.team': function fieldsTeam(value) {}
+  },
+  methods: {
+    submit: function submit() {
+      var _this3 = this;
+
       axios.post('/appliesend', this.fields).then(function (response) {
-        _this2.fields = {};
-        _this2.errors = {};
-        _this2.succes = true;
+        _this3.fields = {};
+        _this3.errors = {};
+        _this3.succes = true;
       })["catch"](function (error) {
-        _this2.errors = error.response.data.errors;
-        _this2.succes = false;
+        _this3.errors = error.response.data.errors;
+        _this3.succes = false;
         console.log('Error');
       });
     }
@@ -37625,7 +37653,7 @@ var render = function() {
           ],
           staticClass: "alert alert-success"
         },
-        [_vm._v("Udalo sie utworzyc")]
+        [_vm._v(_vm._s(_vm.__("Apply succesfull")))]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
@@ -37635,7 +37663,7 @@ var render = function() {
             staticClass: "col-md-4 col-form-label text-md-right",
             attrs: { for: "league" }
           },
-          [_vm._v("Nazwa ligi22")]
+          [_vm._v(_vm._s(_vm.__("League name")))]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
@@ -37670,11 +37698,9 @@ var render = function() {
               }
             },
             _vm._l(_vm.leagues, function(league) {
-              return _c(
-                "option",
-                { staticClass: "apply.id", domProps: { value: league.id } },
-                [_vm._v(_vm._s(league.name))]
-              )
+              return _c("option", { domProps: { value: league.id } }, [
+                _vm._v(_vm._s(league.name) + "\n                ")
+              ])
             }),
             0
           ),
@@ -37687,6 +37713,77 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.visible.teams,
+              expression: "visible.teams"
+            }
+          ],
+          staticClass: "form-group row"
+        },
+        [
+          _c(
+            "label",
+            {
+              staticClass: "col-md-4 col-form-label text-md-right",
+              attrs: { for: "team" }
+            },
+            [_vm._v(_vm._s(_vm.__("Team name")))]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.team,
+                    expression: "fields.team"
+                  }
+                ],
+                attrs: { id: "team", name: "team" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "team",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.league_teams, function(team) {
+                return _c("option", { domProps: { value: team.id } }, [
+                  _vm._v(_vm._s(team.name))
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.team
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(_vm._s(_vm.errors.team[0]))
+                ])
+              : _vm._e()
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group row mb-0" }, [
         _c("div", { staticClass: "col-md-6 offset-md-4" }, [
           _c(
@@ -37694,7 +37791,7 @@ var render = function() {
             { staticClass: "btn btn-primary", attrs: { type: "submit" } },
             [
               _vm._v(
-                "\n                                    " +
+                "\n                " +
                   _vm._s(_vm.__("Apply")) +
                   "\n            "
               )

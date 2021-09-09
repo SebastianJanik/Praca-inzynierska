@@ -13,12 +13,13 @@ class ApplyEndController extends Controller
         $data = request()->validate(
             [
                 'league' => 'required',
+                'team'=>'required',
             ]
         );
         $data['join_date'] = date('Y-m-d');
         $data['left_date'] = date('Y-m-d');
-        $data['team_id'] = 1;
         $data['user_id'] = auth()->id();
+        return view('team_users.store');
         dd($data);
         return TeamUsers::create($data);
     }
