@@ -1870,6 +1870,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js"));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2013,6 +2014,48 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/trans.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/trans.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = {
+  methods: {
+    /**
+     * Translate the given key.
+     */
+    __: function __(key, replace) {
+      var translation,
+          translationNotFound = true;
+
+      try {
+        translation = key.split('.').reduce(function (t, i) {
+          return t[i] || null;
+        }, window._translations[window._locale].php);
+
+        if (translation) {
+          translationNotFound = false;
+        }
+      } catch (e) {
+        translation = key;
+      }
+
+      if (translationNotFound) {
+        translation = window._translations[window._locale]['json'][key] ? window._translations[window._locale]['json'][key] : key;
+      }
+
+      _.forEach(replace, function (value, key) {
+        translation = translation.replace(':' + key, value);
+      });
+
+      return translation;
+    }
+  }
+};
 
 /***/ }),
 
@@ -37652,7 +37695,7 @@ var render = function() {
             [
               _vm._v(
                 "\n                                    " +
-                  _vm._s("Apply") +
+                  _vm._s(_vm.__("Apply")) +
                   "\n            "
               )
             ]

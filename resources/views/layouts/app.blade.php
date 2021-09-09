@@ -12,6 +12,11 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Translations -->
+    <script>
+        window._locale = '{{ app()->getLocale() }}';
+        window._translations = {!! cache('translations') !!};
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
