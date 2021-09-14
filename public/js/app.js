@@ -1898,7 +1898,7 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/applies').then(function (response) {
+    axios.get('/teamusers/create').then(function (response) {
       _this.leagues = response.data.leagues;
       _this.teams = response.data.teams;
     });
@@ -1921,7 +1921,7 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
     submit: function submit() {
       var _this3 = this;
 
-      axios.post('/appliesend', this.fields).then(function (response) {
+      axios.post('/teamusers/store', this.fields).then(function (response) {
         _this3.fields = {};
         _this3.errors = {};
         _this3.succes = true;

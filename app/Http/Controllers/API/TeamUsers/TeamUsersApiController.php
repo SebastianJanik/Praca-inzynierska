@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\API\TeamUsers;
 
+use App\Http\Resources\ApplyEndResource;
+use App\Http\Resources\ApplyResource;
+use App\Models\League;
+use App\Models\Team;
 use App\Models\TeamUsers;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class ApplyEndController extends Controller
+class TeamUsersApiController extends Controller
 {
+    public function index()
+    {
+        return [
+            'leagues' => ApplyResource::collection(League::all()),
+            'teams' => ApplyEndResource::collection(Team::all())
+        ];
+    }
+
     public function store()
     {
         $data = request()->validate(
@@ -19,7 +31,7 @@ class ApplyEndController extends Controller
         $data['join_date'] = date('Y-m-d');
         $data['left_date'] = date('Y-m-d');
         $data['user_id'] = auth()->id();
-        return view('team_users.store');
+        dd(auth()->id());
         dd($data);
         return TeamUsers::create($data);
     }

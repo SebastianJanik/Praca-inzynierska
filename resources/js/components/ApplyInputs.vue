@@ -51,7 +51,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/applies')
+        axios.get('/teamusers/create')
             .then(response => {
                 this.leagues = response.data.leagues;
                 this.teams = response.data.teams;
@@ -72,15 +72,17 @@ export default {
     },
     methods: {
         submit() {
-            axios.post('/appliesend', this.fields).then(response => {
-                this.fields = {};
-                this.errors = {};
-                this.succes = true;
-            }).catch(error => {
-                this.errors = error.response.data.errors;
-                this.succes = false;
-                console.log('Error');
-            });
+            axios.post('/teamusers/store', this.fields)
+                .then(response => {
+                    this.fields = {};
+                    this.errors = {};
+                    this.succes = true;
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                    this.succes = false;
+                    console.log('Error');
+                });
         }
     }
 }
