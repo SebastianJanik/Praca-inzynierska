@@ -47,7 +47,8 @@ class SeasonsController extends Controller
             }
         }
 
-        //Create
+        //Update team matches table
+
         return view('seasons.store');
     }
 }

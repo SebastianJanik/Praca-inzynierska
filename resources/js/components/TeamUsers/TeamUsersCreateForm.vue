@@ -35,7 +35,7 @@
 
 <script>
 
-Vue.mixin(require('./trans'))
+Vue.mixin(require('../trans'))
 export default {
     data() {
         return {
@@ -51,7 +51,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/teamusers/create')
+        axios.get('/TeamUsersCreate')
             .then(response => {
                 this.leagues = response.data.leagues;
                 this.teams = response.data.teams;
@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         submit() {
-            axios.post('/teamusers/store', this.fields)
+            axios.post('/TeamUsersStore', this.fields)
                 .then(response => {
                     this.fields = {};
                     this.errors = {};

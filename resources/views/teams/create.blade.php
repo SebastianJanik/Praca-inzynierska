@@ -85,7 +85,7 @@
                                 <label for="town" class="col-md-4 col-form-label text-md-right">{{ __('Town') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="town" type="text" class="form-control @error('towntown') is-invalid @enderror" name="town" value="{{ old('town') }}" required autocomplete="town" autofocus>
+                                    <input id="town" type="text" class="form-control @error('town') is-invalid @enderror" name="town" value="{{ old('town') }}" required autocomplete="town" autofocus>
 
                                     @error('town')
                                     <span class="invalid-feedback" role="alert">

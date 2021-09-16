@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('team_users_apply')}}">
+                        <a href="{{route('team_users_create')}}">
                             <button>{{__('Apply to the team')}}</button>
                         </a>
                     </div>
