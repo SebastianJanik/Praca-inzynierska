@@ -30,6 +30,9 @@
                         <a href="{{route('seasons_create')}}">
                             <button>{{__('Add season')}}</button>
                         </a>
+                        <a href="{{route('seasons_timetable')}}">
+                            <button>{{__('View seasons')}}</button>
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\League;
 use App\Models\Team;
 
 class TeamsController extends Controller
@@ -13,7 +14,8 @@ class TeamsController extends Controller
 
     public function create()
     {
-        return view('teams.create');
+        $leagues = League::all();
+        return view('teams.create', compact('leagues'));
     }
 
     public function store()
@@ -24,7 +26,8 @@ class TeamsController extends Controller
                 'street' => 'required',
                 'house_number' => 'required',
                 'postal_code' => 'size:6',
-                'town' => 'required'
+                'town' => 'required',
+                'league_id' => 'required'
             ]
         );
         Team::create($data);

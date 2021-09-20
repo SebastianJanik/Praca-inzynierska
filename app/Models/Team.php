@@ -14,7 +14,8 @@ class Team extends Model
         'street',
         'house_number',
         'postal_code',
-        'town'
+        'town',
+        'league_id'
     ];
 
     public function users(){

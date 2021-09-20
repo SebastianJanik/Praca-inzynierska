@@ -14,7 +14,7 @@
                                     {{$loop->iteration}}.
                                 </div>
                                 <div class="card">
-                                    {{$league->name}}
+                                    {{__($league->name)}}
                                 </div>
                             </div>
                         @endforeach

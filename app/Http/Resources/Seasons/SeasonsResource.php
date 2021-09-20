@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Resources\TeamUsers;
+namespace App\Http\Resources\Seasons;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TeamUsersStoreResource extends JsonResource
+class SeasonsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
-     * @return array
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request): array
     {
         return [
             'id'=> $this->id,
             'name'=> $this->name,
+            'league_id'=> $this->league_id,
         ];
     }
 }

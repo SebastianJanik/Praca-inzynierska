@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Seasons\SeasonsResource;
+use App\Models\League;
 use App\Models\Matches;
 use App\Models\Round;
 use App\Models\Season;
@@ -50,5 +52,17 @@ class SeasonsController extends Controller
         //Update team matches table
 
         return view('seasons.store');
+    }
+
+    public function index(): array
+    {
+        return [
+            'leagues' => SeasonsResource::collection(League::all()),
+            'seasons' => SeasonsResource::collection(Season::all())
+        ];
+    }
+
+    public function timetable(){
+        return view('seasons.index');
     }
 }

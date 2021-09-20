@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 class RegisterController extends Controller
 {
@@ -44,7 +46,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -59,21 +61,24 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\Models\User
+     * @param array $data
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'date_birth' => $data['date_birth'],
-            'street' => $data['street'],
-            'house_number' => $data['house_number'],
-            'postal_code' => $data['postal_code'],
-            'town' => $data['town'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = User::create(
+            [
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'date_birth' => $data['date_birth'],
+                'street' => $data['street'],
+                'house_number' => $data['house_number'],
+                'postal_code' => $data['postal_code'],
+                'town' => $data['town'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]
+        );
+        $user->assignRole('user');
+        return $user;
     }
 }

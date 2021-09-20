@@ -3,41 +3,29 @@
         <div class="alert alert-success" v-show="succes">{{ __('Apply succesfull') }}</div>
 
         <div class="form-group row">
-            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-            <div class="col-md-6">
-                <select id="role" name="role" v-model="fields.role">
-                    <option value="player">{{ __('Player') }}</option>
-                    <option value="coach">{{ __('Coach') }}</option>
-                </select>
-                <div class="alert alert-danger" v-if="errors && errors.league">{{ errors.role[0] }}</div>
-            </div>
-        </div>
-
-        <div class="form-group row">
             <label for="league" class="col-md-4 col-form-label text-md-right">{{ __('League name') }}</label>
             <div class="col-md-6">
                 <select id="league" name="league" v-model="fields.league">
-                    <option v-for="league in leagues" v-bind:value="league.id">{{ league.name }}
-                    </option>
+                    <option v-for="league in leagues" v-bind:value="league.id">{{ league.name }}</option>
                 </select>
                 <div class="alert alert-danger" v-if="errors && errors.league">{{ errors.league[0] }}</div>
             </div>
         </div>
 
-        <div class="form-group row" v-show="visible.teams">
-            <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team name') }}</label>
+        <div class="form-group row" v-show="visible.season">
+            <label for="season" class="col-md-4 col-form-label text-md-right">{{ __('Season') }}</label>
             <div class="col-md-6">
-                <select id="team" name="team" v-model="fields.team">
-                    <option v-for="team in league_teams" v-bind:value="team.id">{{ team.name }}</option>
+                <select id="season" name="season" v-model="fields.season">
+                    <option v-for="season in seasons" v-bind:value="season.id">{{ season.name }}</option>
                 </select>
-                <div class="alert alert-danger" v-if="errors && errors.team">{{ errors.team[0] }}</div>
+                <div class="alert alert-danger" v-if="errors && errors.season">{{ errors.season[0] }}</div>
             </div>
         </div>
 
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Apply') }}
+                    {{ __('Show') }}
                 </button>
             </div>
         </div>
@@ -51,44 +39,35 @@ export default {
     data() {
         return {
             leagues: '',
-            teams: '',
-            league_teams: [],
+            seasons: '',
             fields: {},
             succes: false,
             errors: {},
             visible: {
-                teams: false
+                seasons: false
             }
         }
     },
     mounted() {
-        axios.get('/TeamUsers')
+        axios.get('/Seasons')
             .then(response => {
+                console.log(response.data);
                 this.leagues = response.data.leagues;
-                this.teams = response.data.teams;
+                this.seasons = response.data.seasons;
             })
     },
     watch: {
         'fields.league': function (value) {
-            this.league_teams = []
-            this.visible.teams = true;
-            this.teams.forEach(team => {
-                if (team.league_id == value) {
-                    this.league_teams.push(team)
-                }
-            })
-        },
-        'fields.team': function (value) {
+            this.visible.season = true;
         }
     },
     methods: {
         submit() {
-            axios.post('/TeamUsers', this.fields)
+            axios.post('/Seasons', this.fields)
                 .then(response => {
                     this.fields = {};
                     this.errors = {};
                     this.succes = true;
-                    window.location.href = '/home'
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

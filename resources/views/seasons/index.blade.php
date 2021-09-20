@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Apply to the team') }}</div>
 
                     <div class="card-body">
-                        <team-users-create></team-users-create>
+                        <season-index></season-index>
                     </div>
                 </div>
             </div>

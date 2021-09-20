@@ -15,18 +15,26 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'id'=>'1',
-            'name'=>'Admin',
-            'surname'=>'Admin',
-            'date_birth'=>'2000-01-01',
-            'street'=>'street',
-            'house_number'=>'20',
-            'postal_code'=>'11-111',
-            'town'=>'town',
-            'email'=>'admin@admin.com',
-            'password'=>Hash::make('admin123')
-                                   ]);
-
+        DB::table('users')->insert(
+            [
+                'id' => '1',
+                'name' => 'Admin',
+                'surname' => 'Admin',
+                'date_birth' => '2000-01-01',
+                'street' => 'street',
+                'house_number' => '20',
+                'postal_code' => '11-111',
+                'town' => 'town',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('admin123')
+            ]
+        );
+        DB::table('model_has_roles')->insert(
+            [
+                'role_id'=>'5',
+                'model_type'=>'App\Models\user',
+                'model_id'=>'1'
+            ]
+        );
     }
 }

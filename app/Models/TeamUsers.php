@@ -10,6 +10,7 @@ class TeamUsers extends Model
     protected $fillable = [
         'team_id',
         'user_id',
+        'status',
         'join_date',
         'left_date',
     ];
