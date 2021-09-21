@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TeamUsers\TeamUsersResource;
+use App\Http\Resources\LeaguesResource;
+use App\Http\Resources\TeamsResource;
 use App\Models\League;
 use App\Models\Team;
 use App\Models\TeamUsers;
@@ -16,8 +17,8 @@ class TeamUsersController extends Controller
     public function index(): array
     {
         return [
-            'leagues' => TeamUsersResource::collection(League::all()),
-            'teams' => TeamUsersResource::collection(Team::all())
+            'leagues' => LeaguesResource::collection(League::all()),
+            'teams' => TeamsResource::collection(Team::all())
         ];
     }
 

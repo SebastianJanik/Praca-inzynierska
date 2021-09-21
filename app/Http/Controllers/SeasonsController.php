@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Seasons\SeasonsResource;
 use App\Models\League;
 use App\Models\Matches;
 use App\Models\Round;
 use App\Models\Season;
+use App\Models\Team;
 
 class SeasonsController extends Controller
 {
     public function create()
     {
-        return view('seasons.create');
+        $leagues = League::all();
+        return view(
+            'seasons.create',
+            [
+                'leagues' => $leagues,
+            ]
+        );
     }
 
     public function store()
@@ -20,20 +26,22 @@ class SeasonsController extends Controller
         $data = request()->validate(
             [
                 'name' => 'required',
-                'teams' => ['required', 'max:2', 'regex:/^([1-9])/'],
+                'league_id' => 'required',
             ]
         );
-        $season = Season::create($data);
+        $teams = Team::where('league_id', $data['league_id'])->get();
+        $teams_num = $teams->count();
+        $season = Season::create($data['name']);
 
         //Create home and away game round for each team
-        $season_rounds = 2 * ($data['teams'] - 1);
+        $season_rounds = 2 * ($teams_num - 1);
         $rounds = [];
         for ($round = 1; $round <= $season_rounds; $round++) {
             $rounds[] = Round::create(array('name' => $round, 'season_id' => $season->id));
         }
 
         //Create matches for every round
-        $round_matches = round($data['teams'] / 2, 0, PHP_ROUND_HALF_UP);
+        $round_matches = round($teams_num / 2, 0, PHP_ROUND_HALF_UP);
         $matches = [];
         foreach ($rounds as $round) {
             for ($match = 0; $match < $round_matches; $match++) {
@@ -48,21 +56,18 @@ class SeasonsController extends Controller
                 );
             }
         }
+        //Create timetable for teams
+        foreach ($matches as $match){
+            for($team = 0; $team < $teams_num; $team++){
 
-        //Update team matches table
-
+            }
+        }
+        dd($teams[0]->id);
         return view('seasons.store');
     }
 
-    public function index(): array
+    public function index()
     {
-        return [
-            'leagues' => SeasonsResource::collection(League::all()),
-            'seasons' => SeasonsResource::collection(Season::all())
-        ];
-    }
-
-    public function timetable(){
         return view('seasons.index');
     }
 }

@@ -28,14 +28,15 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Number of teams') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('League') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="teams" type="number"
-                                           class="form-control @error('teams') is-invalid @enderror" name="teams"
-                                           value="{{ old('teams') }}" required autocomplete="teams" autofocus>
-
-                                    @error('teams')
+                                    <select id="league" type="text" class="form-control @error('league') is-invalid @enderror" name="league_id" required autocomplete="league" autofocus>
+                                        @foreach($leagues as $league)
+                                            <option value="{{$league->id}}">{{$league->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('league')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

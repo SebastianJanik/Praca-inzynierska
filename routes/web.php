@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Components\TimetableController;
 use App\Http\Controllers\LeaguesController;
+use App\Http\Controllers\MatchTeamsController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TeamUsersController;
@@ -35,11 +37,16 @@ Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams_cre
 Route::post('/teams', [TeamsController::class, 'store'])->name('teams_store');
 
 Route::get('/seasons/create', [SeasonsController::class, 'create'])->name('seasons_create');
-Route::get('/seasons/timetable', [SeasonsController::class, 'timetable'])->name('seasons_timetable');
 Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons_store');
 Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons_index');
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');
 
-Route::apiResource('/TeamUsers', TeamUsersController::class);
-Route::apiResource('/Seasons', SeasonsController::class);
+Route::get('/timetable/create', [TimetableController::class, 'create'])->name('timetable_create');
+
+Route::get('/matchteams/create', [MatchTeamsController::class, 'create'])->name('match_teams_create');
+
+Route::apiResource('TeamUsers', TeamUsersController::class);
+Route::apiResource('matchTeams', MatchTeamsController::class);
+
+Route::apiResource('timetable', TimetableController::class);

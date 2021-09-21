@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Resources\TeamUsers;
+namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TeamUsersResource extends JsonResource
+class TeamsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
-     * @return array
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request): array
+    public function toArray($request)
     {
         return [
             'id'=> $this->id,

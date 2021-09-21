@@ -30,7 +30,7 @@
                         <a href="{{route('seasons_create')}}">
                             <button>{{__('Add season')}}</button>
                         </a>
-                        <a href="{{route('seasons_timetable')}}">
+                        <a href="{{route('seasons_index')}}">
                             <button>{{__('View seasons')}}</button>
                         </a>
                     </div>
@@ -39,6 +39,16 @@
                     <div class="card-button">
                         <a href="{{route('team_users_create')}}">
                             <button>{{__('Apply to the team')}}</button>
+                        </a>
+                    </div>
+                    <div class="card-button">
+                        <a href="{{route('timetable_create')}}">
+                            <button>{{__('Timetable')}}</button>
+                        </a>
+                    </div>
+                    <div class="card-button">
+                        <a href="{{route('match_teams_create')}}">
+                            <button>{{__('Create timetable')}}</button>
                         </a>
                     </div>
                 </div>

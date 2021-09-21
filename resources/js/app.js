@@ -20,8 +20,8 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('team-users-create', require('./components/TeamUsers/TeamUsersCreateForm.vue').default);
-Vue.component('season-index', require('./components/Seasons/SeasonIndexForm').default);
+Vue.component('team-users-create', require('./components/TeamUsersCreateForm.vue').default);
+Vue.component('timetable', require('./components/Timetable.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

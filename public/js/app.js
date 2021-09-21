@@ -2092,10 +2092,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2154,8 +2154,7 @@ Vue.mixin(__webpack_require__(/*! ../trans */ "./resources/js/components/trans.j
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/Seasons').then(function (response) {
-      console.log(response.data);
+    axios.get('/timetable').then(function (response) {
       _this.leagues = response.data.leagues;
       _this.seasons = response.data.seasons;
     });
@@ -2169,7 +2168,7 @@ Vue.mixin(__webpack_require__(/*! ../trans */ "./resources/js/components/trans.j
     submit: function submit() {
       var _this2 = this;
 
-      axios.post('/Seasons', this.fields).then(function (response) {
+      axios.post('/timetable', this.fields).then(function (response) {
         _this2.fields = {};
         _this2.errors = {};
         _this2.succes = true;
@@ -2324,7 +2323,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.component('team-users-create', __webpack_require__(/*! ./components/TeamUsers/TeamUsersCreateForm.vue */ "./resources/js/components/TeamUsers/TeamUsersCreateForm.vue").default);
-Vue.component('season-index', __webpack_require__(/*! ./components/Seasons/SeasonIndexForm */ "./resources/js/components/Seasons/SeasonIndexForm.vue").default);
+Vue.component('timetable', __webpack_require__(/*! ./components/Seasons/Timetable.vue */ "./resources/js/components/Seasons/Timetable.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -37850,10 +37849,10 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Seasons/SeasonIndexForm.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/Seasons/SeasonIndexForm.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/Seasons/Timetable.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Seasons/Timetable.vue ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37861,8 +37860,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SeasonIndexForm.vue?vue&type=template&id=6db02039& */ "./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039&");
-/* harmony import */ var _SeasonIndexForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SeasonIndexForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=bf101072& */ "./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072&");
+/* harmony import */ var _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timetable.vue?vue&type=script&lang=js& */ "./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -37872,9 +37871,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _SeasonIndexForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -37884,7 +37883,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Seasons/SeasonIndexForm.vue"
+component.options.__file = "resources/js/components/Seasons/Timetable.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -37944,10 +37943,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37955,8 +37954,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SeasonIndexForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SeasonIndexForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SeasonIndexForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Timetable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -37986,19 +37985,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072& ***!
+  \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SeasonIndexForm_vue_vue_type_template_id_6db02039___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SeasonIndexForm.vue?vue&type=template&id=6db02039& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_bf101072___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Timetable.vue?vue&type=template&id=bf101072& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072&");
 
 
 /***/ }),
@@ -38020,10 +38019,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/SeasonIndexForm.vue?vue&type=template&id=6db02039& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Seasons/Timetable.vue?vue&type=template&id=bf101072& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
