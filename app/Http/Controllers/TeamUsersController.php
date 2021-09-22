@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\LeaguesResource;
 use App\Http\Resources\TeamsResource;
 use App\Models\League;
@@ -13,6 +14,13 @@ class TeamUsersController extends Controller
     public function create()
     {
         return view('team_users.create');
+    }
+    public function createData(): array
+    {
+        return [
+            'leagues' => LeaguesResource::collection(League::all()),
+            'teams' => TeamsResource::collection(Team::all())
+        ];
     }
     public function index(): array
     {

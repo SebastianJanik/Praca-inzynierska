@@ -42,11 +42,6 @@
                         </a>
                     </div>
                     <div class="card-button">
-                        <a href="{{route('timetable_create')}}">
-                            <button>{{__('Timetable')}}</button>
-                        </a>
-                    </div>
-                    <div class="card-button">
                         <a href="{{route('match_teams_create')}}">
                             <button>{{__('Create timetable')}}</button>
                         </a>

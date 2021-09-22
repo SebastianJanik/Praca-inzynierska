@@ -41,12 +41,15 @@ Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons_stor
 Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons_index');
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');
+Route::get('/team-users/create-data', [TeamUsersController::class, 'createData']);
+Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users_store');
 
-Route::get('/timetable/create', [TimetableController::class, 'create'])->name('timetable_create');
+//Route::match([''],'/team-users/test', [TeamUsersController::class, 'test'])->name('team_users_test'); get i post
+
 
 Route::get('/matchteams/create', [MatchTeamsController::class, 'create'])->name('match_teams_create');
 
-Route::apiResource('TeamUsers', TeamUsersController::class);
-Route::apiResource('matchTeams', MatchTeamsController::class);
 
-Route::apiResource('timetable', TimetableController::class);
+
+
+

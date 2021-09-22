@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\SeasonHelper;
 use App\Models\League;
 use App\Models\Matches;
+use App\Models\MatchTeams;
 use App\Models\Round;
 use App\Models\Season;
 use App\Models\Team;
@@ -29,40 +31,15 @@ class SeasonsController extends Controller
                 'league_id' => 'required',
             ]
         );
-        $teams = Team::where('league_id', $data['league_id'])->get();
-        $teams_num = $teams->count();
-        $season = Season::create($data['name']);
 
-        //Create home and away game round for each team
-        $season_rounds = 2 * ($teams_num - 1);
-        $rounds = [];
-        for ($round = 1; $round <= $season_rounds; $round++) {
-            $rounds[] = Round::create(array('name' => $round, 'season_id' => $season->id));
-        }
+        $season_helper = new SeasonHelper();
 
-        //Create matches for every round
-        $round_matches = round($teams_num / 2, 0, PHP_ROUND_HALF_UP);
-        $matches = [];
-        foreach ($rounds as $round) {
-            for ($match = 0; $match < $round_matches; $match++) {
-                $matches[] = Matches::create(
-                    array
-                    (
-                        'date' => '2021-09-01',
-                        'town' => ' ',
-                        'protocol' => ' ',
-                        'round_id' => $round->id,
-                    )
-                );
-            }
-        }
-        //Create timetable for teams
-        foreach ($matches as $match){
-            for($team = 0; $team < $teams_num; $team++){
+        $teams = Team::where('league_id', $data['league_id'])->get()->toArray();
+        $season = Season::create($data);
+        $rounds = $season_helper->createRounds(count($teams), $season->id);
+        $matches = $season_helper->createMatches(count($teams), $rounds);
+        $season_helper->createMatchTeams($teams);
 
-            }
-        }
-        dd($teams[0]->id);
         return view('seasons.store');
     }
 

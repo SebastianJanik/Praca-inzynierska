@@ -62,7 +62,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/TeamUsers')
+        axios.get('/team-users/create-data')
             .then(response => {
                 this.leagues = response.data.leagues;
                 this.teams = response.data.teams;
@@ -83,7 +83,7 @@ export default {
     },
     methods: {
         submit() {
-            axios.post('/TeamUsers', this.fields)
+            axios.post('/team-users', this.fields)
                 .then(response => {
                     this.fields = {};
                     this.errors = {};

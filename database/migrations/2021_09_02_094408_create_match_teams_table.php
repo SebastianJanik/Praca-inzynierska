@@ -15,10 +15,9 @@ class CreateMatchTeamsTable extends Migration
     {
         Schema::create('match_teams', function (Blueprint $table) {
             $table->foreignId('match_id')->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('team_id')->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('host');
+            $table->foreignId('team_id')->nullable()->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('host');
             $table->timestamps();
-
         });
     }
 
