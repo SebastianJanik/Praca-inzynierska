@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TeamUsers extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'team_id',
         'user_id',
@@ -14,5 +16,4 @@ class TeamUsers extends Model
         'join_date',
         'left_date',
     ];
-    use HasFactory;
 }

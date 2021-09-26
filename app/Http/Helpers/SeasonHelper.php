@@ -3,6 +3,7 @@
 namespace App\Http\Helpers;
 
 use App\Models\Matches;
+use App\Models\MatchTeams;
 use App\Models\Round;
 
 class SeasonHelper
@@ -12,7 +13,7 @@ class SeasonHelper
         $season_rounds = 2 * ($teams_num - 1);
         $rounds = [];
         for ($round = 1; $round <= $season_rounds; $round++) {
-            $rounds [] = Round::create(
+            $rounds[] = Round::create(
                 [
                     'name' => $round,
                     'season_id' => $season_id
@@ -41,42 +42,62 @@ class SeasonHelper
         return $matches;
     }
 
-    public function createMatchTeams($teams)
+    public function createMatchTeams($teams, $matches)
     {
-//        $temp = array();
-//        foreach ($teams as $team)
-//            $temp [] = $team['name'];
-//        $tab = array();
-        $temp = ['1', '2', '3', '4', '5','6','7', '8', '9','10','11','12','13','14'];
+        foreach ($teams as $team) {
+            $teams_id[] = $team['id'];
+        }
+        $teams_pairs = $this->teamsPairs($teams_id);
+        foreach($teams_pairs as $team_pair){
+            $teams_pairs [] = array($team_pair[1], $team_pair[0]);
+        }
+        foreach ($matches as $index => $match) {
+            $match_teams[] = MatchTeams::create(
+                [
+                    'match_id' => $match->id,
+                    'team_id' => $teams_pairs[$index][0],
+                    'host' => 'true',
+                ]
+            );
+            $match_teams[] = MatchTeams::create(
+                [
+                    'match_id' => $match->id,
+                    'team_id' => $teams_pairs[$index][1],
+                    'host' => 'false',
+                ]
+            );
+        }
+    }
+
+    public function teamsPairs($temp)
+    {
+        // $temp = ['1', '2', '3', '4', '5','6','7', '8', '9','10','11','12','13','14'];
+        if (count($temp) % 2 != 0)
+            $temp[] = 'pause';
         $max = count($temp);
         $size = $max - 1;
         $half = $max / 2;
         $index = 0;
         // first iteration
         for ($i = 0; $i < $half; $i++) {
-            $tab [] = array($temp[$i], $temp[$size - $i]);
+            $tab[] = array($temp[$i], $temp[$size - $i]);
         }
         // repeated iterations
         $index = 0;
         for ($i = 0; $i < $size - 1; $i++) {
-            $tab [] = array($temp[0], $temp[$size - $i - 1]);
+            $tab[] = array($temp[0], $temp[$size - $i - 1]);
             for ($j = 0; ($size - $i + $j <= $size) && ($j < $half - 1); $j++) {
                 $index = $size - $i - $j - 2;
-                if($index <= 0)
+                if ($index <= 0)
                     $index = $size + $index;
-                $tab [] = array($temp[$size - $i + $j], $temp[$index]);
+                $tab[] = array($temp[$size - $i + $j], $temp[$index]);
             }
             if ($j < $half - 1) {
                 for ($k = 1; $j < $half - 1; $j++ && $k++) {
-                    $tab [] = array($temp[$k], $temp[$index - $k]);
+                    $tab[] = array($temp[$k], $temp[$index - $k]);
                 }
             }
         }
-        foreach ($tab as $index => $t) {
-            echo $index . ".  ";
-            var_dump($t);
-            echo "<br>";
-        }
-        die();
+        return $tab;
     }
 }

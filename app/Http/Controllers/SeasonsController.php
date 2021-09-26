@@ -36,9 +36,10 @@ class SeasonsController extends Controller
 
         $teams = Team::where('league_id', $data['league_id'])->get()->toArray();
         $season = Season::find('83');
+        // $season = Season::create($data);
         $rounds = $season_helper->createRounds(count($teams), $season->id);
         $matches = $season_helper->createMatches(count($teams), $rounds);
-        $season_helper->createMatchTeams($teams);
+        $teams_pairs = $season_helper->createMatchTeams($teams, $matches);
 
         return view('seasons.store');
     }
