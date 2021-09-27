@@ -41,9 +41,16 @@
                             <button>{{__('Apply to the team')}}</button>
                         </a>
                     </div>
+                </div>
+                <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('match_teams_create')}}">
-                            <button>{{__('Create timetable')}}</button>
+                        <a href="{{route('team_users_accept_coach')}}">
+                            <button>{{__('Users awaiting approval by the coach')}}</button>
+                        </a>
+                    </div>
+                    <div class="card-button">
+                        <a href="{{route('team_users_accept_admin')}}">
+                            <button>{{__('Users awaiting approval by the admin')}}</button>
                         </a>
                     </div>
                 </div>

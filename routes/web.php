@@ -43,11 +43,15 @@ Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons_index
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');
 Route::get('/team-users/create-data', [TeamUsersController::class, 'createData']);
 Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users_store');
+Route::get('/team-users/accept-coach', [TeamUsersController::class, 'indexUsersAcceptCoach'])->name('team_users_accept_coach');
+Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersAcceptAdmin'])->name('team_users_accept_admin');
+Route::post('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users_accept_coach_store');
+Route::post('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users_accept_admin_store');
+
 
 //Route::match([''],'/team-users/test', [TeamUsersController::class, 'test'])->name('team_users_test'); get i post
 
 
-Route::get('/matchteams/create', [MatchTeamsController::class, 'create'])->name('match_teams_create');
 
 
 

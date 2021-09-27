@@ -27,5 +27,7 @@
     "Apply to the team": "Dołącz do drużyny",
     "Player": "Zawodnik",
     "Coach": "Trener",
-    "Role": "Rola"
+    "Role": "Rola",
+    "Users awaiting approval by the coach": "Użytkownicy oczekujący na akceptację trenera",
+    "Users awaiting approval by the admin": "Użytkownicy oczekujący na akceptację admina"
 }
