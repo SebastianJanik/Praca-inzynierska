@@ -29,5 +29,7 @@
     "Coach": "Trener",
     "Role": "Rola",
     "Users awaiting approval by the coach": "Użytkownicy oczekujący na akceptację trenera",
-    "Users awaiting approval by the admin": "Użytkownicy oczekujący na akceptację admina"
+    "Users awaiting approval by the admin": "Użytkownicy oczekujący na akceptację admina",
+    "Accept": "Akceptuj",
+    "Decline": "Odrzuć"
 }

@@ -78,8 +78,16 @@ class TeamUsersController extends Controller
         $data = request()->validate(
             [
                 'user_id' => 'required',
+                'decline' => '',
+                'accept' => '',
             ]
         );
-        dd($data);
+        $user = TeamUsers::where('user_id', $data['user_id'])->first();
+        if(isset($data['accept']))
+            $user->status = 'player accepted by coach';
+        if(isset($data['decline']))
+            $user->status = 'player declined by coach';
+        $user->save();
+        return $this->indexUsersAcceptCoach();
     }
 }

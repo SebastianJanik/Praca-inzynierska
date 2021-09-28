@@ -11,6 +11,7 @@
                         <div class="card-body">
                             <form method="POST" action="{{ route('team_users_accept_coach_store') }}">
                                 @csrf
+                                @method('PUT')
                                 <div class="row-cols">
                                     <div class="hidden">
                                         <input class="" name="user_id" value="{{$user['id']}}">
@@ -28,8 +29,8 @@
                                         {{$user['email']}}
                                     </div>
                                     <div class="col">
-                                        <input type="submit" class="btn btn-primary" value="{{__('Accept')}}">
-                                        <input type="submit" class="btn btn-primary" value="{{__('Decline')}}">
+                                        <input type="submit" class="btn btn-primary" name="accept" value="{{__('Accept')}}">
+                                        <input type="submit" class="btn btn-primary" name="decline" value="{{__('Decline')}}">
                                     </div>
                                 </div>
                             </form>

@@ -45,7 +45,7 @@ Route::get('/team-users/create-data', [TeamUsersController::class, 'createData']
 Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users_store');
 Route::get('/team-users/accept-coach', [TeamUsersController::class, 'indexUsersAcceptCoach'])->name('team_users_accept_coach');
 Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersAcceptAdmin'])->name('team_users_accept_admin');
-Route::post('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users_accept_coach_store');
+Route::put('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users_accept_coach_store');
 Route::post('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users_accept_admin_store');
 
 
