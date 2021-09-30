@@ -10,10 +10,13 @@ class League extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function teams(){
-        return $this->belongsToMany(Team::class);
+        return $this->hasMany(Team::class);
+    }
+    public function seasons(){
+        return $this->belongsTo(Season::class);
     }
 }

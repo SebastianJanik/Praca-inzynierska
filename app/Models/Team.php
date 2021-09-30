@@ -15,15 +15,17 @@ class Team extends Model
         'house_number',
         'postal_code',
         'town',
-        'league_id'
+        'leagues_season_id'
     ];
 
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function matchTeams(){
+        return $this->hasMany(MatchTeams::class);
     }
-    public function matches(){
-        return $this->belongsToMany(Matches::class);
+
+    public function teamUsers(){
+        return $this->hasMany(TeamUsers::class);
     }
+
     public function leagues(){
         return $this->belongsTo(League::class);
     }

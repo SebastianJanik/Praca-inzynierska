@@ -15,13 +15,14 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('league_id')->nullable()->constrained('leagues')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('leagues_season_id')->nullable()->constrained('leagues_season')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('street');
             $table->string('house_number');
             $table->string('postal_code');
             $table->string('town');
             $table->timestamps();
+
         });
     }
 

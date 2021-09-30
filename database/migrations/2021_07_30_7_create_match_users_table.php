@@ -24,6 +24,7 @@ class CreateMatchUsersTable extends Migration
             $table->time('end_min')->nullable();
             $table->timestamps();
 
+            $table->primary(['match_id', 'user_id'], 'match_users_match_id_user_id_primary');
         });
     }
 

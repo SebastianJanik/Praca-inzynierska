@@ -20,5 +20,11 @@ class LeagueSeeder extends Seeder
                 'name' => 'Ekstraklasa',
             ]
         );
+        DB::table('leagues')->insert(
+            [
+                'id'=>'2',
+                'name' => 'Druga liga',
+            ]
+        );
     }
 }

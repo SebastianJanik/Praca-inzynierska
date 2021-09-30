@@ -16,12 +16,16 @@ class Matches extends Model
         'round_id'
     ];
 
-    public function teams(){
-        return $this->belongsToMany(Team::class);
+    public function matchTeams(){
+        return $this->hasMany(MatchTeams::class);
     }
 
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function matchUsers(){
+        return $this->hasMany(MatchUsers::class);
+    }
+
+    public function rounds(){
+        return $this->belongsTo(Round::class);
     }
 
 }

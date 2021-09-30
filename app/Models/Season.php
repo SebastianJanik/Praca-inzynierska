@@ -14,6 +14,9 @@ class Season extends Model
     ];
 
     public function rounds(){
-        return $this->belongsToMany(Round::class);
+        return $this->hasMany(Round::class);
+    }
+    public function leagues(){
+        return $this->hasMany(League::class);
     }
 }

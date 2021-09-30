@@ -10,10 +10,14 @@ class Round extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'season_id'
+        'leagues_season_id'
     ];
 
     public function matches(){
-        return $this->belongsToMany(Matches::class);
+        return $this->hasMany(Matches::class);
+    }
+
+    public function seasons(){
+        return $this->belongsTo(Season::class);
     }
 }

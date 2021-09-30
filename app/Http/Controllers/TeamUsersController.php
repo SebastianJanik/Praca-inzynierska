@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\TeamUsersHelper;
 use App\Http\Resources\LeaguesResource;
 use App\Http\Resources\TeamsResource;
 use App\Models\League;
@@ -56,21 +57,18 @@ class TeamUsersController extends Controller
 
     public function indexUsersAcceptCoach()
     {
-        $coach_id = Auth::id();
-        $team_id = TeamUsers::where('user_id', $coach_id)->first()->team_id;
+        $teamUsersHelper = new TeamUsersHelper();
         $status = 'player waiting for acceptation by coach';
-        $users = TeamUsers::where('team_id', $team_id)->where('status', $status)->get();
-        $users_id = [];
-        foreach ($users as $user) {
-            $users_id [] = $user->user_id;
-        }
-        $users = User::whereIn('id', $users_id)->get()->toArray();
+        $users = $teamUsersHelper->usersWaitingForAccept($status);
         return view('team_users.accept_coach', compact('users'));
     }
 
     public function indexUsersAcceptAdmin()
     {
-        return view('team_users.accept_admin');
+        $teamUsersHelper = new TeamUsersHelper();
+        $status = 'player accepted by coach';
+        $users = $teamUsersHelper->usersWaitingForAccept($status);
+        return view('team_users.accept_admin', compact('users'));
     }
 
     public function storeUsersAcceptCoach()
@@ -87,6 +85,24 @@ class TeamUsersController extends Controller
             $user->status = 'player accepted by coach';
         if(isset($data['decline']))
             $user->status = 'player declined by coach';
+        $user->save();
+        return $this->indexUsersAcceptCoach();
+    }
+
+    public function storeUsersAcceptAdmin()
+    {
+        $data = request()->validate(
+            [
+                'user_id' => 'required',
+                'decline' => '',
+                'accept' => '',
+            ]
+        );
+        $user = TeamUsers::where('user_id', $data['user_id'])->first();
+        if(isset($data['accept']))
+            $user->status = 'player accepted by admin';
+        if(isset($data['decline']))
+            $user->status = 'player declined by admin';
         $user->save();
         return $this->indexUsersAcceptCoach();
     }

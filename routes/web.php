@@ -34,11 +34,19 @@ Route::post('/leagues', [LeaguesController::class, 'store'])->name('leagues_stor
 Route::get('/leagues', [LeaguesController::class, 'index'])->name('leagues_index');
 
 Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams_create');
+Route::get('/teams', [TeamsController::class, 'index'])->name('teams_index');
+Route::get('/teams/{id}/edit', [TeamsController::class, 'edit'])->name('teams_edit');
+Route::get('/teams/{id}/assign', [TeamsController::class, 'assign'])->name('teams_assign');
+Route::patch('/teams/{id}', [TeamsController::class, 'update'])->name('teams_update');
+Route::patch('/teams/{id}', [TeamsController::class, 'updateAssign'])->name('teams_updateAssign');
 Route::post('/teams', [TeamsController::class, 'store'])->name('teams_store');
 
 Route::get('/seasons/create', [SeasonsController::class, 'create'])->name('seasons_create');
 Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons_store');
 Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons_index');
+
+Route::get('/match-teams/create', [MatchTeamsController::class, 'create'])->name('match_teams_create');
+
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');
 Route::get('/team-users/create-data', [TeamUsersController::class, 'createData']);
@@ -46,7 +54,7 @@ Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_us
 Route::get('/team-users/accept-coach', [TeamUsersController::class, 'indexUsersAcceptCoach'])->name('team_users_accept_coach');
 Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersAcceptAdmin'])->name('team_users_accept_admin');
 Route::put('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users_accept_coach_store');
-Route::post('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users_accept_admin_store');
+Route::put('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users_accept_admin_store');
 
 
 //Route::match([''],'/team-users/test', [TeamUsersController::class, 'test'])->name('team_users_test'); get i post

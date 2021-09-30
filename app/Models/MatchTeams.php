@@ -14,4 +14,11 @@ class MatchTeams extends Model
         'team_id',
         'host',
     ];
+
+    public function matches(){
+        return $this->belongsTo(Matches::class);
+    }
+    public function teams(){
+        return $this->belongsTo(Team::class);
+    }
 }

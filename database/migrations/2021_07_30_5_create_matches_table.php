@@ -15,10 +15,10 @@ class CreateMatchesTable extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('town');
-            $table->string('protocol');
             $table->foreignId('round_id')->constrained('rounds')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('date')->nullable();
+            $table->string('town')->nullable();
+            $table->string('protocol')->nullable();
             $table->timestamps();
         });
     }
