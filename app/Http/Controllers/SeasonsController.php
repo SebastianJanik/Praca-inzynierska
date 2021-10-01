@@ -22,7 +22,7 @@ class SeasonsController extends Controller
     {
         $data = request()->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:seasons',
             ]
         );
         $season = Season::create($data);

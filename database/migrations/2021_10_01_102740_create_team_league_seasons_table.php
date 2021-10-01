@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMatchTeamsTable extends Migration
+class CreateTeamLeagueSeasonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateMatchTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('match_teams', function (Blueprint $table) {
-            $table->foreignId('match_id')->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
+        Schema::create('team_league_seasons', function (Blueprint $table) {
             $table->foreignId('team_id')->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('host');
+            $table->foreignId('league_season_id')->constrained('league_seasons')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
 
-            $table->primary(['match_id', 'team_id'], 'match_teams_match_id_team_id_primary');
+            $table->primary(['team_id', 'league_season_id'], 'team_league_seasons_team_id_league_season_id_primary');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateMatchTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('match_teams');
+        Schema::dropIfExists('team_league_seasons');
     }
 }

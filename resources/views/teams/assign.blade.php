@@ -19,6 +19,8 @@
                                     <select id="league" type="text"
                                             class="form-control @error('league') is-invalid @enderror" name="league_id"
                                             required autocomplete="league" autofocus>
+                                        <option value="" disabled selected>{{__('Select league')}}</option>
+                                        <option value="none">{{__('None league')}}</option>
                                         @foreach($leagues as $league)
                                             <option value="{{$league->id}}">{{$league->name}}</option>
                                         @endforeach
@@ -39,8 +41,9 @@
                                     <select id="season" type="text"
                                             class="form-control @error('season') is-invalid @enderror" name="season_id"
                                             required autocomplete="season" autofocus>
+                                        <option value="" disabled selected>{{__('Select season')}}</option>
                                         @foreach($seasons as $season)
-                                            <option value="{{$league->id}}">{{$league->name}}</option>
+                                            <option value="{{$season->id}}">{{$season->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('season')

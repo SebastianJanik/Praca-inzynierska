@@ -15,7 +15,7 @@ class CreateRoundsTable extends Migration
     {
         Schema::create('rounds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('leagues_season_id')->constrained('leagues_season')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('league_season_id')->constrained('league_seasons')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('name');
             $table->timestamps();
         });

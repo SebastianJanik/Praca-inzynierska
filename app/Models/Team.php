@@ -15,7 +15,6 @@ class Team extends Model
         'house_number',
         'postal_code',
         'town',
-        'leagues_season_id'
     ];
 
     public function matchTeams(){
