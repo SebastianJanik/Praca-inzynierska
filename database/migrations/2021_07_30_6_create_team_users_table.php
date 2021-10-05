@@ -16,7 +16,7 @@ class CreateTeamUsersTable extends Migration
         Schema::create('team_users', function (Blueprint $table){
             $table->foreignId('team_id')->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('status');
+            $table->foreignId('status_id')->default('5')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->date('join_date')->nullable();
             $table->date('left_date')->nullable();
             $table->timestamps();

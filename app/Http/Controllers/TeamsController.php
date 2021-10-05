@@ -47,14 +47,19 @@ class TeamsController extends Controller
     public function editAssign($team_id)
     {
         $team = Team::find($team_id);
+        $seasons = Season::where('status_id', '1')->get();
+        foreach ($seasons as $season)
+            $seasons_id [] = $season->id;
+        if(isset($seasons_id))
+            $leagues_id = LeagueSeasons::select('league_id')->whereIn('season_id', $seasons_id)->get()->toArray();
+        if(isset($leagues_id))
+            $leagues = League::whereIn('id', $leagues_id)->get();
         $teamLeagueSeason = TeamLeagueSeasons::where('team_id', $team_id)->first();
         $leagueSeason = null;
         if($teamLeagueSeason) {
             $teamLeagueSeason->toArray();
             $leagueSeason = LeagueSeasons::where('id', $teamLeagueSeason['league_season_id'])->first();
         }
-        $seasons = Season::all();
-        $leagues = League::all();
         return view('teams.assign', compact('team', 'seasons', 'leagues', 'leagueSeason'));
     }
 
@@ -82,9 +87,20 @@ class TeamsController extends Controller
                 'season_id' => 'required'
             ]
         );
-        if ($data['league_id'] == 'none')
+        if($data['league_id'] == 'none')
             $data['league_id'] = null;
-        LeagueSeasons::updateOrCreate($data);
+        $leagueSeason = LeagueSeasons::where('league_id', $data['league_id'])->where('season_id', $data['season_id'])->first();
+        $activeSeasons = Season::select('id')->where('status_id', '1')->get()->toArray();
+        //choosing only records which season is currently active
+        $leagueActiveSeasons = LeagueSeasons::select('id')->whereIn('season_id', $activeSeasons)->get();
+        foreach ($leagueActiveSeasons as $leagueActiveSeason){
+            $leagueActiveSeasons_id [] = $leagueActiveSeason['id'];
+        }
+        $teamLeagueSeasons = TeamLeagueSeasons::all()->where('team_id', $team_id)->whereIn('league_season_id', $leagueActiveSeasons_id)->first()->toArray();
+        if($teamLeagueSeasons)
+            TeamLeagueSeasons::where('team_id', $team_id,)
+                ->where('league_season_id', $teamLeagueSeasons['league_season_id'])
+                ->update(['league_season_id' => $leagueSeason->id]);
         return $this->editAssign($team_id);
     }
 }

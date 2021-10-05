@@ -47,10 +47,10 @@ class TeamUsersController extends Controller
         $data['user_id'] = auth()->id();
         $data['team_id'] = $data['team'];
         if ($data['role'] == 'player') {
-            $data['status'] = 'player waiting for acceptation by coach';
+            $data['status_id'] = '5';
         }
         if ($data['role'] == 'coach') {
-            $data['status'] = 'coach waiting for acceptation';
+            $data['status_id'] = '8';
         }
         return TeamUsers::create($data);
     }
@@ -58,7 +58,7 @@ class TeamUsersController extends Controller
     public function indexUsersAcceptCoach()
     {
         $teamUsersHelper = new TeamUsersHelper();
-        $status = 'player waiting for acceptation by coach';
+        $status = '5';
         $users = $teamUsersHelper->usersWaitingForAccept($status);
         return view('team_users.accept_coach', compact('users'));
     }
@@ -66,7 +66,7 @@ class TeamUsersController extends Controller
     public function indexUsersAcceptAdmin()
     {
         $teamUsersHelper = new TeamUsersHelper();
-        $status = 'player accepted by coach';
+        $status = '6';
         $users = $teamUsersHelper->usersWaitingForAccept($status);
         return view('team_users.accept_admin', compact('users'));
     }
@@ -82,9 +82,9 @@ class TeamUsersController extends Controller
         );
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status = 'player accepted by coach';
+            $user->status = '6';
         if(isset($data['decline']))
-            $user->status = 'player declined by coach';
+            $user->status = '7';
         $user->save();
         return $this->indexUsersAcceptCoach();
     }
@@ -100,9 +100,9 @@ class TeamUsersController extends Controller
         );
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status = 'player accepted by admin';
+            $user->status = '11';
         if(isset($data['decline']))
-            $user->status = 'player declined by admin';
+            $user->status = '12';
         $user->save();
         return $this->indexUsersAcceptCoach();
     }

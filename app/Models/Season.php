@@ -10,7 +10,8 @@ class Season extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'status_id'
     ];
 
     public function rounds(){

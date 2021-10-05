@@ -17,12 +17,14 @@ class SeasonsSeeder extends Seeder
         DB::table('seasons')->insert(
             [
                 'id'=>'1',
+                'status_id' => '1',
                 'name' => 'Sezon pierwszy',
             ]
         );
         DB::table('seasons')->insert(
             [
                 'id'=>'2',
+                'status_id' => '2',
                 'name' => 'Sezon drugi',
             ]
         );
