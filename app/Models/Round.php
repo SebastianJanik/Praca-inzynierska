@@ -10,7 +10,7 @@ class Round extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'leagues_season_id'
+        'league_season_id'
     ];
 
     public function matches(){

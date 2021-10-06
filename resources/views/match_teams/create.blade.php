@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Create timetable') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('leagues_store') }}">
+                        <form method="POST" action="{{ route('match_teams_store') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -19,6 +19,9 @@
                                     <select id="season" type="text"
                                             class="form-control @error('season') is-invalid @enderror" name="season"
                                             required autocomplete="season" autofocus>
+                                        @foreach($seasons as $season)
+                                            <option value="{{$season->id}}">{{$season->name}}</option>
+                                        @endforeach
                                     </select>
 
                                         @error('season')
@@ -53,7 +56,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Create league') }}
+                                        {{ __('Create timetable') }}
                                     </button>
                                 </div>
                             </div>

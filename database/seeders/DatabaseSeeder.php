@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TeamLeagueSeasons;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TeamSeeder::class);
         $this->call(LeagueSeeder::class);
         $this->call(SeasonsSeeder::class);
+        $this->call(LeagueSeasonsSeeder::class);
+        $this->call(TeamLeagueSeasonsSeeder::class);
     }
 }

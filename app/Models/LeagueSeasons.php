@@ -12,5 +12,6 @@ class LeagueSeasons extends Model
     protected $fillable = [
         'season_id',
         'league_id',
+        'status_id'
     ];
 }

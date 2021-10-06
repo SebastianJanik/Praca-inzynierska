@@ -20,9 +20,9 @@
                                             class="form-control @error('league') is-invalid @enderror" name="league_id"
                                             required autocomplete="league" autofocus>
                                         <option value="" disabled selected>{{__('Select league')}}</option>
-                                        <option value="none">{{__('None league')}}</option>
+                                        <option @if($leagueSeason->league_id == null) selected @endif value="none">{{__('None league')}}</option>
                                         @foreach($leagues as $league)
-                                            <option value="{{$league->id}}">{{$league->name}}</option>
+                                            <option @if($leagueSeason->league_id == $league->id) selected @endif value="{{$league->id}}">{{$league->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('league')
@@ -43,7 +43,7 @@
                                             required autocomplete="season" autofocus>
                                         <option value="" disabled selected>{{__('Select season')}}</option>
                                         @foreach($seasons as $season)
-                                            <option value="{{$season->id}}">{{$season->name}}</option>
+                                            <option @if($leagueSeason->season_id == $season->id) selected @endif value="{{$season->id}}">{{$season->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('season')

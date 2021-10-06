@@ -6,9 +6,9 @@ use App\Models\Matches;
 use App\Models\MatchTeams;
 use App\Models\Round;
 
-class SeasonHelper
+class MatchTeamHelper
 {
-    public function createRounds($teams_num, $season_id): array
+    public function createRounds($teams_num, $league_season_id): array
     {
         $season_rounds = 2 * ($teams_num - 1);
         $rounds = [];
@@ -16,7 +16,7 @@ class SeasonHelper
             $rounds[] = Round::create(
                 [
                     'name' => $round,
-                    'season_id' => $season_id
+                    'league_season_id' => $league_season_id
                 ]
             );
         }
@@ -56,24 +56,25 @@ class SeasonHelper
                 [
                     'match_id' => $match->id,
                     'team_id' => $teams_pairs[$index][0],
-                    'host' => 'true',
+                    'host' => true,
                 ]
             );
             $match_teams[] = MatchTeams::create(
                 [
                     'match_id' => $match->id,
                     'team_id' => $teams_pairs[$index][1],
-                    'host' => 'false',
+                    'host' => false,
                 ]
             );
         }
+        return $match_teams;
     }
 
     public function teamsPairs($temp)
     {
         // $temp = ['1', '2', '3', '4', '5','6','7', '8', '9','10','11','12','13','14'];
         if (count($temp) % 2 != 0)
-            $temp[] = 'pause';
+            $temp[] = null; //null means pause
         $max = count($temp);
         $size = $max - 1;
         $half = $max / 2;

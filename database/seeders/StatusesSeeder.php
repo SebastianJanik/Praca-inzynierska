@@ -74,5 +74,17 @@ class StatusesSeeder extends Seeder
                 'name' => 'declined by admin',
             ]
         );
+        DB::table('statuses')->insert(
+            [
+                'id'=>'11',
+                'name' => 'timetable created',
+            ]
+        );
+        DB::table('statuses')->insert(
+            [
+                'id'=>'12',
+                'name' => "timetable doesn't exist",
+            ]
+        );
     }
 }

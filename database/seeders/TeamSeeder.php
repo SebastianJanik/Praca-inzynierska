@@ -17,6 +17,7 @@ class TeamSeeder extends Seeder
         DB::table('teams')->insert(
             [
                 'id' => '1',
+                'status_id' => '1',
                 'name' => 'Granit',
                 'street' =>'Granitowa',
                 'house_number'=>'10',
@@ -27,6 +28,7 @@ class TeamSeeder extends Seeder
         DB::table('teams')->insert(
             [
                 'id' => '2',
+                'status_id' => '1',
                 'name' => 'Druga druzyna',
                 'street' =>'Druga',
                 'house_number'=>'10',
@@ -37,6 +39,7 @@ class TeamSeeder extends Seeder
         DB::table('teams')->insert(
             [
                 'id' => '3',
+                'status_id' => '1',
                 'name' => 'Trzecia druzyna',
                 'street' =>'Trzecia',
                 'house_number'=>'10',

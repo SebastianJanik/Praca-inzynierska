@@ -18,7 +18,7 @@
                             <button>{{__('Create league')}}</button>
                         </a>
                         <a href="{{route('leagues_index')}}">
-                            <button>{{__('View league')}}</button>
+                            <button>{{__('View leagues')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
@@ -40,6 +40,9 @@
                     <div class="card-button">
                         <a href="{{route('match_teams_create')}}">
                             <button>{{__('Create timetable')}}</button>
+                        </a>
+                        <a href="{{route('match_teams_index')}}">
+                            <button>{{__('Show timetables')}}</button>
                         </a>
                     </div>
                 </div>

@@ -46,6 +46,9 @@ Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons_stor
 Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons_index');
 
 Route::get('/match-teams/create', [MatchTeamsController::class, 'create'])->name('match_teams_create');
+Route::get('/match-teams', [MatchTeamsController::class, 'index'])->name('match_teams_index');
+Route::get('/match-teams/{id}', [MatchTeamsController::class, 'show'])->name('match_teams_show');
+Route::post('/match-teams', [MatchTeamsController::class, 'store'])->name('match_teams_store');
 
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');

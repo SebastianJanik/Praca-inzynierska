@@ -17,6 +17,7 @@ class CreateLeagueSeasonsTable extends Migration
             $table->id();
             $table->foreignId('season_id')->constrained('seasons')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('league_id')->nullable()->constrained('leagues')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
 
             $table->unique(['season_id', 'league_id'], 'season_league_uq');
