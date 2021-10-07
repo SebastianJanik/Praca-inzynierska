@@ -6,6 +6,8 @@ use App\Http\Helpers\TeamUsersHelper;
 use App\Http\Resources\LeaguesResource;
 use App\Http\Resources\TeamsResource;
 use App\Models\League;
+use App\Models\LeagueSeasons;
+use App\Models\Season;
 use App\Models\Team;
 use App\Models\TeamUsers;
 use App\Models\User;
@@ -15,11 +17,16 @@ class TeamUsersController extends Controller
 {
     public function create()
     {
+        $seasons = Season::select('id')->where('status_id', 1)->get()->toArray();
+        $leagues_id = LeagueSeasons::select('league_id')->whereIn('season_id', $seasons)->get()->toArray();
+        $leagues = League::find($leagues_id)->toArray();
+        dd($leagues);
         return view('team_users.create');
     }
 
     public function createData(): array
     {
+
         return [
             'leagues' => LeaguesResource::collection(League::all()),
             'teams' => TeamsResource::collection(Team::all())

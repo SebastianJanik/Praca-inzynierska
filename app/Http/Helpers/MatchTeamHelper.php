@@ -5,14 +5,17 @@ namespace App\Http\Helpers;
 use App\Models\Matches;
 use App\Models\MatchTeams;
 use App\Models\Round;
+use App\Models\Team;
 
 class MatchTeamHelper
 {
     public function createRounds($teams_num, $league_season_id): array
     {
-        $season_rounds = 2 * ($teams_num - 1);
+        $rounds_num = $teams_num;
+        if($teams_num % 2 == 0)
+            $rounds_num--;
         $rounds = [];
-        for ($round = 1; $round <= $season_rounds; $round++) {
+        for ($round = 1; $round <= $rounds_num; $round++) {
             $rounds[] = Round::create(
                 [
                     'name' => $round,
@@ -100,5 +103,37 @@ class MatchTeamHelper
             }
         }
         return $tab;
+    }
+
+    public function matchesBelongsToRound($round_id): array
+    {
+        $matches = Matches::where('round_id', $round_id)->get()->toArray();
+        $data = [];
+        foreach ($matches as $match)
+            $data [] = array(
+                'match' => $match,
+                'match_teams' => $this->matchTeamsBelongsToMatch($match['id'])
+            );
+        return $data;
+    }
+
+    public function matchTeamsBelongsToMatch($match_id): array
+    {
+        $matchTeams = MatchTeams::where('match_id', $match_id)->get();
+        $data = [];
+        foreach ($matchTeams as $matchTeam)
+            $data [] = array(
+                'id' => $matchTeam->id,
+                'team' => Team::find($matchTeam->team_id),
+                'goals' => $matchTeam->goals,
+                'host' => $matchTeam->host
+            );
+        foreach ($data as $index=>$item){
+            if($item['team'] == null)
+                $data[$index]['team']['name'] = 'PAUSE';
+            else
+                $data[$index]['team'] = $item['team']->toArray();
+        }
+        return $data;
     }
 }

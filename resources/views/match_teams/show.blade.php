@@ -15,7 +15,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-header">{{__('Round')}}</div>
+                    @foreach($data as $round)
+                        <div class="card-header">{{$loop->iteration}}</div>
+                        <div class="card-body">
+                            @foreach($round['matches'] as $match)
+                                    <div class="row">
+                                        {{$match['match_teams'][0]['team']['name']}}
+                                        {{$match['match_teams'][0]['goals']}}
+                                        @if($match['match_teams'][0]['goals'] == null)
+                                            X
+                                        @endif
+                                        -
+                                        @if($match['match_teams'][1]['goals'] == null)
+                                            X
+                                        @endif
+                                        {{$match['match_teams'][0]['goals']}}
+                                        {{$match['match_teams'][1]['team']['name']}}
+                                        <a href="{{route('home')}}">
+                                            <button>{{__('View details')}}</button>
+                                        </a>
+                                        <a href="{{route('home')}}">
+                                            <button>{{__('Edit match')}}</button>
+                                        </a>
+                                    </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

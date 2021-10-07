@@ -17,6 +17,7 @@ class CreateMatchTeamsTable extends Migration
             $table->id();
             $table->foreignId('match_id')->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('team_id')->nullable()->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('goals')->nullable();
             $table->boolean('host');
             $table->timestamps();
 

@@ -12,6 +12,7 @@ class MatchTeams extends Model
     protected $fillable = [
         'match_id',
         'team_id',
+        'goals',
         'host',
     ];
 

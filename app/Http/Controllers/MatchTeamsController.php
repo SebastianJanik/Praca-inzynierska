@@ -34,6 +34,7 @@ class MatchTeamsController extends Controller
 
     public function show($league_season_id)
     {
+        $matchTeamsHelper = new MatchTeamHelper();
         $rounds = Round::where('league_season_id', $league_season_id)->get();
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
         foreach ($team_league_seasons as $item)
@@ -45,14 +46,12 @@ class MatchTeamsController extends Controller
         foreach ($matches as $match)
             $matches_id [] = $match->id;
         $matchTeams = MatchTeams::whereIn('match_id', $matches_id)->get();
-        $data = null;
-        foreach ($rounds as $round){
-            $data [] = array(
-                'round' => array($round->id)
+
+        foreach ($rounds as $round)
+            $data [] = array (
+                'matches' => $matchTeamsHelper->matchesBelongsToRound($round->id)
             );
-        }
-        dd($data);
-        return view('match_teams.show', compact('teams', 'matches', 'matchTeams', 'rounds'));
+        return view('match_teams.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
     }
     public function create()
     {
