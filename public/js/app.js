@@ -2128,6 +2128,8 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
     return {
       leagues: '',
       teams: '',
+      league_season: '',
+      team_league_seasons: '',
       league_teams: [],
       fields: {},
       succes: false,
@@ -2143,6 +2145,8 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
     axios.get('/team-users/create-data').then(function (response) {
       _this.leagues = response.data.leagues;
       _this.teams = response.data.teams;
+      _this.league_season = response.data.league_season;
+      _this.team_league_seasons = response.data.team_league_seasons;
     });
   },
   watch: {
@@ -2151,9 +2155,15 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
 
       this.league_teams = [];
       this.visible.teams = true;
-      this.teams.forEach(function (team) {
-        if (team.league_id == value) {
-          _this2.league_teams.push(team);
+      this.league_season.forEach(function (ls) {
+        if (ls.league_id == value) {
+          _this2.team_league_seasons.forEach(function (tls) {
+            if (tls.league_season_id == ls.id) {
+              _this2.teams.forEach(function (team) {
+                if (team.id == tls.team_id) _this2.league_teams.push(team);
+              });
+            }
+          });
         }
       });
     },
@@ -2171,97 +2181,6 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
       })["catch"](function (error) {
         _this3.errors = error.response.data.errors;
         _this3.succes = false;
-        console.log('Error');
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js"));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      leagues: '',
-      seasons: '',
-      fields: {},
-      succes: false,
-      errors: {},
-      visible: {
-        seasons: false
-      }
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/timetable').then(function (response) {
-      _this.leagues = response.data.leagues;
-      _this.seasons = response.data.seasons;
-    });
-  },
-  watch: {
-    'fields.league': function fieldsLeague(value) {
-      this.visible.season = true;
-    }
-  },
-  methods: {
-    submit: function submit() {
-      var _this2 = this;
-
-      axios.post('/timetable', this.fields).then(function (response) {
-        _this2.fields = {};
-        _this2.errors = {};
-        _this2.succes = true;
-      })["catch"](function (error) {
-        _this2.errors = error.response.data.errors;
-        _this2.succes = false;
         console.log('Error');
       });
     }
@@ -2295,7 +2214,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('team-users-create', __webpack_require__(/*! ./components/TeamUsersCreateForm.vue */ "./resources/js/components/TeamUsersCreateForm.vue").default);
-Vue.component('timetable', __webpack_require__(/*! ./components/Timetable.vue */ "./resources/js/components/Timetable.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -37816,45 +37734,6 @@ component.options.__file = "resources/js/components/TeamUsersCreateForm.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Timetable.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/components/Timetable.vue ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=8e6c5a74& */ "./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74&");
-/* harmony import */ var _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timetable.vue?vue&type=script&lang=js& */ "./resources/js/components/Timetable.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Timetable.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/TeamUsersCreateForm.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/TeamUsersCreateForm.vue?vue&type=script&lang=js& ***!
@@ -37871,22 +37750,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Timetable.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/Timetable.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Timetable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
 /***/ "./resources/js/components/TeamUsersCreateForm.vue?vue&type=template&id=80b1f760&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/TeamUsersCreateForm.vue?vue&type=template&id=80b1f760& ***!
@@ -37900,23 +37763,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamUsersCreateForm_vue_vue_type_template_id_80b1f760___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamUsersCreateForm_vue_vue_type_template_id_80b1f760___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TeamUsersCreateForm.vue?vue&type=template&id=80b1f760& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TeamUsersCreateForm.vue?vue&type=template&id=80b1f760&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74& ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_8e6c5a74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Timetable.vue?vue&type=template&id=8e6c5a74& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74&");
 
 
 /***/ }),
@@ -38163,201 +38009,6 @@ var render = function() {
                 "\n                " +
                   _vm._s(_vm.__("Apply")) +
                   "\n            "
-              )
-            ]
-          )
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Timetable.vue?vue&type=template&id=8e6c5a74& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      attrs: { method: "POST" },
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.submit.apply(null, arguments)
-        }
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.succes,
-              expression: "succes"
-            }
-          ],
-          staticClass: "alert alert-success"
-        },
-        [_vm._v(_vm._s(_vm.__("Apply succesfull")))]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-md-4 col-form-label text-md-right",
-            attrs: { for: "league" }
-          },
-          [_vm._v(_vm._s(_vm.__("League name")))]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.fields.league,
-                  expression: "fields.league"
-                }
-              ],
-              attrs: { id: "league", name: "league" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.fields,
-                    "league",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            _vm._l(_vm.leagues, function(league) {
-              return _c("option", { domProps: { value: league.id } }, [
-                _vm._v(_vm._s(league.name))
-              ])
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _vm.errors && _vm.errors.league
-            ? _c("div", { staticClass: "alert alert-danger" }, [
-                _vm._v(_vm._s(_vm.errors.league[0]))
-              ])
-            : _vm._e()
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.visible.season,
-              expression: "visible.season"
-            }
-          ],
-          staticClass: "form-group row"
-        },
-        [
-          _c(
-            "label",
-            {
-              staticClass: "col-md-4 col-form-label text-md-right",
-              attrs: { for: "season" }
-            },
-            [_vm._v(_vm._s(_vm.__("Season")))]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.fields.season,
-                    expression: "fields.season"
-                  }
-                ],
-                attrs: { id: "season", name: "season" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.fields,
-                      "season",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              _vm._l(_vm.seasons, function(season) {
-                return _c("option", { domProps: { value: season.id } }, [
-                  _vm._v(_vm._s(season.name))
-                ])
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _vm.errors && _vm.errors.season
-              ? _c("div", { staticClass: "alert alert-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.season[0]))
-                ])
-              : _vm._e()
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row mb-0" }, [
-        _c("div", { staticClass: "col-md-6 offset-md-4" }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [
-              _vm._v(
-                "\n                " + _vm._s(_vm.__("Show")) + "\n            "
               )
             ]
           )

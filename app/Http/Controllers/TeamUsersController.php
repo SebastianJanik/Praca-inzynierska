@@ -9,6 +9,7 @@ use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
 use App\Models\Team;
+use App\Models\TeamLeagueSeasons;
 use App\Models\TeamUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,19 +18,24 @@ class TeamUsersController extends Controller
 {
     public function create()
     {
-        $seasons = Season::select('id')->where('status_id', 1)->get()->toArray();
-        $leagues_id = LeagueSeasons::select('league_id')->whereIn('season_id', $seasons)->get()->toArray();
-        $leagues = League::find($leagues_id)->toArray();
-        dd($leagues);
         return view('team_users.create');
     }
 
     public function createData(): array
     {
-
+        $seasons = Season::select('id')->where('status_id', 1)->get()->toArray();
+        $leagues_id = LeagueSeasons::select('league_id')->whereIn('season_id', $seasons)->get()->toArray();
+        $leagues_seasons_id = LeagueSeasons::select('id')->whereIn('season_id', $seasons)->get()->toArray();
+        $leagues_seasons = LeagueSeasons::whereIn('season_id', $seasons)->get()->toArray();
+        $leagues = League::find($leagues_id)->toArray();
+        $teams_id = TeamLeagueSeasons::select('team_id')->whereIn('league_season_id', $leagues_seasons_id)->get()->toArray();
+        $team_league_seasons = TeamLeagueSeasons::whereIn('league_season_id', $leagues_seasons_id)->get()->toArray();
+        $teams = Team::find($teams_id)->toArray();
         return [
-            'leagues' => LeaguesResource::collection(League::all()),
-            'teams' => TeamsResource::collection(Team::all())
+            'leagues' => $leagues,
+            'teams' => $teams,
+            'league_season' => $leagues_seasons,
+            'team_league_seasons' => $team_league_seasons
         ];
     }
 
@@ -89,9 +95,9 @@ class TeamUsersController extends Controller
         );
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status = '6';
+            $user->status_id = '6';
         if(isset($data['decline']))
-            $user->status = '7';
+            $user->status_id = '7';
         $user->save();
         return $this->indexUsersAcceptCoach();
     }
@@ -107,9 +113,9 @@ class TeamUsersController extends Controller
         );
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status = '11';
+            $user->status_id = '11';
         if(isset($data['decline']))
-            $user->status = '12';
+            $user->status_id = '12';
         $user->save();
         return $this->indexUsersAcceptCoach();
     }

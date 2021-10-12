@@ -5,13 +5,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Show timetable') }}</div>
+                    <div class="card-header">{{ __('Edit match') }}</div>
 
                     <div class="card-body">
-                        <timetable></timetable>
+                        <form method="POST" action="{{ route('matches_update', $match->id) }}">
+                            @csrf
+                            @method('PATCH')
+
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+

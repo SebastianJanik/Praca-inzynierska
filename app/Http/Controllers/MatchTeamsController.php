@@ -14,8 +14,6 @@ use App\Models\TeamLeagueSeasons;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use phpDocumentor\Reflection\Types\Object_;
 
-use function Sodium\add;
-
 class MatchTeamsController extends Controller
 {
     public function index()
@@ -90,9 +88,9 @@ class MatchTeamsController extends Controller
         $teamLeagueSeasons = TeamLeagueSeasons::where('league_season_id', $leagueSeasons->id)->get()->toArray();
         foreach ($teamLeagueSeasons as $teamLeagueSeason)
             $teams_id [] = $teamLeagueSeason['team_id'];
-        $teams = Team::find($teams_id)->toArray();
-        if(count($teams) < 2)
+        if(!isset($teams_id) || count($teams_id) < 2)
             return 'Number of teams is to less to create timetable';
+        $teams = Team::find($teams_id)->toArray();
         $rounds = $matchTeam_helper->createRounds(count($teams), $leagueSeasons->id);
         $matches = $matchTeam_helper->createMatches(count($teams), $rounds);
         $team_pairs = $matchTeam_helper->createMatchTeams($teams, $matches);

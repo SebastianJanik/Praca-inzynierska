@@ -52,6 +52,8 @@ export default {
         return {
             leagues: '',
             teams: '',
+            league_season: '',
+            team_league_seasons: '',
             league_teams: [],
             fields: {},
             succes: false,
@@ -66,15 +68,24 @@ export default {
             .then(response => {
                 this.leagues = response.data.leagues;
                 this.teams = response.data.teams;
+                this.league_season = response.data.league_season;
+                this.team_league_seasons = response.data.team_league_seasons;
             })
     },
     watch: {
         'fields.league': function (value) {
             this.league_teams = []
             this.visible.teams = true;
-            this.teams.forEach(team => {
-                if (team.league_id == value) {
-                    this.league_teams.push(team)
+            this.league_season.forEach(ls => {
+                if(ls.league_id == value){
+                    this.team_league_seasons.forEach(tls => {
+                        if(tls.league_season_id == ls.id){
+                            this.teams.forEach(team => {
+                                if(team.id == tls.team_id)
+                                    this.league_teams.push(team)
+                            })
+                        }
+                    })
                 }
             })
         },

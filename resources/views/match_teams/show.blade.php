@@ -34,7 +34,7 @@
                                         <a href="{{route('home')}}">
                                             <button>{{__('View details')}}</button>
                                         </a>
-                                        <a href="{{route('home')}}">
+                                        <a href="{{route('matches_edit', $match['match']['id'])}}">
                                             <button>{{__('Edit match')}}</button>
                                         </a>
                                     </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Components\TimetableController;
 use App\Http\Controllers\LeaguesController;
+use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\MatchTeamsController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\TeamsController;
@@ -50,6 +51,8 @@ Route::get('/match-teams', [MatchTeamsController::class, 'index'])->name('match_
 Route::get('/match-teams/{id}', [MatchTeamsController::class, 'show'])->name('match_teams_show');
 Route::post('/match-teams', [MatchTeamsController::class, 'store'])->name('match_teams_store');
 
+Route::get('/matches/{id}/edit', [MatchesController::class, 'edit'])->name('matches_edit');
+Route::patch('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches_update');
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users_create');
 Route::get('/team-users/create-data', [TeamUsersController::class, 'createData']);
