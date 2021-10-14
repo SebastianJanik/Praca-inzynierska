@@ -9,6 +9,14 @@ class MatchUsers extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'match_id',
+        'user_id',
+        'goals',
+        'assists',
+        'start_min',
+        'end_min'
+    ];
     public function matches(){
         return $this->belongsTo(Matches::class);
     }
