@@ -17,12 +17,12 @@
                                     {{__($team->name)}}
                                 </div>
                                 <div class="card-button">
-                                    <a href="{{route('teams_edit', $team->id)}}">
+                                    <a href="{{route('teams.edit', $team->id)}}">
                                         <button>{{__('Edit team')}}</button>
                                     </a>
                                 </div>
                                 <div class="card-button">
-                                    <a href="{{route('teams_editAssign', $team->id)}}">
+                                    <a href="{{route('teams.editAssign', $team->id)}}">
                                         <button>{{__('Assign team')}}</button>
                                     </a>
                                 </div>

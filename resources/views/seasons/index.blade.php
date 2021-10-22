@@ -8,7 +8,12 @@
                     <div class="card-header">{{ __('All seasons') }}</div>
 
                     <div class="card-body">
-                        Here are your seasons
+                        @foreach($seasons as $season)
+                        <div class="row">
+                            <span>{{$loop->iteration}}.</span>
+                            <a href="{{route('seasons.show', $season->id)}}">{{$season->name}}</a>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

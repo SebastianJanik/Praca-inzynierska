@@ -21,20 +21,22 @@
                             @foreach($round['matches'] as $match)
                                     <div class="row">
                                         {{$match['match_teams'][0]['team']['name']}}
-                                        {{$match['match_teams'][0]['goals']}}
                                         @if($match['match_teams'][0]['goals'] == null)
                                             X
+                                        @else
+                                            {{$match['match_teams'][0]['goals']}}
                                         @endif
                                         -
                                         @if($match['match_teams'][1]['goals'] == null)
                                             X
+                                        @else
+                                            {{$match['match_teams'][1]['goals']}}
                                         @endif
-                                        {{$match['match_teams'][0]['goals']}}
                                         {{$match['match_teams'][1]['team']['name']}}
                                         <a href="{{route('home')}}">
                                             <button>{{__('View details')}}</button>
                                         </a>
-                                        <a href="{{route('matches_edit', $match['match']['id'])}}">
+                                        <a href="{{route('matches.edit', $match['match']['id'])}}">
                                             <button>{{__('Edit match')}}</button>
                                         </a>
                                     </div>

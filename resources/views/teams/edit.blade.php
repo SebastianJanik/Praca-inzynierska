@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Edit team') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('teams_update', $team->id) }}">
+                        <form method="POST" action="{{ route('teams.update', $team->id) }}">
                             @csrf
                             @method('PATCH')
                             <div class="form-group row">

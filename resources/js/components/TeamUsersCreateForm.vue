@@ -99,7 +99,6 @@ export default {
                     this.fields = {};
                     this.errors = {};
                     this.succes = true;
-                    window.location.href = '/home'
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

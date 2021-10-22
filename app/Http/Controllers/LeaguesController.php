@@ -13,6 +13,10 @@ class LeaguesController extends Controller
         return view('leagues.index', array('leagues'=>$leagues));
     }
 
+    public function show ($league_seasons_id)
+    {
+        return view('leagues.show');
+    }
     public function create()
     {
         return view('leagues.create');

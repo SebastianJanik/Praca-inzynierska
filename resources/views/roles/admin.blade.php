@@ -14,53 +14,53 @@
                 </div>
                 <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('leagues_create')}}">
+                        <a href="{{route('leagues.create')}}">
                             <button>{{__('Create league')}}</button>
                         </a>
-                        <a href="{{route('leagues_index')}}">
+                        <a href="{{route('leagues.index')}}">
                             <button>{{__('View leagues')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
-                        <a href="{{route('teams_create')}}">
+                        <a href="{{route('teams.create')}}">
                             <button>{{__('Add team')}}</button>
                         </a>
-                        <a href="{{route('teams_index')}}">
+                        <a href="{{route('teams.index')}}">
                             <button>{{__('Show teams')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
-                        <a href="{{route('seasons_create')}}">
+                        <a href="{{route('seasons.create')}}">
                             <button>{{__('Add season')}}</button>
                         </a>
-                        <a href="{{route('seasons_index')}}">
+                        <a href="{{route('seasons.index')}}">
                             <button>{{__('View seasons')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
-                        <a href="{{route('match_teams_create')}}">
+                        <a href="{{route('match_teams.create')}}">
                             <button>{{__('Create timetable')}}</button>
                         </a>
-                        <a href="{{route('match_teams_index')}}">
+                        <a href="{{route('league_seasons.index')}}">
                             <button>{{__('Show timetables')}}</button>
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('team_users_create')}}">
+                        <a href="{{route('team_users.create')}}">
                             <button>{{__('Apply to the team')}}</button>
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-button">
-                        <a href="{{route('team_users_accept_coach')}}">
+                        <a href="{{route('team_users.accept_coach')}}">
                             <button>{{__('Users awaiting approval by the coach')}}</button>
                         </a>
                     </div>
                     <div class="card-button">
-                        <a href="{{route('team_users_accept_admin')}}">
+                        <a href="{{route('team_users.accept_admin')}}">
                             <button>{{__('Users awaiting approval by the admin')}}</button>
                         </a>
                     </div>

@@ -9,7 +9,7 @@
 
                     @foreach($users as $user)
                         <div class="card-body">
-                            <form method="POST" action="{{ route('team_users_accept_admin_store') }}">
+                            <form method="POST" action="{{ route('team_users.accept_admin_store') }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="row-cols">

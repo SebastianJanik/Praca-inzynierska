@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Create timetable') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('match_teams_store') }}">
+                        <form method="POST" action="{{ route('match_teams.store') }}">
                             @csrf
 
                             <div class="form-group row">

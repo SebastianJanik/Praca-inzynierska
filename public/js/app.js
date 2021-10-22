@@ -2177,7 +2177,6 @@ Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/components/trans.js
         _this3.fields = {};
         _this3.errors = {};
         _this3.succes = true;
-        window.location.href = '/home';
       })["catch"](function (error) {
         _this3.errors = error.response.data.errors;
         _this3.succes = false;

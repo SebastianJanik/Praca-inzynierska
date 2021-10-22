@@ -15,7 +15,7 @@
                                     {{$item['league']->name}}
                                 </div>
                                 <div class="card-button">
-                                    <a href="{{route('match_teams_show', $item['league_season_id'])}}">
+                                    <a href="{{route('league.seasons.show', $item['league_season_id'])}}">
                                         <button>{{__('Show timetable')}}</button>
                                     </a>
                                 </div>

@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <button>{{__('Add player')}}</button>
-                    <a href="{{route('teams_create')}}">
+                    <a href="{{route('teams.create')}}">
                         <button>{{__('Add team')}}</button>
                     </a>
                 </div>
