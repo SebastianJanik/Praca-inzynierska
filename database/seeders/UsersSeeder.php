@@ -71,48 +71,22 @@ class UsersSeeder extends Seeder
                 'password' => Hash::make('admin123')
             ]
         );
-        DB::table('users')->insert(
-            [
-                'id' => '5',
-                'name' => 'User1',
-                'surname' => 'User1',
-                'date_birth' => '2000-01-01',
-                'street' => 'street',
-                'house_number' => '20',
-                'postal_code' => '11-111',
-                'town' => 'town',
-                'email' => 'user1@user1.com',
-                'password' => Hash::make('admin123')
-            ]
-        );
-        DB::table('users')->insert(
-            [
-                'id' => '6',
-                'name' => 'User2',
-                'surname' => 'User2',
-                'date_birth' => '2000-01-01',
-                'street' => 'street',
-                'house_number' => '20',
-                'postal_code' => '11-111',
-                'town' => 'town',
-                'email' => 'user2@user2.com',
-                'password' => Hash::make('admin123')
-            ]
-        );
-        DB::table('users')->insert(
-            [
-                'id' => '7',
-                'name' => 'User3',
-                'surname' => 'User3',
-                'date_birth' => '2000-01-01',
-                'street' => 'street',
-                'house_number' => '20',
-                'postal_code' => '11-111',
-                'town' => 'town',
-                'email' => 'user3@user3.com',
-                'password' => Hash::make('admin123')
-            ]
-        );
+        for ($i = 5; $i < 20; $i++){
+            DB::table('users')->insert(
+                [
+                    'id' => $i,
+                    'name' => 'User'.$i,
+                    'surname' => 'User'.$i,
+                    'date_birth' => '2000-01-01',
+                    'street' => 'street',
+                    'house_number' => '20',
+                    'postal_code' => '11-111',
+                    'town' => 'town',
+                    'email' => 'user'.$i.'@user'.$i.'.com',
+                    'password' => Hash::make('admin123')
+                ]
+            );
+        }
         DB::table('model_has_roles')->insert(
             [
                 'role_id'=>'1',
@@ -141,26 +115,14 @@ class UsersSeeder extends Seeder
                 'model_id'=>'4'
             ]
         );
-        DB::table('model_has_roles')->insert(
-            [
-                'role_id'=>'5',
-                'model_type'=>'App\Models\user',
-                'model_id'=>'5'
-            ]
-        );
-        DB::table('model_has_roles')->insert(
-            [
-                'role_id'=>'5',
-                'model_type'=>'App\Models\user',
-                'model_id'=>'6'
-            ]
-        );
-        DB::table('model_has_roles')->insert(
-            [
-                'role_id'=>'5',
-                'model_type'=>'App\Models\user',
-                'model_id'=>'7'
-            ]
-        );
+        for ($i = 5; $i < 20; $i++){
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id'=>'5',
+                    'model_type'=>'App\Models\user',
+                    'model_id'=>$i
+                ]
+            );
+        }
     }
 }

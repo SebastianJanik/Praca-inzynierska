@@ -45,6 +45,11 @@
                             <button>{{__('Show timetables')}}</button>
                         </a>
                     </div>
+                    <div class="card-button">
+                        <a href="{{route('users.players_index')}}">
+                            <button>{{__('Show my players')}}</button>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="card-button">

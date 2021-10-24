@@ -38,5 +38,13 @@ class TeamLeagueSeasonsSeeder extends Seeder
                 'league_season_id' => '4'
             ]
         );
+        for($i= 4; $i<10; $i++){
+            DB::table('team_league_seasons')->insert(
+                [
+                    'team_id' => $i,
+                    'league_season_id' => '1'
+                ]
+            );
+        }
     }
 }

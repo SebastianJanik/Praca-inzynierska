@@ -5,18 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('All timetables') }}</div>
-
+                    <div class="card-header">{{ __('Your players') }}</div>
                     <div class="card-body">
-                        @foreach($data as $item)
+                        @foreach($users as $user)
                             <div class="row">
-                                <div class="card">
-                                    {{$item['season']->name}}
-                                    {{$item['league']->name}}
-                                </div>
+                                <span>{{$user->name}} {{$user->surname}}</span>
                                 <div class="card-button">
-                                    <a href="{{route('league_seasons.show', $item['league_season_id'])}}">
-                                        <button>{{__('Show timetable')}}</button>
+                                    <a href="#">
+                                        <button>{{__('Remove player')}}</button>
                                     </a>
                                 </div>
                             </div>

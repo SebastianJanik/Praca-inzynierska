@@ -47,5 +47,18 @@ class TeamSeeder extends Seeder
                 'town'=>'Trzecia'
             ]
         );
+        for($i= 4; $i<10; $i++){
+            DB::table('teams')->insert(
+                [
+                    'id' => $i,
+                    'status_id' => '1',
+                    'name' => $i. 'Druzyna',
+                    'street' => $i.'ulica',
+                    'house_number'=>'10',
+                    'postal_code'=>'11-111',
+                    'town'=> 'Miasto'.$i
+                ]
+            );
+        }
     }
 }
