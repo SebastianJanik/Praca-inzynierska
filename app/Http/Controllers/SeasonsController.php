@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Helpers\SeasonHelper;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
-use App\Models\Team;
 
 class SeasonsController extends Controller
 {

@@ -17,9 +17,6 @@
                         <a href="{{route('leagues.create')}}">
                             <button>{{__('Create league')}}</button>
                         </a>
-                        <a href="{{route('leagues.index')}}">
-                            <button>{{__('View leagues')}}</button>
-                        </a>
                     </div>
                     <div class="card-button">
                         <a href="{{route('teams.create')}}">

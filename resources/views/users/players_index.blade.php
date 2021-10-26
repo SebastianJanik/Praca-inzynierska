@@ -11,8 +11,8 @@
                             <div class="row">
                                 <span>{{$user->name}} {{$user->surname}}</span>
                                 <div class="card-button">
-                                    <a href="#">
-                                        <button>{{__('Remove player')}}</button>
+                                    <a href="{{route('users.players_show', $user->id)}}">
+                                        <button>{{__('View player')}}</button>
                                     </a>
                                 </div>
                             </div>

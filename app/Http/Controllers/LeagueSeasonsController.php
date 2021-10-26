@@ -27,7 +27,7 @@ class LeagueSeasonsController extends Controller
                 'league' => League::find($leagueSeason->league_id)
             );
         }
-        return view('match_teams.index', compact('data'));
+        return view('league_seasons.index', compact('data'));
     }
 
     public function show($league_season_id)
@@ -49,6 +49,6 @@ class LeagueSeasonsController extends Controller
             $data [] = array (
                 'matches' => $matchTeamsHelper->matchesBelongsToRound($round->id)
             );
-        return view('match_teams.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
+        return view('league_seasons.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
     }
 }

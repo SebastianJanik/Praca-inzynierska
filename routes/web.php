@@ -33,12 +33,11 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/users-players', [UsersController::class, 'indexPlayers'])->name('users.players_index');
+Route::get('/users/players-index', [UsersController::class, 'indexPlayers'])->name('users.players_index');
+Route::get('/users/players-show/{id}', [UsersController::class, 'showPlayers'])->name('users.players_show');
 
 Route::get('/leagues/create', [LeaguesController::class, 'create'])->name('leagues.create');
 Route::post('/leagues', [LeaguesController::class, 'store'])->name('leagues.store');
-Route::get('/leagues', [LeaguesController::class, 'index'])->name('leagues.index');
-Route::get('/leagues/{id}', [LeaguesController::class, 'show'])->name('leagues.show');
 
 Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams.create');
 Route::get('/teams', [TeamsController::class, 'index'])->name('teams.index');
@@ -64,6 +63,7 @@ Route::patch('/matches/{id}/update', [MatchesController::class, 'update'])->name
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users.create');
 Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users.store');
+Route::post('/team-users/remove/{id}', [TeamUsersController::class, 'remove'])->name('team_users.remove');
 Route::get('/team-users/accept-coach', [TeamUsersController::class, 'indexUsersAcceptCoach'])->name('team_users.accept_coach');
 Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersAcceptAdmin'])->name('team_users.accept_admin');
 Route::put('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users.accept_coach_store');

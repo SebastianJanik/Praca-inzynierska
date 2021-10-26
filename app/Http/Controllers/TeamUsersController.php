@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\TeamUsersHelper;
-use App\Http\Resources\LeaguesResource;
-use App\Http\Resources\TeamsResource;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
@@ -12,9 +10,8 @@ use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 use App\Models\TeamUsers;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Integer;
 
-use function PHPUnit\Framework\isEmpty;
 
 class TeamUsersController extends Controller
 {
@@ -47,23 +44,36 @@ class TeamUsersController extends Controller
         if ($data['role'] == 'coach') {
             $data['status_id'] = '8';
         }
+        $user->status_id = 13;
+        $user->save();
         return TeamUsers::create($data);
+    }
+
+    public function remove($id)
+    {
+        $user = User::find($id);
+        $team_users = TeamUsers::where('user_id', $id)
+            ->where('status_id', 9)->first();
+        $team_users->status_id = 1;
+        $team_users->left_date = date('Y-m-d');
+        $team_users->save();
+        $user->status_id = 1;
+        $user->save();
+        return (new UsersController)->indexPlayers();
     }
 
     public function indexUsersAcceptCoach()
     {
         $teamUsersHelper = new TeamUsersHelper();
-        $status = '5';
-        $users = $teamUsersHelper->usersWaitingForAccept($status);
+        $users = $teamUsersHelper->playersWaitingForAccept();
         return view('team_users.accept_coach', compact('users'));
     }
 
     public function indexUsersAcceptAdmin()
     {
         $teamUsersHelper = new TeamUsersHelper();
-        $status = '6';
-        $users = $teamUsersHelper->usersWaitingForAccept($status);
-        return view('team_users.accept_admin', compact('users'));
+        $data = $teamUsersHelper->usersWaitingForAccept();
+        return view('team_users.accept_admin', compact('data'));
     }
 
     public function storeUsersAcceptCoach()

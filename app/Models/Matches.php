@@ -16,16 +16,11 @@ class Matches extends Model
         'round_id'
     ];
 
-    public function matchTeams(){
-        return $this->hasMany(MatchTeams::class);
-    }
-
-    public function matchUsers(){
-        return $this->hasMany(MatchUsers::class);
-    }
-
-    public function rounds(){
-        return $this->belongsTo(Round::class);
+    public function matchesInActiveSeason(){
+        $season = Season::where('status_id', 1)->get();
+        $league_seasons = LeagueSeasons::where('season_id', $season->pluck('id'))->get();
+        $rounds = Round::whereIn('league_season_id', $league_seasons->pluck('id'))->get();
+        return Matches::whereIn('round_id', $rounds->pluck('id'))->get();
     }
 
 }

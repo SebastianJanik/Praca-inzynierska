@@ -86,5 +86,16 @@ class StatusesSeeder extends Seeder
                 'name' => "timetable doesn't exist",
             ]
         );
+        DB::table('statuses')->insert(
+            [
+                'id'=>'13',
+                'name' => "assigned to the team",
+            ]
+        );DB::table('statuses')->insert(
+            [
+                'id'=>'14',
+                'name' => "apply to be referee",
+            ]
+        );
     }
 }

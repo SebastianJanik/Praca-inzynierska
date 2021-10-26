@@ -7,16 +7,6 @@ use App\Models\Season;
 
 class LeaguesController extends Controller
 {
-    public function index()
-    {
-        $leagues = League::all();
-        return view('leagues.index', array('leagues'=>$leagues));
-    }
-
-    public function show ($league_seasons_id)
-    {
-        return view('leagues.show');
-    }
     public function create()
     {
         return view('leagues.create');
