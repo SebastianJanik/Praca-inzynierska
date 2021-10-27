@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app',["name" => "Dodaj"])
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">{{ __('Add league') }}</div>
 

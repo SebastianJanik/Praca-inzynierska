@@ -34,6 +34,8 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/users/players-index', [UsersController::class, 'indexPlayers'])->name('users.players_index');
+Route::get('/users/referee-create', [UsersController::class, 'createReferee'])->name('users.referee_create');
+Route::post('/users/referee-store', [UsersController::class, 'storeReferee'])->name('users.referee_store');
 Route::get('/users/players-show/{id}', [UsersController::class, 'showPlayers'])->name('users.players_show');
 
 Route::get('/leagues/create', [LeaguesController::class, 'create'])->name('leagues.create');

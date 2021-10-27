@@ -1,8 +1,9 @@
+<main class="main-content">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Main-Content') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -54,6 +55,11 @@
                             <button>{{__('Apply to the team')}}</button>
                         </a>
                     </div>
+                    <div class="card-button">
+                        <a href="{{route('users.referee_create')}}">
+                            <button>{{__('Become a referee')}}</button>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="card-button">
@@ -71,3 +77,4 @@
         </div>
     </div>
 </div>
+</main>

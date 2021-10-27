@@ -62,4 +62,22 @@ class UsersController extends Controller
             )
         );
     }
+    public function createReferee()
+    {
+        $user = User::find(Auth::id());
+        $message = null;
+        if($user->status_id == 13)
+            $message = 'You are actually player or coach';
+        if($user->status_id == 14)
+            $message = 'You have already applied for this position';
+        return view('users.referee_create', compact('message'));
+    }
+
+    public function storeReferee()
+    {
+        $user = User::find(Auth::id());
+        $user->status_id = 14;
+        $user->save();
+        return $this->createReferee();
+    }
 }
