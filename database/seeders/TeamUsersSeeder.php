@@ -25,7 +25,7 @@ class TeamUsersSeeder extends Seeder
                 ]
             );
             DB::table('users')->where('id', $i)
-                ->update(['status_id', 13]);
+                ->update(['status_id' => 13]);
         }
         DB::table('team_users')->insert(
             [
@@ -36,6 +36,6 @@ class TeamUsersSeeder extends Seeder
             ]
         );
         DB::table('users')->where('id', 3)
-            ->update(['status_id', 13]);
+            ->update(['status_id' => 13]);
     }
 }

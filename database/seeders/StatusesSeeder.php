@@ -91,10 +91,23 @@ class StatusesSeeder extends Seeder
                 'id'=>'13',
                 'name' => "assigned to the team",
             ]
-        );DB::table('statuses')->insert(
+        );
+        DB::table('statuses')->insert(
             [
                 'id'=>'14',
                 'name' => "apply to be referee",
+            ]
+        );
+        DB::table('statuses')->insert(
+            [
+                'id'=>'15',
+                'name' => "incoming",
+            ]
+        );
+        DB::table('statuses')->insert(
+            [
+                'id'=>'16',
+                'name' => "completed ",
             ]
         );
     }

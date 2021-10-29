@@ -66,6 +66,9 @@ class MatchesController extends Controller
                 ]
             );
         }
+        $match = Matches::find($match_id);
+        $match->status_id = '16';
+        $match->save();
         return $this->edit($match_id);
     }
 }

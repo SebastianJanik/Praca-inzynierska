@@ -59,6 +59,7 @@ Route::post('/match-teams', [MatchTeamsController::class, 'store'])->name('match
 
 Route::get('/league-seasons', [LeagueSeasonsController::class, 'index'])->name('league_seasons.index');
 Route::get('/league-seasons/{id}', [LeagueSeasonsController::class, 'show'])->name('league_seasons.show');
+Route::get('/league-seasons-table/{id}', [LeagueSeasonsController::class, 'showTable'])->name('league_seasons.show_table');
 
 Route::get('/matches/{id}/edit', [MatchesController::class, 'edit'])->name('matches.edit');
 Route::patch('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches.update');
