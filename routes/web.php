@@ -44,9 +44,9 @@ Route::post('/leagues', [LeaguesController::class, 'store'])->name('leagues.stor
 Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams.create');
 Route::get('/teams', [TeamsController::class, 'index'])->name('teams.index');
 Route::get('/teams/{id}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
-Route::get('/teams/{id}/edit-assign', [TeamsController::class, 'editAssign'])->name('teams.editAssign');
+Route::get('/teams/{id}/edit-assign', [TeamsController::class, 'editAssign'])->name('teams.edit_assign');
 Route::patch('/teams/{id}/update', [TeamsController::class, 'update'])->name('teams.update');
-Route::patch('/teams/{id}/update-assign', [TeamsController::class, 'updateAssign'])->name('teams.updateAssign');
+Route::patch('/teams/{id}/update-assign', [TeamsController::class, 'updateAssign'])->name('teams.update_assign');
 Route::post('/teams', [TeamsController::class, 'store'])->name('teams.store');
 
 Route::get('/seasons/create', [SeasonsController::class, 'create'])->name('seasons.create');
@@ -63,6 +63,7 @@ Route::get('/league-seasons-table/{id}', [LeagueSeasonsController::class, 'showT
 
 Route::get('/matches/{id}/edit', [MatchesController::class, 'edit'])->name('matches.edit');
 Route::patch('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches.update');
+Route::patch('/matches/{id}/protocol', [MatchesController::class, 'protocol'])->name('matches.protocol');
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users.create');
 Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users.store');

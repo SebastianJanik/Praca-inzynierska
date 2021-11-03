@@ -15,6 +15,8 @@ class UsersController extends Controller
     {
         $id = Auth::user()->id;
         $coaches_team = TeamUsers::where('user_id', $id)->get();
+        if($coaches_team->isEmpty())
+            return 'You are not a coach';
         $team_users = TeamUsers::where('team_id', $coaches_team->pluck('team_id'))
             ->whereIn('status_id', [6, 9])->get();
         $users = User::find($team_users->pluck('user_id'))
@@ -78,6 +80,6 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
         $user->status_id = 14;
         $user->save();
-        return $this->createReferee();
+        return redirect()->route('users.referee_create');
     }
 }

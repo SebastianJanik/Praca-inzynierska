@@ -69,6 +69,17 @@ class MatchesController extends Controller
         $match = Matches::find($match_id);
         $match->status_id = '16';
         $match->save();
-        return $this->edit($match_id);
+        return redirect()->route('matches.edit', ['id' => $match_id]);
+    }
+
+    public function protocol($match_id)
+    {
+        Matches::find($match_id)->update(['status_id' => 16]);
+
+        if(request()->get('restore'))
+            Matches::where('id', $match_id)->update(['status_id' => 16]);
+        if(request()->get('accept'))
+            Matches::where('id', $match_id)->update(['status_id' => 9]);
+        return redirect()->route('matches.edit', ['id' => $match_id]);
     }
 }

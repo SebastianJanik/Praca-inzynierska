@@ -42,6 +42,11 @@
                             </h2>
                             <div id="panelsStayOpen-archive" class="accordion-collapse collapse" aria-labelledby="archive">
                                 <div class="accordion-body">
+                                    @if($archive != null)
+                                        @foreach($archive as $season)
+                                            <a href="{{route('seasons.show', $season->id)}}">{{$season->name}}</a>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>

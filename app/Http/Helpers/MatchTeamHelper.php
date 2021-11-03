@@ -105,35 +105,58 @@ class MatchTeamHelper
         return $tab;
     }
 
-    public function matchesBelongsToRound($round_id): array
+    public function matchesBelongsToRound($round_id)
     {
-        $matches = Matches::where('round_id', $round_id)->get()->toArray();
+        $matches = Matches::where('round_id', $round_id)->get();
         $data = [];
         foreach ($matches as $match)
-            $data [] = array(
+            $data [] = (object)array(
                 'match' => $match,
                 'match_teams' => $this->matchTeamsBelongsToMatch($match['id'])
             );
         return $data;
     }
 
-    public function matchTeamsBelongsToMatch($match_id): array
+    public function matchTeamsBelongsToMatch($match_id)
     {
         $matchTeams = MatchTeams::where('match_id', $match_id)->get();
         $data = [];
         foreach ($matchTeams as $matchTeam)
-            $data [] = array(
+            $data [] = (object)array(
                 'id' => $matchTeam->id,
                 'team' => Team::find($matchTeam->team_id),
                 'goals' => $matchTeam->goals,
                 'host' => $matchTeam->host
             );
-        foreach ($data as $index=>$item){
-            if($item['team'] == null)
-                $data[$index]['team']['name'] = 'PAUSE';
-            else
-                $data[$index]['team'] = $item['team']->toArray();
+        foreach ($data as $item){
+            if($item->team == null) {
+                $item->team = (object)['name' => 'PAUSE'];
+            }
         }
         return $data;
+    }
+
+    public function matchTeamPoints($match_id, $team_id)
+    {
+        $match_team = MatchTeams::where('match_id', $match_id)
+            ->where('team_id', $team_id)->first();
+        // If match goals are nulls
+        $match_team2 = MatchTeams::where('match_id', $match_id)
+            ->where('team_id', '!=', $team_id)->first();
+        if(!$match_team)
+            return null;
+        if(!isset($match_team->goals) || !isset($match_team2->goals))
+            return null;
+
+        if(!$match_team2)
+            return 0;
+        if($match_team->goals > $match_team2->goals)
+            return 3;
+        if($match_team->goals < $match_team2->goals)
+            return 0;
+        if($match_team->goals == $match_team2->goals)
+            return 1;
+
+        return null;
     }
 }

@@ -33,7 +33,9 @@
             @include('layouts.navbar')
         </nav>
         <div id ="main">
+            @auth
             @include('layouts.sidebar')
+            @endauth
             @yield('content')
         </div>
     </div>

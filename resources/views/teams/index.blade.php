@@ -22,7 +22,7 @@
                                     </a>
                                 </div>
                                 <div class="card-button">
-                                    <a href="{{route('teams.editAssign', $team->id)}}">
+                                    <a href="{{route('teams.edit_assign', $team->id)}}">
                                         <button>{{__('Assign team')}}</button>
                                     </a>
                                 </div>

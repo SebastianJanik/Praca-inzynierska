@@ -22,21 +22,21 @@
                             <div class="form-group row">
                                 <label for="league" class="col-md-4 col-form-label text-md-right">{{ __('League') }}</label>
                                 <div class="row">
-                                    <select id="league" name="league" required>
+                                    <select id="league" name="league" onchange="teams()" required>
                                         <option value selected disabled>{{__('Select league')}}</option>
                                         @foreach($leagues as $league)
-                                        <option value="{{$league->id}}">{{$league->name}}</option>
+                                        <option value="{{$league->id}}" data-tag>{{$league->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div id="select-team" class="form-group row hidden">
                                 <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team') }}</label>
                                 <div class="row">
                                     <select id="team" name="team" required>
                                         <option value selected disabled>{{__('Select team')}}</option>
-                                        @foreach($teams as $team)
-                                            <option value="{{$team->id}}">{{$team->name}}</option>
+                                        @foreach($data as $team)
+                                            <option class="hidden option-team" value="{{$team->id}}" data-tag="{{$team->league->id}}">{{$team->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,3 +55,18 @@
         </div>
     </div>
 @endsection
+<script>
+    function teams()
+    {
+        let selectedLeague = document.getElementById('league').value
+        let teamSelect = document.getElementById('select-team')
+        teamSelect.classList.remove('hidden')
+        let options = Array.from(document.getElementsByClassName('option-team'))
+        options.forEach(function (option){
+            if(option.getAttribute('data-tag') === selectedLeague)
+                option.classList.remove('hidden')
+            else
+                option.classList.add('hidden')
+        })
+    }
+</script>

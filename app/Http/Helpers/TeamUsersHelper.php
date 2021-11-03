@@ -14,10 +14,11 @@ class TeamUsersHelper
         $coach_id = Auth::id();
         $team_users = TeamUsers::where('user_id', $coach_id)
             ->where('status_id', 9)->get();
-        $users = TeamUsers::where('team_id', $team_users->pluck('team_id'))->where('status_id', 5)->get();
-        if ($users->isEmpty()) {
+        if ($team_users->isEmpty()) {
             return null;
         }
+        $users = TeamUsers::where('team_id', $team_users->pluck('team_id'))
+            ->where('status_id', 5)->get();
         return User::whereIn('id', $users->pluck('user_id'))->get()->toArray();
     }
 

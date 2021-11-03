@@ -35,12 +35,11 @@ class SidebarProvider extends ServiceProvider
                 'league' => League::find($leagueSeason->league_id)
             );
         }
-//        dump((object)$data);
-//        dd($data);
         View::share(
             [
                 'seasons' => Season::all(),
-                'dataSidebar' => (object)$data
+                'dataSidebar' => (object)$data,
+                'archive' => Season::where('status_id', 2)->get()
             ]
         );
     }

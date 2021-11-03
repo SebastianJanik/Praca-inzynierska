@@ -49,7 +49,7 @@ class TeamsController extends Controller
             ]
         );
         Team::where('id', $team_id)->update($data);
-        return $this->edit($team_id);
+        return redirect()->route('teams.edit', ['id' => $team_id]);
     }
 
     public function edit($team_id)
@@ -89,13 +89,14 @@ class TeamsController extends Controller
                     'league_season_id' => $leagueSeason->id
                 ]
             );
-            return $this->editAssign($team_id);
+            return redirect()->route('teams.edit_assign', ['id' => $team_id]);
         }
         $teamLeagueSeasons->toArray();
         TeamLeagueSeasons::where('team_id', $team_id,)
             ->where('league_season_id', $teamLeagueSeasons['league_season_id'])
             ->update(['league_season_id' => $leagueSeason->id]);
-        return $this->editAssign($team_id);
+        return redirect()->route('teams.edit_assign', ['id' => $team_id]);
+
     }
 
     public function editAssign($team_id)

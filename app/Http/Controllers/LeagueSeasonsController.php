@@ -17,6 +17,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class LeagueSeasonsController extends Controller
 {
+    private $status_accepted = 9;
 
     public function index()
     {
@@ -37,43 +38,64 @@ class LeagueSeasonsController extends Controller
         $matchTeamsHelper = new MatchTeamHelper();
 
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
-        if(isEmpty($team_league_seasons))
+        if($team_league_seasons->isEmpty())
             return "Table doesn't exist";
 
         $rounds = Round::where('league_season_id', $league_season_id)->get();
-        foreach ($rounds as $round)
-            $rounds_id [] = $round->id;
-        $matches = Matches::whereIn('round_id', $rounds_id)->get();
-        foreach ($matches as $match)
-            $matches_id [] = $match->id;
+        if($rounds->isEmpty())
+            return "Table doesn't exist";
+
+        $matches = Matches::whereIn('round_id', $rounds->pluck('id'))->get();
+        if($matches->isEmpty())
+            return "Table doesn't exist";
 
         $teams = Team::find($team_league_seasons->pluck('team_id'));
-        $matchTeams = MatchTeams::whereIn('match_id', $matches_id)->get();
+        $matchTeams = MatchTeams::whereIn('match_id', $matches->pluck('id'))->get();
 
         foreach ($rounds as $round)
-            $data [] = array (
+            $data [] = (object)array (
                 'matches' => $matchTeamsHelper->matchesBelongsToRound($round->id)
             );
-//        return view('league_seasons.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
+        return view('league_seasons.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
     }
 
     public function showTable($league_season_id)
     {
+        $matchTeamsHelper = new MatchTeamHelper();
+
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
-        if(isEmpty($team_league_seasons))
+        if($team_league_seasons->isEmpty())
             return "Table doesn't exist";
 
         $rounds = Round::where('league_season_id', $league_season_id)->get();
-        if(isEmpty($rounds))
+        if($rounds->isEmpty())
             return "Table doesn't exist";
 
         $matches = Matches::whereIn('round_id', $rounds->pluck('id'))->get();
-        if(isEmpty($matches))
+        if($matches->isEmpty())
             return "Table doesn't exist";
 
-        $matchTeams = MatchTeams::whereIn('match_id', $matches->pluck('id'))->get();
+        $matches = $matches->where('status_id', $this->status_accepted);
+
         $teams = Team::find($team_league_seasons->pluck('team_id'));
 
-        return view('league_season.show_table');
+        $data = [];
+        foreach ($teams as $key=>$team){
+            $matchTeams = MatchTeams::whereIn('match_id', $matches->pluck('id'))
+                ->where('team_id', $team->id)->get();
+            $data [] = (object)array(
+                'team' => $team,
+                'count' => count($matchTeams),
+                'points' => 0
+            );
+            foreach ($matchTeams as $matchTeam){
+                $points = $matchTeamsHelper->matchTeamPoints($matchTeam->match_id, $matchTeam->team_id);
+                if(!is_int($points))
+                    return 'Whoops something goes wrong';
+                $data[$key]->points += $points;
+            }
+        }
+
+        return view('league_seasons.show_table');
     }
 }

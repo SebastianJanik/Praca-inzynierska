@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\TeamsHelper;
 use App\Http\Helpers\TeamUsersHelper;
 use App\Models\League;
 use App\Models\LeagueSeasons;
@@ -10,19 +11,37 @@ use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 use App\Models\TeamUsers;
 use App\Models\User;
-use phpDocumentor\Reflection\Types\Integer;
 
 
 class TeamUsersController extends Controller
 {
     public function create()
     {
+        $teamHelper = new TeamsHelper();
         $seasons = Season::where('status_id', 1)->get();
-        $leagues_seasons = LeagueSeasons::where('season_id', $seasons->pluck('id'))->get();
-        $leagues = League::find($leagues_seasons->pluck('league_id')->toArray());
-        $team_league_seasons = TeamLeagueSeasons::whereIn('league_season_id', $leagues_seasons->pluck('id')->toArray());
-        $teams = Team::find($team_league_seasons->pluck('team_id')->toArray());
-        return view('team_users.create', compact('leagues_seasons', 'leagues' , 'team_league_seasons', 'teams'));
+        $leagues_seasons = LeagueSeasons::where('season_id', $seasons->pluck('id'))
+            ->whereNotNull('league_id')->get();
+        $leagues = League::find($leagues_seasons->pluck('league_id'));
+        $team_league_seasons = TeamLeagueSeasons::whereIn('league_season_id', $leagues_seasons->pluck('id'))->get();
+        $teams = Team::find($team_league_seasons->pluck('team_id'));
+        $data = [];
+        foreach ($teams as $team){
+            $data [] = (object)array(
+                'id' => $team->id,
+                'name' => $team->name,
+                'league' => $teamHelper->teamLeagueInCurrentSeason($team->id)
+            );
+        }
+//        foreach ($team_league_seasons as $team_league_season){
+//                $team = Team::find($team_league_season->team_id);
+//                $data [] = (object)array(
+//                    'team' => $team,
+//                    'team_league' => (object)$teamHelper->teamLeagueInCurrentSeason($team->id)
+//                );
+//            }
+
+//        dd($data);
+        return view('team_users.create', compact('data', 'leagues'));
     }
 
     public function store()
@@ -59,7 +78,7 @@ class TeamUsersController extends Controller
         $team_users->save();
         $user->status_id = 1;
         $user->save();
-        return (new UsersController)->indexPlayers();
+        return redirect()->route('users.players_index');
     }
 
     public function indexUsersAcceptCoach()
@@ -73,6 +92,8 @@ class TeamUsersController extends Controller
     {
         $teamUsersHelper = new TeamUsersHelper();
         $data = $teamUsersHelper->usersWaitingForAccept();
+        if($data->players->isEmpty() && $data->coaches->isEmpty() && $data->referee->isEmpty())
+            $data = null;
         return view('team_users.accept_admin', compact('data'));
     }
 
@@ -91,7 +112,7 @@ class TeamUsersController extends Controller
         if(isset($data['decline']))
             $user->status_id = '7';
         $user->save();
-        return $this->indexUsersAcceptCoach();
+        return redirect()->route('team_users.accept_coach');
     }
 
     public function storeUsersAcceptAdmin()
@@ -110,6 +131,6 @@ class TeamUsersController extends Controller
         if(isset($data['decline']))
             $user->status_id = '10';
         $user->save();
-        return $this->indexUsersAcceptAdmin();
+        return redirect()->route('team_users.accept_admin');
     }
 }
