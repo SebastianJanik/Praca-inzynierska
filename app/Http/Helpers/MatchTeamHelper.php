@@ -140,7 +140,6 @@ class MatchTeamHelper
     {
         $match_team = MatchTeams::where('match_id', $match_id)
             ->where('team_id', $team_id)->first();
-        // If match goals are nulls
         $match_team2 = MatchTeams::where('match_id', $match_id)
             ->where('team_id', '!=', $team_id)->first();
         if(!$match_team)
@@ -159,4 +158,26 @@ class MatchTeamHelper
 
         return null;
     }
+    public function matchTeamGoalsScored($match_id, $team_id)
+    {
+        $match_team = MatchTeams::where('match_id', $match_id)
+            ->where('team_id', $team_id)->first();
+        if(!$match_team)
+            return null;
+        if(!isset($match_team->goals))
+            return null;
+        return $match_team->goals;
+    }
+    public function matchTeamGoalsConceded($match_id, $team_id)
+    {
+        $match_team = MatchTeams::where('match_id', $match_id)
+            ->where('team_id', '!=', $team_id)->first();
+        if(!$match_team)
+            return null;
+        if(!isset($match_team->goals))
+            return null;
+        return $match_team->goals;
+    }
+
+
 }

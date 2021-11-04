@@ -86,16 +86,21 @@ class LeagueSeasonsController extends Controller
             $data [] = (object)array(
                 'team' => $team,
                 'count' => count($matchTeams),
-                'points' => 0
+                'points' => 0,
+                'goals_scored' => 0,
+                'goals_conceded' => 0
             );
             foreach ($matchTeams as $matchTeam){
                 $points = $matchTeamsHelper->matchTeamPoints($matchTeam->match_id, $matchTeam->team_id);
-                if(!is_int($points))
+                $goals_scored = $matchTeamsHelper->matchTeamGoalsScored($matchTeam->match_id, $matchTeam->team_id);
+                $goals_conceded = $matchTeamsHelper->matchTeamGoalsConceded($matchTeam->match_id, $matchTeam->team_id);
+                if(!is_int($points) || !is_int($goals_scored) || !is_int($goals_conceded))
                     return 'Whoops something goes wrong';
                 $data[$key]->points += $points;
+                $data[$key]->goals_scored += $goals_scored;
+                $data[$key]->goals_conceded += $goals_conceded;
             }
         }
-
-        return view('league_seasons.show_table');
+        return view('league_seasons.show_table', compact('data'));
     }
 }
