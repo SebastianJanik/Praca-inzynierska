@@ -147,29 +147,31 @@
                         </div>
                     </form>
                     @role('admin')
+                    @if($match->status_id != 15)
                         @if($match->status_id != 9)
-                        <form method="POST" action="{{ route('matches.protocol', $match->id) }}">
-                        @csrf
-                            @method('PATCH')
-                            <div class="row">
-                                <input class="hidden" name="accept" value="accept">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Accept protocol') }}
-                                </button>
-                            </div>
-                        </form>
-                    @else
-                        <form method="POST" action="{{ route('matches.protocol', $match->id) }}">
-                        @csrf
-                            @method('PATCH')
-                            <div class="row">
-                                <input class="hidden" name="restore" value="restore">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Restore editable for referees') }}
-                                </button>
-                            </div>
-                        </form>
+                            <form method="POST" action="{{ route('matches.protocol', $match->id) }}">
+                                @csrf
+                                @method('PATCH')
+                                <div class="row">
+                                    <input class="hidden" name="accept" value="accept">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Accept protocol') }}
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('matches.protocol', $match->id) }}">
+                                @csrf
+                                @method('PATCH')
+                                <div class="row">
+                                    <input class="hidden" name="restore" value="restore">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Restore editable for referees') }}
+                                    </button>
+                                </div>
+                            </form>
                         @endif
+                    @endif
                     @endrole
                 </div>
             </div>

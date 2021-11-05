@@ -14,6 +14,7 @@
                             <div class="col">{{ __('Points') }}</div>
                             <div class="col">{{ __('Goals scored') }}</div>
                             <div class="col">{{ __('Goals conceded') }}</div>
+                            <div class="col">{{ __('Goals diff') }}</div>
                         </div>
                         @foreach($data as $team)
                         <div class="row">
@@ -22,6 +23,7 @@
                             <div class="col">{{$team->points}}</div>
                             <div class="col">{{$team->goals_scored}}</div>
                             <div class="col">{{$team->goals_conceded}}</div>
+                            <div class="col">{{$team->goals_diff}}</div>
                         </div>
                         @endforeach
                     </div>

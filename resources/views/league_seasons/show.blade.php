@@ -39,11 +39,28 @@
                                                 @endrole
                                             @endif
                                             @role('admin')
-                                                <a href="{{route('matches.edit', $match->match->id)}}">
-                                                    <button>{{__('Edit match')}}</button>
-                                                </a>
+                                            <a href="{{route('matches.edit', $match->match->id)}}">
+                                                <button>{{__('Edit match')}}</button>
+                                            </a>
                                             @endrole
                                         </div>
+                                        @role('admin')
+                                        <div class="col">
+                                            @switch($match->match->status_id)
+                                                @case(15)
+                                                <span class="bg-primary">{{__('Incoming match')}}</span>
+                                                @break
+                                                @case(16)
+                                                <span class="bg-warning">{{__('Waiting for accept')}}</span>
+                                                @break
+                                                @case(9)
+                                                <span class="bg-success">{{__('Accepted')}}</span>
+                                                @break
+                                                @default
+                                                <span class="bg-danger">{{__('Other')}}</span>
+                                            @endswitch
+                                        </div>
+                                        @endrole
                                     @endif
                                 </div>
                             @endforeach

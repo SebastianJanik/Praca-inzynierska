@@ -88,7 +88,8 @@ class LeagueSeasonsController extends Controller
                 'count' => count($matchTeams),
                 'points' => 0,
                 'goals_scored' => 0,
-                'goals_conceded' => 0
+                'goals_conceded' => 0,
+                'goals_diff' => 0
             );
             foreach ($matchTeams as $matchTeam){
                 $points = $matchTeamsHelper->matchTeamPoints($matchTeam->match_id, $matchTeam->team_id);
@@ -96,11 +97,20 @@ class LeagueSeasonsController extends Controller
                 $goals_conceded = $matchTeamsHelper->matchTeamGoalsConceded($matchTeam->match_id, $matchTeam->team_id);
                 if(!is_int($points) || !is_int($goals_scored) || !is_int($goals_conceded))
                     return 'Whoops something goes wrong';
+                $goals_diff = $goals_scored - $goals_conceded;
                 $data[$key]->points += $points;
                 $data[$key]->goals_scored += $goals_scored;
                 $data[$key]->goals_conceded += $goals_conceded;
+                $data[$key]->goals_diff += $goals_diff;
             }
         }
+        usort($data, function ($a, $b) : int {
+            return
+                ($b->points <=> $a->points) * 1000 +// price ASC
+                ($b->goals_diff <=> $a->goals_diff) * 100 +// price ASC
+                ($b->goals_scored <=> $a->goals_scored) * 10 +// inStock DESC
+                ($a->goals_conceded <=> $b->goals_conceded); // isRecommended DESC
+        });
         return view('league_seasons.show_table', compact('data'));
     }
 }
