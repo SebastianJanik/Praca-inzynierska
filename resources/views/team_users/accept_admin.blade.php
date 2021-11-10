@@ -16,31 +16,38 @@
                                         <form method="POST" action="{{ route('team_users.accept_admin_store') }}">
                                             @csrf
                                             @method('PUT')
-                                            <div class="row-cols">
-                                                <div class="hidden">
-                                                    <input class="" name="user_id" value="{{$user['id']}}">
+                                            <div class="form-group row hidden">
+                                                <div class="col-md-6">
+                                                    <label for="user_id"></label>
+                                                    <input id="user_id" class="" name="user_id" value="{{$user['id']}}">
                                                 </div>
-                                                <div class="col">
-                                                    {{$user->name}}
+                                            </div>
+                                            <div class="form-group row-flex">
+                                                <label class="col-form-label" for="name">{{__('Name')}}</label>
+                                                <input type="text" readonly class="form-control-plaintext" name="name"
+                                                       id="name" value="{{$user->name}}">
+                                            </div>
+                                            <div class="form-group row-flex">
+                                                <label class="col-form-label" for="surname">{{__('Surname')}}</label>
+                                                <input type="text" readonly class="form-control-plaintext" name="surname"
+                                                       id="surname" value="{{$user->surname}}">
+                                            </div>
+                                            <div class="form-group row">
+                                                {{$user->date_birth}}
+                                            </div>
+                                            <div class="form-group row">
+                                                {{$user->email}}
+                                            </div>
+                                            <div class="form-group row">
+                                                {{$user->role}}
+                                            </div>
+                                            @if(isset($user->team->name))
+                                                <div class="form-group row">
+                                                    {{$user->team->name}}
                                                 </div>
-                                                <div class="col">
-                                                    {{$user->surname}}
-                                                </div>
-                                                <div class="col">
-                                                    {{$user->date_birth}}
-                                                </div>
-                                                <div class="col">
-                                                    {{$user->email}}
-                                                </div>
-                                                <div class="col">
-                                                    {{$user->role}}
-                                                </div>
-                                                @if(isset($user->team->name))
-                                                    <div class="col">
-                                                        {{$user->team->name}}
-                                                    </div>
-                                                @endif
-                                                <div class="col">
+                                            @endif
+                                            <div class="form-group row ">
+                                                <div class="col-md-6">
                                                     <input type="submit" class="btn btn-primary" name="accept"
                                                            value="{{__('Accept')}}">
                                                     <input type="submit" class="btn btn-primary" name="decline"

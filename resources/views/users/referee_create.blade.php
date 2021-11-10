@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">{{ __('Become a referee') }}</div>
-                    @if($error == null)
+                    @if($message == null)
                         {{__('Are you sure, you want to become a referee ?')}}
                         <form method="POST" action="{{ route('users.referee_store') }}">
                             <input type="submit" class="btn-success" value="Yes">

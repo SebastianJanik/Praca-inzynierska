@@ -8,6 +8,7 @@ use App\Models\Statuses;
 use App\Models\TeamUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -68,8 +69,9 @@ class UsersController extends Controller
     {
         $user = User::find(Auth::id());
         $message = null;
-        if($user->status_id == 13)
-            $message = 'You are actually player or coach';
+
+        if($user->hasAnyRole(['player', 'coach', 'referre', 'admin']))
+            $message = 'Your role is actually assigned';
         if($user->status_id == 14)
             $message = 'You have already applied for this position';
         return view('users.referee_create', compact('message'));
@@ -81,5 +83,10 @@ class UsersController extends Controller
         $user->status_id = 14;
         $user->save();
         return redirect()->route('users.referee_create');
+    }
+
+    public function suspendPlayer($user)
+    {
+
     }
 }
