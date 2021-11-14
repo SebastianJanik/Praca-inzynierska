@@ -74,11 +74,22 @@
                                     @csrf
                                     <div class="card-button">
                                         <a href=>
-                                            <button class="btn-danger">{{__('Remove player')}}</button>
+                                            <button class="btn-danger">{{__('Remove')}}</button>
                                         </a>
                                     </div>
                                 </form>
                             </div>
+                            @role('admin')
+                            <div class="row">
+                                <div class="card-button">
+                                    <form class="suspend" method="POST" action="{{route('suspensions.create')}}">
+                                    @csrf
+                                        <input name="user_id" class="hidden" value="{{$user->id}}">
+                                        <button class="btn-warning">{{__('Suspend')}}</button>
+                                    </form>
+                                </div>
+                            </div>
+                            @endrole
                         </div>
                     </div>
                 </div>

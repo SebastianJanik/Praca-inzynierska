@@ -56,6 +56,6 @@ class MatchTeamsController extends Controller
         $team_pairs = $matchTeam_helper->createMatchTeams($teams, $matches);
         $leagueSeasons->status_id = '11';
         $leagueSeasons->save();
-        return view('home');
+        return redirect()->route('home');
     }
 }

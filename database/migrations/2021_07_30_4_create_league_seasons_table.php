@@ -13,7 +13,7 @@ class CreateLeagueSeasonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('league_seasons', function (Blueprint $table) {
+        Schema::create('league_season', function (Blueprint $table) {
             $table->id();
             $table->foreignId('season_id')->constrained('seasons')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('league_id')->nullable()->constrained('leagues')->onUpdate('cascade')->onDelete('cascade');
@@ -33,6 +33,6 @@ class CreateLeagueSeasonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('league_seasons');
+        Schema::dropIfExists('league_season');
     }
 }

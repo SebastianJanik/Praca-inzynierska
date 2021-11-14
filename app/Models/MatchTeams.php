@@ -9,6 +9,8 @@ class MatchTeams extends Model
 {
     use HasFactory;
 
+    protected $table = 'match_team';
+
     protected $fillable = [
         'match_id',
         'team_id',

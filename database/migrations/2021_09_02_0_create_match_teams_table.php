@@ -13,7 +13,7 @@ class CreateMatchTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('match_teams', function (Blueprint $table) {
+        Schema::create('match_team', function (Blueprint $table) {
             $table->id();
             $table->foreignId('match_id')->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('team_id')->nullable()->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
@@ -31,7 +31,7 @@ class CreateMatchTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('match_teams');
+        Schema::dropIfExists('match_team');
     }
 }
 

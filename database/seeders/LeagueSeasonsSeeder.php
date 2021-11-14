@@ -14,7 +14,7 @@ class LeagueSeasonsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '1',
                 'season_id' => '1',
@@ -22,7 +22,7 @@ class LeagueSeasonsSeeder extends Seeder
                 'status_id' => '12'
             ]
         );
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '2',
                 'season_id' => '1',
@@ -30,7 +30,7 @@ class LeagueSeasonsSeeder extends Seeder
                 'status_id' => '12'
             ]
         );
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '3',
                 'season_id' => '1',
@@ -38,7 +38,7 @@ class LeagueSeasonsSeeder extends Seeder
                 'status_id' => '12'
             ]
         );
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '4',
                 'season_id' => '2',
@@ -46,7 +46,7 @@ class LeagueSeasonsSeeder extends Seeder
                 'status_id' => '12'
             ]
         );
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '5',
                 'season_id' => '2',
@@ -54,7 +54,7 @@ class LeagueSeasonsSeeder extends Seeder
                 'status_id' => '12'
             ]
         );
-        DB::table('league_seasons')->insert(
+        DB::table('league_season')->insert(
             [
                 'id' => '6',
                 'season_id' => '2',

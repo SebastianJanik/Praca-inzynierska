@@ -7,12 +7,13 @@ use App\Models\MatchUsers;
 use App\Models\Statuses;
 use App\Models\TeamUsers;
 use App\Models\User;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
-    public function indexPlayers()
+    public function indexPlayersCoach()
     {
         $id = Auth::user()->id;
         $coaches_team = TeamUsers::where('user_id', $id)->get();
@@ -22,6 +23,12 @@ class UsersController extends Controller
             ->whereIn('status_id', [6, 9])->get();
         $users = User::find($team_users->pluck('user_id'))
             ->where('id', '!=', $id);
+        return view('users.players_index', compact('users'));
+    }
+
+    public function indexPlayersAdmin($team_id)
+    {
+        $users = Team::find($team_id)->users;
         return view('users.players_index', compact('users'));
     }
 
@@ -85,8 +92,4 @@ class UsersController extends Controller
         return redirect()->route('users.referee_create');
     }
 
-    public function suspendPlayer($user)
-    {
-
-    }
 }

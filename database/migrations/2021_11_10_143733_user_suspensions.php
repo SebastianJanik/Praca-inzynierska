@@ -13,9 +13,11 @@ class UserSuspensions extends Migration
      */
     public function up()
     {
-        Schema::create('user_suspensions', function (Blueprint $table) {
+        Schema::create('suspension_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('suspension_id')->constrained('suspensions')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->timestamps();
 
             $table->primary(['user_id', 'suspension_id'], 'user_suspensions_user_id_suspension_id_primary');
         });
@@ -28,6 +30,6 @@ class UserSuspensions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_suspensions');
+        Schema::dropIfExists('suspension_user');
     }
 }

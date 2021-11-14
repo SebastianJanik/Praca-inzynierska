@@ -32,15 +32,6 @@ class TeamUsersController extends Controller
                 'league' => $teamHelper->teamLeagueInCurrentSeason($team->id)
             );
         }
-//        foreach ($team_league_seasons as $team_league_season){
-//                $team = Team::find($team_league_season->team_id);
-//                $data [] = (object)array(
-//                    'team' => $team,
-//                    'team_league' => (object)$teamHelper->teamLeagueInCurrentSeason($team->id)
-//                );
-//            }
-
-//        dd($data);
         return view('team_users.create', compact('data', 'leagues'));
     }
 

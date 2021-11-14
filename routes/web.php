@@ -12,6 +12,7 @@ use App\Http\Controllers\TeamUsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SuspensionsController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -33,16 +34,18 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/users/players-index', [UsersController::class, 'indexPlayers'])->name('users.players_index');
+Route::get('/users/myplayers-index', [UsersController::class, 'indexPlayersCoach'])->name('users.players_index');
+Route::get('/users/{team_id}/players-index', [UsersController::class, 'indexPlayersAdmin'])->name('users.players_index_admin');
 Route::get('/users/referee-create', [UsersController::class, 'createReferee'])->name('users.referee_create');
-Route::post('/users/referee-store', [UsersController::class, 'storeReferee'])->name('users.referee_store');
 Route::get('/users/players-show/{id}', [UsersController::class, 'showPlayers'])->name('users.players_show');
+Route::post('/users/referee-store', [UsersController::class, 'storeReferee'])->name('users.referee_store');
 
 Route::get('/leagues/create', [LeaguesController::class, 'create'])->name('leagues.create');
 Route::post('/leagues', [LeaguesController::class, 'store'])->name('leagues.store');
 
 Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams.create');
 Route::get('/teams', [TeamsController::class, 'index'])->name('teams.index');
+Route::get('/teams/{id}/show', [TeamsController::class, 'show'])->name('teams.show');
 Route::get('/teams/{id}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
 Route::get('/teams/{id}/edit-assign', [TeamsController::class, 'editAssign'])->name('teams.edit_assign');
 Route::patch('/teams/{id}/update', [TeamsController::class, 'update'])->name('teams.update');
@@ -72,6 +75,11 @@ Route::get('/team-users/accept-coach', [TeamUsersController::class, 'indexUsersA
 Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersAcceptAdmin'])->name('team_users.accept_admin');
 Route::put('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users.accept_coach_store');
 Route::put('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users.accept_admin_store');
+
+Route::post('/suspensions/create', [SuspensionsController::class, 'create'])->name('suspensions.create');
+Route::post('/suspensions', [SuspensionsController::class, 'store'])->name('suspensions.store');
+
+
 
 
 //Route::match([''],'/team-users/test', [TeamUsersController::class, 'test'])->name('team_users_test'); get i post

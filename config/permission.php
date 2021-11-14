@@ -69,6 +69,9 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+
+        //My model is user
+        'model' => 'users',
     ],
 
     'column_names' => [

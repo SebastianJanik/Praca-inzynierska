@@ -10,6 +10,8 @@ class TeamUsers extends Model
 {
     use HasFactory;
 
+    protected $table = 'team_user';
+
     protected $primaryKey = ['team_id', 'user_id'];
     public $incrementing = false;
 

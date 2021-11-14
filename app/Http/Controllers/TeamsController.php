@@ -16,6 +16,12 @@ class TeamsController extends Controller
         return view('teams.index', ['teams' => $teams]);
     }
 
+    public function show($id)
+    {
+        $team = Team::find($id);
+        return view('teams.show', compact('team'));
+    }
+
     public function create()
     {
         $leagues = League::all();

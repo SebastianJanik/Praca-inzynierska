@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LeagueSeasons extends Model
+class Suspensions extends Model
 {
     use HasFactory;
 
-    protected $table = 'league_season';
-    
     protected $fillable = [
-        'season_id',
-        'league_id',
-        'status_id'
+        'status_id',
+        'match_id',
+        'reason',
+        'length',
+        'matches_left',
     ];
 }

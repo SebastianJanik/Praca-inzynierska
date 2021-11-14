@@ -48,10 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function teamUsers(){
-        return $this->hasMany(TeamUsers::class);
-    }
-    public function matchUsers(){
-        return $this->hasMany(MatchUsers::class);
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 }

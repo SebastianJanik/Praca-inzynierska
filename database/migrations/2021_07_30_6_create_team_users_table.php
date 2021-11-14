@@ -13,7 +13,7 @@ class CreateTeamUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_users', function (Blueprint $table){
+        Schema::create('team_user', function (Blueprint $table){
             $table->foreignId('team_id')->constrained('teams')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('status_id')->default('5')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
@@ -32,6 +32,6 @@ class CreateTeamUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_users');
+        Schema::dropIfExists('team_user');
     }
 }

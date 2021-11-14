@@ -16,7 +16,7 @@ class TeamUsersSeeder extends Seeder
     public function run()
     {
         for ($i = 5; $i < 12; $i++) {
-            DB::table('team_users')->insert(
+            DB::table('team_user')->insert(
                 [
                     'team_id' => '1',
                     'user_id' => $i,
@@ -27,7 +27,7 @@ class TeamUsersSeeder extends Seeder
             DB::table('users')->where('id', $i)
                 ->update(['status_id' => 13]);
         }
-        DB::table('team_users')->insert(
+        DB::table('team_user')->insert(
             [
                 'team_id' => '1',
                 'user_id' => '3',

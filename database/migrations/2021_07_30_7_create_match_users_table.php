@@ -13,7 +13,7 @@ class CreateMatchUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('match_users', function (Blueprint $table) {
+        Schema::create('match_user', function (Blueprint $table) {
             $table->foreignId('match_id')->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('yellow_card');
@@ -35,6 +35,6 @@ class CreateMatchUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('match_users');
+        Schema::dropIfExists('match_user');
     }
 }

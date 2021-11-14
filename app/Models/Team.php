@@ -17,15 +17,8 @@ class Team extends Model
         'town',
     ];
 
-    public function matchTeams(){
-        return $this->hasMany(MatchTeams::class);
-    }
-
-    public function teamUsers(){
-        return $this->hasMany(TeamUsers::class);
-    }
-
-    public function leagues(){
-        return $this->belongsTo(League::class);
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

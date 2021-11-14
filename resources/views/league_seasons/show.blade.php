@@ -12,7 +12,13 @@
                             @foreach($round->matches as $match)
                                 <div class="row">
                                     <div class="col">
-                                        {{$match->match_teams[0]->team->name}}
+                                        @if($match->match_teams[0]->team->name != 'PAUSE')
+                                            <a href="{{route('teams.show', $match->match_teams[0]->team->id)}}">
+                                                {{$match->match_teams[0]->team->name}}
+                                            </a>
+                                        @else
+                                            {{$match->match_teams[0]->team->name}}
+                                        @endif
                                         @if($match->match_teams[0]->goals == null)
 
                                         @else
@@ -24,7 +30,13 @@
                                         @else
                                             {{$match->match_teams[1]->goals}}
                                         @endif
-                                        {{$match->match_teams[1]->team->name}}
+                                        @if($match->match_teams[1]->team->name != 'PAUSE')
+                                            <a href="{{route('teams.show', $match->match_teams[1]->team->id)}}">
+                                                {{$match->match_teams[1]->team->name}}
+                                            </a>
+                                        @else
+                                            {{$match->match_teams[1]->team->name}}
+                                        @endif
                                     </div>
                                     @if($match->match_teams[0]->team->name != 'PAUSE' && $match->match_teams[1]->team->name != 'PAUSE')
                                         <div class="col">

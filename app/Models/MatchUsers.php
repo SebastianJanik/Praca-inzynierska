@@ -10,6 +10,8 @@ class MatchUsers extends Model
 {
     use HasFactory;
 
+    protected $table = 'match_user';
+
     protected $primaryKey = ['match_id', 'user_id'];
     public $incrementing = false;
 
