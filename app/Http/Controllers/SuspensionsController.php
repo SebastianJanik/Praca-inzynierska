@@ -24,15 +24,10 @@ class SuspensionsController extends Controller
             $suspension = Suspensions::create(
                 [
                     'match_id' => $data['match_id'][$user_id],
+                    'user_id' => $user_id,
                     'reason' => $data['reason'][$user_id],
                     'length' => $data['length'][$user_id],
                     'matches_left' => $data['length'][$user_id],
-                ]
-            );
-            SuspensionUsers::create(
-                [
-                    'user_id' => $user_id,
-                    'suspension_id' => $suspension->id
                 ]
             );
             $user = User::find($user_id);

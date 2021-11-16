@@ -12,6 +12,8 @@ class Suspensions extends Model
     protected $fillable = [
         'status_id',
         'match_id',
+        'user_id',
+        'end_match_id',
         'reason',
         'length',
         'matches_left',

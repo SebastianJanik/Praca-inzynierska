@@ -9,6 +9,8 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $table = 'teams';
+
     protected $fillable = [
         'name',
         'street',
@@ -20,5 +22,10 @@ class Team extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function matches()
+    {
+        return $this->belongsToMany(Matches::class, (new MatchTeams())->getTable(), 'team_id','match_id');
     }
 }

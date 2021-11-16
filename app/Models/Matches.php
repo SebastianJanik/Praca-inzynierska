@@ -23,4 +23,14 @@ class Matches extends Model
         return Matches::whereIn('round_id', $rounds->pluck('id'))->get();
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, (new MatchUsers())->getTable(), 'match_id', 'user_id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, (new MatchTeams())->getTable(), 'match_id', 'team_id');
+    }
+
 }

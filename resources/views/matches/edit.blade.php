@@ -11,23 +11,31 @@
                         @csrf
                         @method('PATCH')
                         <div class="row justify-content-center">Match Result</div>
-                        <div class="row">
-                            <div class="col float-left">
+                        <div class="row-flex">
+                            <div class="col-flex">
+                                <div class="col">
                                 {{$teams[0]->name}}
+                                </div>
+                                <div class="col">
                                 <input type="number" min="0" name="goals_team[{{$teams[0]->id}}]"
                                        @if($match_teams[0]->goals) value="{{$match_teams[0]->goals}}"
                                        @else value="0" @endif>
+                                </div>
                             </div>
-                            <div class="col float-right">
+                            <div class="col-flex">
+                                <div class="col">
                                 <input type="number" min="0" name="goals_team[{{$teams[1]->id}}]"
                                        @if($match_teams[1]->goals) value="{{$match_teams[1]->goals}}"
                                        @else value="0" @endif>
+                                </div>
+                                <div class="col">
                                 {{$teams[1]->name}}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             @foreach($teams as $team)
-                                <div class="col-xl">
+                                <div class="row">
                                     <table class="table">
                                         <thead class="thead-dark">
                                         <tr>
@@ -191,3 +199,14 @@
         })
     }
 </script>
+<style>
+    table{
+        table-layout: fixed;
+    }
+    td, th{
+        word-wrap: break-word;
+    }
+    input {
+        width: 100%;
+    }
+</style>

@@ -16,8 +16,10 @@ class Suspensions extends Migration
     {
         Schema::create('suspensions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status_id')->default('1')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('match_id')->nullable()->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->default('1')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('end_match_id')->nullable()->constrained('matches')->onUpdate('cascade')->onDelete('cascade');
             $table->string('reason');
             $table->unsignedInteger('length');
             $table->unsignedInteger('matches_left');

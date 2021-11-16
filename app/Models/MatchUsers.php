@@ -26,6 +26,7 @@ class MatchUsers extends Model
         'end_min'
     ];
 
+
     /**
      * Set the keys for a save update query.
      *

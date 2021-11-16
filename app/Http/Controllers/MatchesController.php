@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\SuspensionHelper;
 use App\Models\Matches;
 use App\Models\MatchTeams;
 use App\Models\MatchUsers;
+use App\Models\Suspensions;
 use App\Models\Team;
 use App\Models\TeamUsers;
 use App\Models\User;
+use phpDocumentor\Reflection\Types\Collection;
 
 class MatchesController extends Controller
 {
@@ -67,19 +70,38 @@ class MatchesController extends Controller
             );
         }
         $match = Matches::find($match_id);
-        $match->status_id = '16';
+        $match->status_id = 16;
         $match->save();
         return redirect()->route('matches.edit', ['id' => $match_id]);
     }
 
     public function protocol($match_id)
     {
-        Matches::find($match_id)->update(['status_id' => 16]);
+        $suspensionHelper = new SuspensionHelper();
+        $match = Matches::find($match_id);
+        $teams = $match->teams;
+        //users in match
+        $users = $match->users;
+        //suspended users in both teams
+        $suspended_users = new \Illuminate\Database\Eloquent\Collection();
+        foreach ($teams as $team)
+            $suspended_users = $suspended_users->merge($team->users->where('status_id', 4));
+        $suspensions = Suspensions::whereIn('user_id', $suspended_users->pluck('id'))
+            ->where('status_id', 1)->get();
 
-        if(request()->get('restore'))
-            Matches::where('id', $match_id)->update(['status_id' => 16]);
-        if(request()->get('accept'))
-            Matches::where('id', $match_id)->update(['status_id' => 9]);
+        foreach ($users as $user){
+            $user->match = $user->matches;
+        }
+        if(request()->get('restore')) {
+            $match->status_id = 16;
+            $match->save();
+        }
+        if(request()->get('accept')) {
+            foreach ($suspensions as $suspension)
+                $suspensionHelper->decreaseSuspension($suspension, $match_id);
+            $match->status_id = 9;
+            $match->save();
+        }
         return redirect()->route('matches.edit', ['id' => $match_id]);
     }
 }

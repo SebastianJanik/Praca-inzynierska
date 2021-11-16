@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Team::class);
     }
+    public function matches()
+    {
+        return $this->belongsToMany(Matches::class, (new MatchUsers())->getTable(), 'user_id','match_id');
+    }
+    public function suspensions()
+    {
+        return $this->hasMany(Suspensions::class);
+    }
 }

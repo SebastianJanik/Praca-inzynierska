@@ -23,12 +23,6 @@ class TeamUsers extends Model
         'left_date',
     ];
 
-    public function teams(){
-        return $this->belongsTo(Team::class);
-    }
-    public function users(){
-        return $this->belongsTo(User::class);
-    }
     /**
      * Set the keys for a save update query.
      *
