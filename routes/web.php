@@ -76,8 +76,10 @@ Route::get('/team-users/accept-admin', [TeamUsersController::class, 'indexUsersA
 Route::put('/team-users/accept-coach', [TeamUsersController::class, 'storeUsersAcceptCoach'])->name('team_users.accept_coach_store');
 Route::put('/team-users/accept-admin', [TeamUsersController::class, 'storeUsersAcceptAdmin'])->name('team_users.accept_admin_store');
 
+Route::get('/suspensions/edit/{id}', [SuspensionsController::class, 'edit'])->name('suspensions.edit');
 Route::post('/suspensions/create', [SuspensionsController::class, 'create'])->name('suspensions.create');
 Route::post('/suspensions', [SuspensionsController::class, 'store'])->name('suspensions.store');
+Route::patch('/suspensions/update', [SuspensionsController::class, 'update'])->name('suspensions.update');
 
 
 

@@ -10,7 +10,7 @@ use App\Models\Suspensions;
 use App\Models\Team;
 use App\Models\TeamUsers;
 use App\Models\User;
-use phpDocumentor\Reflection\Types\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class MatchesController extends Controller
 {
@@ -80,19 +80,32 @@ class MatchesController extends Controller
         $suspensionHelper = new SuspensionHelper();
         $match = Matches::find($match_id);
         $teams = $match->teams;
-        //users in match
         $users = $match->users;
-        //suspended users in both teams
-        $suspended_users = new \Illuminate\Database\Eloquent\Collection();
+        $suspended_users = new Collection();
         foreach ($teams as $team)
             $suspended_users = $suspended_users->merge($team->users->where('status_id', 4));
         $suspensions = Suspensions::whereIn('user_id', $suspended_users->pluck('id'))
             ->where('status_id', 1)->get();
-
         foreach ($users as $user){
             $user->match = $user->matches;
         }
         if(request()->get('restore')) {
+            $suspensionsCurrentMatch = Suspensions::where('match_id', $match_id)->get();
+            if(!$suspensionsCurrentMatch->isEmpty()) {
+                foreach ($suspensionsCurrentMatch as $suspensionCurrentMatch) {
+                    $data [] = (object)array(
+                        'suspension' => $suspensionCurrentMatch,
+                        'user' => $user = User::find($suspensionCurrentMatch->user_id),
+                        'team' => $user->team->first(),
+                    );
+                }
+                $match->status_id = 9;
+                $match->save();
+                $title = 'Suspensions that were imposed after this match';
+                return view('suspensions.edit', compact('data', 'match_id', 'title'));
+            }
+            foreach ($suspensions as $suspension)
+                $suspensionHelper->increaseSuspension($suspension);
             $match->status_id = 16;
             $match->save();
         }

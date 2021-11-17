@@ -48,9 +48,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function teams()
+    public function allTeams()
     {
         return $this->belongsToMany(Team::class);
+    }
+
+    /*
+     * Return user's actual team
+     */
+    public function team()
+    {
+        return $this->belongsToMany(Team::class)
+            ->wherePivot('status_id', 9);
     }
     public function matches()
     {

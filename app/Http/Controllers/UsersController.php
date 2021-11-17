@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Matches;
 use App\Models\MatchUsers;
 use App\Models\Statuses;
+use App\Models\Suspensions;
 use App\Models\TeamUsers;
 use App\Models\User;
 use App\Models\Team;
@@ -53,6 +54,8 @@ class UsersController extends Controller
         $minutes = array_sum($match_users->pluck('end_min')->toArray()) - array_sum($match_users->pluck('start_min')->toArray());
         $yellows = array_sum($match_users->pluck('yellow_card')->toArray());
         $reds = array_sum($match_users->pluck('red_card')->toArray());
+        $suspension = Suspensions::where('user_id', $user->id)
+            ->where('status_id', 1)->first();
         return view(
             'users.players_show',
             compact
@@ -68,7 +71,8 @@ class UsersController extends Controller
                 'assists',
                 'yellows',
                 'reds',
-                'minutes'
+                'minutes',
+                'suspension'
             )
         );
     }

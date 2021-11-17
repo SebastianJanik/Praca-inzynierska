@@ -22,7 +22,13 @@
                         </div>
                         <div class="row">
                             <div class="col">{{ __('Status') }}</div>
-                            <div class="col">{{$status->name}}</div>
+                            <div class="col">{{$status->name}}
+                                @if($status->id == 4)
+                                    <a href="{{route('suspensions.edit', $suspension->id)}}">
+                                        <button class="btn-warning">{{__('Edit suspension')}}</button>
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

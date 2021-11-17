@@ -2,6 +2,8 @@
 
 namespace App\Http\Helpers;
 
+use App\Models\Suspensions;
+
 class SuspensionHelper
 {
     public function decreaseSuspension($suspension, $match_id)
@@ -10,7 +12,15 @@ class SuspensionHelper
             $suspension->matches_left --;
             $suspension->status_id = 2;
             $suspension->end_match_id = $match_id;
-            $suspension->save();
+        }else{
+            $suspension->matches_left --;
         }
+        $suspension->save();
+    }
+
+    public function increaseSuspension($suspension)
+    {
+        $suspension->matches_left ++;
+        $suspension->save();
     }
 }

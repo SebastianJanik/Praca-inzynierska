@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Suspensions;
-use App\Models\SuspensionUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,7 @@ class SuspensionsController extends Controller
         foreach($data['user_id'] as $user_id){
             if(!isset($data['match_id'][$user_id]))
                 $data['match_id'][$user_id] = null;
-            $suspension = Suspensions::create(
+            Suspensions::create(
                 [
                     'match_id' => $data['match_id'][$user_id],
                     'user_id' => $user_id,
@@ -36,6 +35,22 @@ class SuspensionsController extends Controller
         }
 
         return redirect()->route('home');
+    }
+
+    public function edit($suspension_id)
+    {
+        $data [] = (object)array(
+            'suspension' => $suspension = Suspensions::find($suspension_id),
+            'user' => $user = User::find($suspension->user_id),
+            'team' => $user->team->first(),
+        );
+        $title = 'Edit suspension';
+        return view('suspensions.edit', compact('data', 'title'));
+    }
+
+    public function update(Request $request)
+    {
+        dd($request->all());
     }
 
 }
