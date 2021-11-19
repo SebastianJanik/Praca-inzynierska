@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Suspensions;
+use App\Models\TeamUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,10 @@ class SuspensionsController extends Controller
     public function store()
     {
         $data = Request()->all();
-        foreach($data['user_id'] as $user_id){
-            if(!isset($data['match_id'][$user_id]))
+        foreach ($data['user_id'] as $user_id) {
+            if (!isset($data['match_id'][$user_id])) {
                 $data['match_id'][$user_id] = null;
+            }
             Suspensions::create(
                 [
                     'match_id' => $data['match_id'][$user_id],
@@ -50,7 +52,29 @@ class SuspensionsController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+        $suspensions = Suspensions::find($data['suspension_id']);
+        foreach ($suspensions as $suspension) {
+            $suspension->length = $data['length'][$suspension->id];
+            $suspension->matches_left = $data['matches_left'][$suspension->id];
+            $suspension->reason = $data['reason'][$suspension->id];
+            if ($suspension->matches_left == 0) {
+                $user = User::find($suspension->user_id);
+                $team_user = TeamUsers::where('user_id', $user->id)->where('status_id', '!=', 2)->get();
+                if(!$team_user->isEmpty())
+                    $user->status_id = 13;
+                else
+                    $user->status_id = 1;
+                $user->save();
+                $suspension->status_id = 2;
+            }else {
+                $suspension->status_id = 1;
+            }
+            $suspension->save();
+        }
+        if (isset($data['match_id']))
+            return redirect()->route('matches.edit', $data['match_id']);
+        return redirect()->route('suspensions.edit', $data['suspension_id']);
     }
 
 }

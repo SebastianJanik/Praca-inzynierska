@@ -20,22 +20,13 @@ class MatchesController extends Controller
         if (!isset($match)) {
             return "Match doesn't exist";
         }
+        $teams = $match->teams;
         $match_teams = MatchTeams::where('match_id', $match_id)->get();
-        foreach ($match_teams as $match_team) {
-            $teams_id [] = $match_team->team_id;
-        }
-        if (!isset($teams_id)) {
-            return ' There are no teams in this match';
-        }
-        $team_users = TeamUsers::whereIn('team_id', $teams_id)
+        $team_users = TeamUsers::whereIn('team_id', $teams->pluck('id'))
             ->where('status_id', '9')->get();
-        $users_id = null;
-        foreach ($team_users as $team_user) {
-            $users_id [] = $team_user->user_id;
-        }
         $match_users = MatchUsers::where('match_id', $match_id)->get();
-        $users = User::find($users_id);
-        $teams = Team::find($teams_id);
+        $users = User::whereIn('id', $team_users->pluck('user_id')->toArray())
+            ->where('status_id', 13)->get();
         return view('matches.edit', compact('match', 'users', 'teams', 'match_users', 'team_users', 'match_teams'));
     }
 
@@ -99,7 +90,7 @@ class MatchesController extends Controller
                         'team' => $user->team->first(),
                     );
                 }
-                $match->status_id = 9;
+                $match->status_id = 16;
                 $match->save();
                 $title = 'Suspensions that were imposed after this match';
                 return view('suspensions.edit', compact('data', 'match_id', 'title'));

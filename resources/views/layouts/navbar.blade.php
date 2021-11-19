@@ -9,10 +9,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
-        <ul class="navbar-nav mr-auto">
-
-        </ul>
-
+        @auth()
+        <div class="navbar-nav mr-auto">
+        @include('roles.admin')
+        </div>
+        @endauth()
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
