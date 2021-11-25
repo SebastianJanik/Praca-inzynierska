@@ -148,11 +148,13 @@
                                 </div>
                             @endforeach
                         </div>
+                        @if($match->status_id != 9)
                         <div class="row">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Update match') }}
                             </button>
                         </div>
+                        @endif
                     </form>
                     @role('admin')
                     @if($match->status_id != 15)
@@ -174,7 +176,7 @@
                                 <div class="row">
                                     <input class="hidden" name="restore" value="restore">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Restore editable for referees') }}
+                                        {{ __('Restore editable') }}
                                     </button>
                                 </div>
                             </form>

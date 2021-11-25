@@ -82,7 +82,9 @@ class MatchesController extends Controller
         }
         if(request()->get('restore')) {
             $suspensionsCurrentMatch = Suspensions::where('match_id', $match_id)->get();
-            if(!$suspensionsCurrentMatch->isEmpty()) {
+            $suspensionsEndedCurrentMatch = Suspensions::where('end_match_id', $match_id)->get();
+            if(!$suspensionsCurrentMatch->isEmpty() || !$suspensionsEndedCurrentMatch->isEmpty()) {
+                $data = null;
                 foreach ($suspensionsCurrentMatch as $suspensionCurrentMatch) {
                     $data [] = (object)array(
                         'suspension' => $suspensionCurrentMatch,
@@ -90,10 +92,19 @@ class MatchesController extends Controller
                         'team' => $user->team->first(),
                     );
                 }
+                $dataEnd = null;
+                foreach ($suspensionsEndedCurrentMatch as $suspensionEndedCurrentMatch) {
+                    $dataEnd [] = (object)array(
+                        'suspension' => $suspensionEndedCurrentMatch,
+                        'user' => $user = User::find($suspensionEndedCurrentMatch->user_id),
+                        'team' => $user->team->first(),
+                    );
+                }
                 $match->status_id = 16;
                 $match->save();
                 $title = 'Suspensions that were imposed after this match';
-                return view('suspensions.edit', compact('data', 'match_id', 'title'));
+                $secondtitle = 'Suspensions expired after this match';
+                return view('suspensions.edit', compact('data', 'dataEnd', 'match_id', 'title', 'secondtitle'));
             }
             foreach ($suspensions as $suspension)
                 $suspensionHelper->increaseSuspension($suspension);

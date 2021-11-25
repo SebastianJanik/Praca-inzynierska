@@ -64,7 +64,7 @@ class TeamUsersController extends Controller
         $user = User::find($id);
         $team_users = TeamUsers::where('user_id', $id)
             ->where('status_id', 9)->first();
-        $team_users->status_id = 1;
+        $team_users->status_id = 2;
         $team_users->left_date = date('Y-m-d');
         $team_users->save();
         $user->status_id = 1;

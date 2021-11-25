@@ -58,18 +58,21 @@ class SuspensionsController extends Controller
             $suspension->length = $data['length'][$suspension->id];
             $suspension->matches_left = $data['matches_left'][$suspension->id];
             $suspension->reason = $data['reason'][$suspension->id];
+            $user = User::find($suspension->user_id);
             if ($suspension->matches_left == 0) {
-                $user = User::find($suspension->user_id);
                 $team_user = TeamUsers::where('user_id', $user->id)->where('status_id', '!=', 2)->get();
+                if (isset($data['match_id']))
+                    $suspension->end_match_id = $data['match_id'];
                 if(!$team_user->isEmpty())
                     $user->status_id = 13;
                 else
                     $user->status_id = 1;
-                $user->save();
                 $suspension->status_id = 2;
             }else {
                 $suspension->status_id = 1;
+                $user->status_id = 4;
             }
+            $user->save();
             $suspension->save();
         }
         if (isset($data['match_id']))
