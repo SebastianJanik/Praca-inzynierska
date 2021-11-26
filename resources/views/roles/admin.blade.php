@@ -12,9 +12,6 @@
         <a href="{{route('teams.create')}}">
             <button>{{__('Add team')}}</button>
         </a>
-        <a href="{{route('teams.index')}}">
-            <button>{{__('Show teams')}}</button>
-        </a>
         <a href="{{route('seasons.create')}}">
             <button>{{__('Add season')}}</button>
         </a>

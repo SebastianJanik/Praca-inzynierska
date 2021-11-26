@@ -14,10 +14,12 @@ class Season extends Model
         'status_id'
     ];
 
-    public function rounds(){
-        return $this->hasMany(Round::class);
-    }
     public function leagues(){
-        return $this->hasMany(League::class);
+        return $this->belongsToMany(League::class);
+    }
+
+    public function league_seasons()
+    {
+        return $this->belongsToMany(LeagueSeasons::class);
     }
 }

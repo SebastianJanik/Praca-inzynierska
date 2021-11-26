@@ -27,3 +27,7 @@ html, body, #app{
     display: flex;
     width: 100%;
 }
+
+.text-body{
+    margin-left: 10px;
+}

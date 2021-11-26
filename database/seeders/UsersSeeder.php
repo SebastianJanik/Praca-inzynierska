@@ -15,6 +15,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        $today = date("Y-m-d H:m:s");
         DB::table('users')->insert(
             [
                 'id' => '1',
@@ -26,7 +27,8 @@ class UsersSeeder extends Seeder
                 'postal_code' => '11-111',
                 'town' => 'town',
                 'email' => 'admin@admin.com',
-                'password' => Hash::make('admin123')
+                'password' => Hash::make('admin123'),
+                'created_at' => $today
             ]
         );
         DB::table('users')->insert(
@@ -40,7 +42,8 @@ class UsersSeeder extends Seeder
                 'postal_code' => '11-111',
                 'town' => 'town',
                 'email' => 'player@player.com',
-                'password' => Hash::make('admin123')
+                'password' => Hash::make('admin123'),
+                'created_at' => $today
             ]
         );
         DB::table('users')->insert(
@@ -54,7 +57,8 @@ class UsersSeeder extends Seeder
                 'postal_code' => '11-111',
                 'town' => 'town',
                 'email' => 'coach@coach.com',
-                'password' => Hash::make('admin123')
+                'password' => Hash::make('admin123'),
+                'created_at' => $today
             ]
         );
         DB::table('users')->insert(
@@ -68,7 +72,8 @@ class UsersSeeder extends Seeder
                 'postal_code' => '11-111',
                 'town' => 'town',
                 'email' => 'referee@referee.com',
-                'password' => Hash::make('admin123')
+                'password' => Hash::make('admin123'),
+                'created_at' => $today
             ]
         );
         for ($i = 5; $i < 20; $i++){
@@ -83,7 +88,8 @@ class UsersSeeder extends Seeder
                     'postal_code' => '11-111',
                     'town' => 'town',
                     'email' => 'user'.$i.'@user'.$i.'.com',
-                    'password' => Hash::make('admin123')
+                    'password' => Hash::make('admin123'),
+                    'created_at' => $today
                 ]
             );
         }
