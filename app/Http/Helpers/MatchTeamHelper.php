@@ -5,6 +5,7 @@ namespace App\Http\Helpers;
 use App\Models\Matches;
 use App\Models\MatchTeams;
 use App\Models\Round;
+use App\Models\Statuses;
 use App\Models\Team;
 
 class MatchTeamHelper
@@ -28,15 +29,14 @@ class MatchTeamHelper
 
     public function createMatches($teams_num, $rounds): array
     {
+        $modelStatusy = new Statuses();
         $matches_in_round = round($teams_num / 2, 0, PHP_ROUND_HALF_UP);
         $matches = [];
         foreach ($rounds as $round) {
             for ($match = 0; $match < $matches_in_round; $match++) {
                 $matches[] = Matches::create(
                     [
-                        'date' => '2021-09-01',
-                        'town' => ' ',
-                        'protocol' => ' ',
+                        'status_id' => $modelStatusy->getStatus('incoming'),
                         'round_id' => $round->id,
                     ]
                 );

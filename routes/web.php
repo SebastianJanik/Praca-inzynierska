@@ -47,13 +47,13 @@ Route::get('/teams/create', [TeamsController::class, 'create'])->name('teams.cre
 Route::get('/teams', [TeamsController::class, 'index'])->name('teams.index');
 Route::get('/teams/{id}/show', [TeamsController::class, 'show'])->name('teams.show');
 Route::get('/teams/{id}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
-Route::get('/teams/{id}/edit-assign', [TeamsController::class, 'editAssign'])->name('teams.edit_assign');
 Route::patch('/teams/{id}/update', [TeamsController::class, 'update'])->name('teams.update');
-Route::patch('/teams/{id}/update-assign', [TeamsController::class, 'updateAssign'])->name('teams.update_assign');
 Route::post('/teams', [TeamsController::class, 'store'])->name('teams.store');
+Route::post('/teams/change-team-league', [TeamsController::class, 'changeTeamLeague'])->name('teams.change_team_league');
 
 Route::get('/seasons/create', [SeasonsController::class, 'create'])->name('seasons.create');
 Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons.store');
+Route::post('/seasons/change-status', [SeasonsController::class, 'changeStatus'])->name('seasons.change_status');
 Route::get('/seasons', [SeasonsController::class, 'index'])->name('seasons.index');
 Route::get('/seasons/{id}', [SeasonsController::class, 'show'])->name('seasons.show');
 
@@ -67,6 +67,7 @@ Route::get('/league-seasons-table/{id}', [LeagueSeasonsController::class, 'showT
 Route::get('/matches/{id}/edit', [MatchesController::class, 'edit'])->name('matches.edit');
 Route::patch('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches.update');
 Route::patch('/matches/{id}/protocol', [MatchesController::class, 'protocol'])->name('matches.protocol');
+Route::post('/matches/{id}/change_date', [MatchesController::class, 'changeDate'])->name('matches.change_date');
 
 Route::get('/team-users/create', [TeamUsersController::class, 'create'])->name('team_users.create');
 Route::post('/team-users', [TeamUsersController::class, 'store'])->name('team_users.store');

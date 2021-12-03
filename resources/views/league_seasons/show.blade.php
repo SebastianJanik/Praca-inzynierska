@@ -39,6 +39,31 @@
                                         @endif
                                     </div>
                                     @if($match->match_teams[0]->team->name != 'PAUSE' && $match->match_teams[1]->team->name != 'PAUSE')
+                                        <div class="col col-flex">
+                                            @if($match->match->date)
+                                                <span class="text-body">
+                                                {{$match->match->date}}
+                                            </span>
+                                            @else
+                                                <span class="text-body"></span>
+                                            @endif
+                                            @role('admin')
+                                            @if($match->match->status_id == 15)
+                                                <button class="btn-primary date_change" id="button-date_{{$match->match->id}}" onclick="dateForm({{$match->match->id}})">{{__('Change date')}}</button>
+                                                <form id="change-date-form_{{$match->match->id}}" class="hidden" method="POST"
+                                                      action="{{route("matches.change_date", $match->match->id)}}">
+                                                    @csrf
+                                                    <label>
+                                                        <input name="date" type="date">
+                                                    </label>
+                                                    <label>
+                                                        <input name="league_season_id" type="hidden" value="{{$league_season_id}}">
+                                                    </label>
+                                                    <input class="btn-primary" type="submit" value="{{__("Change")}}">
+                                                </form>
+                                            @endif
+                                            @endrole
+                                        </div>
                                         <div class="col">
                                             <a href="{{route('home')}}">
                                                 <button>{{__('View details')}}</button>
@@ -82,5 +107,13 @@
             </div>
         </div>
     </div>
+<script>
+    function dateForm(id)
+    {
+        let button = document.getElementById("button-date_" + id)
+        let form = document.getElementById("change-date-form_" + id)
+        button.style.display = "none"
+        form.style.display = "block"
+    }
+</script>
 @endsection
-

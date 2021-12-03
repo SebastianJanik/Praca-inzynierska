@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
+use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 
@@ -18,7 +19,13 @@ class TeamsController extends Controller
 
     public function show($id)
     {
+        $modelStatusy = new Statuses();
         $team = Team::find($id);
+        $season = Season::where("status_id", $modelStatusy->getStatus('incoming'))->first();
+        if($season) {
+            $leagues = $season->leagues;
+            return view('teams.show', compact('team', 'season', 'leagues'));
+        }
         return view('teams.show', compact('team'));
     }
 
@@ -39,6 +46,8 @@ class TeamsController extends Controller
                 'town' => 'required',
             ]
         );
+        $modelStatusy = new Statuses();
+        $data['status_id'] = $modelStatusy->getStatus('inactive');
         Team::create($data);
         return view('teams.store');
     }
@@ -105,26 +114,8 @@ class TeamsController extends Controller
 
     }
 
-    public function editAssign($team_id)
+    public function changeTeamLeague($team_id)
     {
-        $team = Team::find($team_id);
-        $seasons = Season::where('status_id', '1')->get();
-        foreach ($seasons as $season) {
-            $seasons_id [] = $season->id;
-        }
-        if (isset($seasons_id)) {
-            $leagues_id = LeagueSeasons::select('league_id')
-                ->whereIn('season_id', $seasons_id)->get()->toArray();
-        }
-        if (isset($leagues_id)) {
-            $leagues = League::whereIn('id', $leagues_id)->get();
-        }
-        $teamLeagueSeason = TeamLeagueSeasons::where('team_id', $team_id)->first();
-        $leagueSeason = new LeagueSeasons();
-        if ($teamLeagueSeason) {
-            $teamLeagueSeason->toArray();
-            $leagueSeason = LeagueSeasons::where('id', $teamLeagueSeason['league_season_id'])->first();
-        }
-        return view('teams.assign', compact('team', 'seasons', 'leagues', 'leagueSeason'));
+
     }
 }

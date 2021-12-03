@@ -17,7 +17,7 @@ class CreateMatchesTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('round_id')->constrained('rounds')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('status_id')->default('15')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->date('date')->nullable();
             $table->string('town')->nullable();
             $table->string('protocol')->nullable();

@@ -14,17 +14,18 @@ class Statuses extends Model
         'inactive' => 2,
         'blocked' => 3,
         'suspended' => 4,
-        'waiting for acceptation by coach' => 4,
-        'accepted by coach' => 5,
-        'declined by coach' => 6,
-        'waiting for acceptation by admin' => 7,
-        'accepted by admin' => 8,
-        'declined by admin' => 9,
-        'timetable created' => 10,
-        "timetable doesn't exist" => 11,
-        'assigned to the team' => 12,
-        'incoming' => 13,
-        'completed' => 14
+        'waiting for acceptation by coach' => 5,
+        'accepted by coach' => 6,
+        'declined by coach' => 7,
+        'waiting for acceptation by admin' => 8,
+        'accepted by admin' => 9,
+        'declined by admin' => 10,
+        'timetable created' => 11,
+        "timetable doesn't exist" => 12,
+        'assigned to the team' => 13,
+        'apply to be referee' => 14,
+        'incoming' => 15,
+        'completed' => 16
     );
 
     public function getStatus($name)

@@ -16,7 +16,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status_id')->default('8')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->constrained('statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('street');
             $table->string('house_number');

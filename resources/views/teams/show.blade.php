@@ -17,19 +17,49 @@
                             <div class="col">{{$team->town}}</div>
                         </div>
                         <div class="row">
-                            <div class="card-button">
-                                <a href="{{route('users.players_index_admin', $team->id)}}">
-                                    <button>{{__('Show players')}}</button>
-                                </a>
+                            <div class="col col-flex">
+                                <div class="card-button">
+                                    <a href="{{route('users.players_index_admin', $team->id)}}">
+                                        <button>{{__('Show players')}}</button>
+                                    </a>
+                                </div>
+                                @if($season)
+                                    <div class="card-button">
+                                        <button id="move-button" onclick="showForm()">{{__('Move team')}}</button>
+                                    </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league')}}">
+                                        @csrf
+                                        <label for="season">{{__('Season')}}</label>
+                                        <select id="season" name="league" class="form-select">
+                                            <option value="{{$season->id}}">{{$season->name}}</option>
+                                        </select>
+                                        <label for="league">{{__('League')}}</label>
+                                        <select id="league" name="league" class="form-select">
+                                            @foreach($leagues as $league)
+                                                <option value="{{$league->id}}">{{$league->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="row">
+                                            <input type="submit" class="btn-primary" value="{{__('Move')}}">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @endif
                         </div>
-                        {{-- <div class="row">
-                            <div class="col">{{ __('Status') }}</div>
-                            <div class="col">{{$status->name}}</div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function showForm()
+        {
+            document.getElementById("move-button").style.display = "none"
+            document.getElementById("move-form").style.display = "block"
+        }
+    </script>
 @endsection

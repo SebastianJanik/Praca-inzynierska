@@ -119,4 +119,18 @@ class MatchesController extends Controller
         }
         return redirect()->route('matches.edit', ['id' => $match_id]);
     }
+
+    public function changeDate($match_id)
+    {
+        $data = request()->validate(
+            [
+                'date' => 'required|date|after:today',
+                'league_season_id' => 'required'
+            ]
+        );
+        $match = Matches::find($match_id);
+        $match->date = $data['date'];
+        $match->save();
+        return redirect()->route('league_seasons.show', $data['league_season_id']);
+    }
 }

@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
+use App\Models\Statuses;
 
 class SeasonsController extends Controller
 {
     public function index()
     {
         $seasons = Season::all();
+        foreach ($seasons as $season)
+            $season->status = Statuses::find($season->status_id);
         return view('seasons.index', compact('seasons'));
     }
 
@@ -39,24 +42,49 @@ class SeasonsController extends Controller
                 'name' => 'required|unique:seasons',
             ]
         );
-        $data['status_id'] = '1';
+        $modelStatusy = new Statuses();
+        $data['status_id'] = $modelStatusy->getStatus("incoming");
         $season = Season::create($data);
         $leagues = League::all();
         foreach ($leagues as $league)
             LeagueSeasons::create(
                 [
                     'season_id' => $season->id,
-                    'league_id' => $league->id
+                    'league_id' => $league->id,
+                    'status_id' => $modelStatusy->getStatus("timetable doesn't exist")
                 ]
             );
         LeagueSeasons::create(
             [
                 'season_id' => $season->id,
-                'league_id' => null
+                'league_id' => null,
+                'status_id' => $modelStatusy->getStatus("timetable doesn't exist")
             ]
         );
 
         return view('seasons.store');
     }
 
+    public function changeStatus()
+    {
+        $modelStatusy = new Statuses();
+        $data = request()->validate(
+            [
+                "season_id" => "required"
+            ]
+        );
+        $active_seasons = Season::where('status_id', $modelStatusy->getStatus('active'))->get();
+        $season = Season::find($data["season_id"]);
+        if($season->status_id == $modelStatusy->getStatus('active')) {
+            $season->status_id = $modelStatusy->getStatus('inactive');
+        } else {
+            if(count($active_seasons) >= 1){
+                $message = "Only one season can be active";
+                return redirect()->route('seasons.index')->with('message', $message);
+            }
+            $season->status_id = $modelStatusy->getStatus('active');
+        }
+        $season->save();
+        return redirect()->route('seasons.index');
+    }
 }

@@ -49,14 +49,11 @@ class LeagueSeasonsController extends Controller
         if($matches->isEmpty())
             return "Table doesn't exist";
 
-        $teams = Team::find($team_league_seasons->pluck('team_id'));
-        $matchTeams = MatchTeams::whereIn('match_id', $matches->pluck('id'))->get();
-
         foreach ($rounds as $round)
             $data [] = (object)array (
                 'matches' => $matchTeamsHelper->matchesBelongsToRound($round->id)
             );
-        return view('league_seasons.show', compact('teams', 'matches', 'matchTeams', 'data', 'rounds'));
+        return view('league_seasons.show', compact('data', 'league_season_id'));
     }
 
     public function showTable($league_season_id)

@@ -19,6 +19,16 @@ class LeagueSeasons extends Model
 
     public function leagues()
     {
-        return $this->hasMany(League::class);
+        return $this->belongsTo(League::class);
+    }
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class, "league_season_id");
+    }
+
+    public function matches()
+    {
+        return $this->hasManyThrough(Matches::class, Round::class,"league_season_id","round_id")->orderBy("date", "desc");
     }
 }

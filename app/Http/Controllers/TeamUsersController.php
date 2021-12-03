@@ -7,6 +7,7 @@ use App\Http\Helpers\TeamUsersHelper;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Season;
+use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 use App\Models\TeamUsers;
@@ -37,8 +38,8 @@ class TeamUsersController extends Controller
 
     public function store()
     {
+        $modelStatuses = new Statuses();
         $user = User::find(auth()->id());
-        $team_user = TeamUsers::where('user_id', $user->id)->get();
         $data = request()->validate(
             [
                 'team' => 'required',
@@ -49,25 +50,26 @@ class TeamUsersController extends Controller
         $data['user_id'] = $user->id;
         $data['team_id'] = $data['team'];
         if ($data['role'] == 'player') {
-            $data['status_id'] = '5';
+            $data['status_id'] = $modelStatuses->getStatus('waiting for acceptation by coach');
         }
         if ($data['role'] == 'coach') {
-            $data['status_id'] = '8';
+            $data['status_id'] = $modelStatuses->getStatus('waiting for acceptation by admin');
         }
-        $user->status_id = 13;
+        $user->status_id = $modelStatuses->getStatus('assigned to the team');
         $user->save();
         return TeamUsers::create($data);
     }
 
     public function remove($id)
     {
+        $modelStatuses = new Statuses();
         $user = User::find($id);
         $team_users = TeamUsers::where('user_id', $id)
-            ->where('status_id', 9)->first();
-        $team_users->status_id = 2;
+            ->where('status_id', $modelStatuses->getStatus('accepted by admin'))->first();
+        $team_users->status_id = $modelStatuses->getStatus('inactive');
         $team_users->left_date = date('Y-m-d');
         $team_users->save();
-        $user->status_id = 1;
+        $user->status_id = $modelStatuses->getStatus('active');
         $user->save();
         return redirect()->route('users.players_index');
     }
@@ -90,6 +92,7 @@ class TeamUsersController extends Controller
 
     public function storeUsersAcceptCoach()
     {
+        $modelStatuses = new Statuses();
         $data = request()->validate(
             [
                 'user_id' => 'required',
@@ -99,15 +102,16 @@ class TeamUsersController extends Controller
         );
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status_id = '6';
+            $user->status_id = $modelStatuses->getStatus('accepted by coach');
         if(isset($data['decline']))
-            $user->status_id = '7';
+            $user->status_id = $modelStatuses->getStatus('declined by coach');
         $user->save();
         return redirect()->route('team_users.accept_coach');
     }
 
     public function storeUsersAcceptAdmin()
     {
+        $modelStatuses = new Statuses();
         $data = request()->validate(
             [
                 'user_id' => 'required',
@@ -118,9 +122,9 @@ class TeamUsersController extends Controller
 
         $user = TeamUsers::where('user_id', $data['user_id'])->first();
         if(isset($data['accept']))
-            $user->status_id = '9';
+            $user->status_id = $modelStatuses->getStatus('accepted by admin');
         if(isset($data['decline']))
-            $user->status_id = '10';
+            $user->status_id = $modelStatuses->getStatus('declined by admin');
         $user->save();
         return redirect()->route('team_users.accept_admin');
     }

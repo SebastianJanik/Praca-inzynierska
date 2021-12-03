@@ -37,7 +37,21 @@ class Matches extends Model
     {
         $statuses = new Statuses();
         $season = Season::where('status_id', $statuses->getStatus('active'))->first();
-        $leagues = $season->league_seasons;
-        return $leagues;
+        if(!$season)
+            return null;
+        $league_seasons = $season->league_seasons;
+        $closestMatch = null;
+        foreach ($league_seasons as $league_season) {
+            $league_matches[$league_season->id] = $league_season->matches;
+            if(!$league_matches[$league_season->id]->isEmpty()) {
+                $closestMatch[$league_season->id] = $league_matches[$league_season->id][0];
+                foreach ($league_matches[$league_season->id] as $match) {
+                    if ($match->date > $closestMatch[$league_season->id]->date) {
+                        $closestMatch[$league_season->id] = $match;
+                    }
+                }
+            }
+        }
+        return $closestMatch;
     }
 }

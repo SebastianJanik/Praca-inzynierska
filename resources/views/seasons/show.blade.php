@@ -5,13 +5,13 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">{{ __('All leagues') }}</div>
+                    <div class="card-header">{{ __('Leagues') }}</div>
 
                     <div class="card-body">
                         @foreach($data as $league)
-                            <div class="row">
-                                <span>{{$loop->iteration}}.</span>
-                                <a href="{{route('league_seasons.show', $league['league_season_id'])}}">{{$league['league']['name']}}</a>
+                            <div class="row-flex">
+                                <span class="text-body">{{$loop->iteration}}.</span>
+                                <span class="text-body"><a href="{{route('league_seasons.show', $league['league_season_id'])}}">{{$league['league']['name']}}</a></span>
                             </div>
                         @endforeach
                     </div>

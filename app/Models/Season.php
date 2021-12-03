@@ -20,6 +20,7 @@ class Season extends Model
 
     public function league_seasons()
     {
-        return $this->belongsToMany(LeagueSeasons::class);
+        return $this->hasMany(LeagueSeasons::class);
     }
 }
+//return $this->belongsToMany(User::class, (new MatchUsers())->getTable(), 'match_id', 'user_id');
