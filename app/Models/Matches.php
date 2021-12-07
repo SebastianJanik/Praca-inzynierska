@@ -10,10 +10,11 @@ class Matches extends Model
     use HasFactory;
 
     protected $fillable = [
+        'round_id',
+        'status_id',
         'date',
         'town',
         'protocol',
-        'round_id'
     ];
 
     public function users()
@@ -27,8 +28,11 @@ class Matches extends Model
     }
 
     public function matchesInActiveSeason(){
-        $season = Season::where('status_id', 1)->get();
-        $league_seasons = LeagueSeasons::where('season_id', $season->pluck('id'))->get();
+        $modelStatusy = new Statuses();
+        $season = Season::where('status_id', $modelStatusy->getStatus('active'))->first();
+        if(!$season)
+            return null;
+        $league_seasons = LeagueSeasons::where('season_id', $season->id)->get();
         $rounds = Round::whereIn('league_season_id', $league_seasons->pluck('id'))->get();
         return Matches::whereIn('round_id', $rounds->pluck('id'))->get();
     }

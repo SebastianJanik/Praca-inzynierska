@@ -8,6 +8,7 @@
                     <div class="card-header">{{ __('Create timetable') }}</div>
 
                     <div class="card-body">
+                        @if(empty($message))
                         <form method="POST" action="{{ route('match_teams.store') }}">
                             @csrf
 
@@ -61,6 +62,9 @@
                                 </div>
                             </div>
                         </form>
+                        @else
+                        {{$message}}
+                        @endif
                     </div>
                 </div>
             </div>

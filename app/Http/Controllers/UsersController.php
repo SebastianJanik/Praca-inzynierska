@@ -35,6 +35,7 @@ class UsersController extends Controller
 
     public function showPlayers($id)
     {
+        $modelStatusy = new Statuses();
         $user = User::find($id);
         $status = Statuses::find($user->status_id);
         $match_users = MatchUsers::where('user_id', $id)->get();
@@ -45,17 +46,26 @@ class UsersController extends Controller
             );
         $all_yellows = array_sum($match_users->pluck('yellow_card')->toArray());
         $all_reds = array_sum($match_users->pluck('red_card')->toArray());
-
         $matches = (new Matches())->matchesInActiveSeason();
-        $match_users = MatchUsers::where('user_id', $id)
-            ->whereIn('match_id', $matches->pluck('id'))->get();
-        $goals = array_sum($match_users->pluck('goals')->toArray());
-        $assists = array_sum($match_users->pluck('assists')->toArray());
-        $minutes = array_sum($match_users->pluck('end_min')->toArray()) - array_sum($match_users->pluck('start_min')->toArray());
-        $yellows = array_sum($match_users->pluck('yellow_card')->toArray());
-        $reds = array_sum($match_users->pluck('red_card')->toArray());
+        if(!$matches){
+            $goals = 0;
+            $assists = 0;
+            $minutes = 0;
+            $yellows = 0;
+            $reds = 0;
+        }else {
+            $match_users = MatchUsers::where('user_id', $id)
+                ->whereIn('match_id', $matches->pluck('id'))->get();
+            $goals = array_sum($match_users->pluck('goals')->toArray());
+            $assists = array_sum($match_users->pluck('assists')->toArray());
+            $minutes = array_sum($match_users->pluck('end_min')->toArray()) - array_sum(
+                    $match_users->pluck('start_min')->toArray()
+                );
+            $yellows = array_sum($match_users->pluck('yellow_card')->toArray());
+            $reds = array_sum($match_users->pluck('red_card')->toArray());
+        }
         $suspension = Suspensions::where('user_id', $user->id)
-            ->where('status_id', 1)->first();
+            ->where('status_id', $modelStatusy->getStatus('active'))->first();
         return view(
             'users.players_show',
             compact

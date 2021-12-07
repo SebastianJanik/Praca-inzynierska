@@ -21,7 +21,15 @@
                                 <form method="POST" action="{{route('seasons.change_status')}}">
                                     @csrf
                                     <input type="hidden" value="{{$season->id}}" name="season_id">
-                                    <input type="submit" class="btn-primary" value="{{__('Change status')}}">
+                                    @if($season->status->name != 'active')
+                                        <button type="submit" name="submit" class="btn-success" value="active">{{__('Set active')}}</button>
+                                    @endif
+                                    @if($season->status->name != 'inactive')
+                                        <button type="submit" name="submit" class="btn-warning" value="inactive">{{__('Set inactive')}}</button>
+                                    @endif
+                                    @if($season->status->name != 'incoming')
+                                        <button type="submit" name="submit" class="btn-primary" value="incoming">{{__('Set incoming')}}</button>
+                                    @endif
                                 </form>
                             </span>
                             </div>

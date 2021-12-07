@@ -19,9 +19,13 @@ class TeamUsersController extends Controller
     public function create()
     {
         $teamHelper = new TeamsHelper();
-        $seasons = Season::where('status_id', 1)->get();
-        $leagues_seasons = LeagueSeasons::where('season_id', $seasons->pluck('id'))
-            ->whereNotNull('league_id')->get();
+        $modelStatusy = new Statuses();
+        $season = Season::where('status_id', $modelStatusy->getStatus('incoming'))->first();
+        if(!$season)
+            return view('team_users.create')->with("message", "Theres no incoming season, you can't aplly right now");
+        $leagues_seasons = LeagueSeasons::where('season_id', $season->id)->get();
+        $teams = $season->teams;
+        dd($teams);
         $leagues = League::find($leagues_seasons->pluck('league_id'));
         $team_league_seasons = TeamLeagueSeasons::whereIn('league_season_id', $leagues_seasons->pluck('id'))->get();
         $teams = Team::find($team_league_seasons->pluck('team_id'));

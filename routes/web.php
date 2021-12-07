@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Components\TimetableController;
 use App\Http\Controllers\LeaguesController;
 use App\Http\Controllers\LeagueSeasonsController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\MatchTeamsController;
-use App\Http\Controllers\MatchUsersController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TeamUsersController;
@@ -49,7 +47,7 @@ Route::get('/teams/{id}/show', [TeamsController::class, 'show'])->name('teams.sh
 Route::get('/teams/{id}/edit', [TeamsController::class, 'edit'])->name('teams.edit');
 Route::patch('/teams/{id}/update', [TeamsController::class, 'update'])->name('teams.update');
 Route::post('/teams', [TeamsController::class, 'store'])->name('teams.store');
-Route::post('/teams/change-team-league', [TeamsController::class, 'changeTeamLeague'])->name('teams.change_team_league');
+Route::post('/teams/change-team-league/{id}', [TeamsController::class, 'changeTeamLeague'])->name('teams.change_team_league');
 
 Route::get('/seasons/create', [SeasonsController::class, 'create'])->name('seasons.create');
 Route::post('/seasons', [SeasonsController::class, 'store'])->name('seasons.store');

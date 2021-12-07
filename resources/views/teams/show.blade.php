@@ -23,23 +23,24 @@
                                         <button>{{__('Show players')}}</button>
                                     </a>
                                 </div>
-                                @if($season)
+                                @if(isset($season))
                                     <div class="card-button">
                                         <button id="move-button" onclick="showForm()">{{__('Move team')}}</button>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league')}}">
+                                    <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league', $team->id)}}">
                                         @csrf
                                         <label for="season">{{__('Season')}}</label>
-                                        <select id="season" name="league" class="form-select">
+                                        <select id="season" name="season" class="form-select">
                                             <option value="{{$season->id}}">{{$season->name}}</option>
                                         </select>
                                         <label for="league">{{__('League')}}</label>
                                         <select id="league" name="league" class="form-select">
-                                            @foreach($leagues as $league)
-                                                <option value="{{$league->id}}">{{$league->name}}</option>
+                                            <option value="none">{{__('No league')}}</option>
+                                        @foreach($leagues as $league)
+                                                <option value="{{$league->id}}" @if($league_season->league_id == $league->id) selected @endif>{{$league->name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="row">
@@ -50,6 +51,15 @@
                             </div>
                             @endif
                         </div>
+                        @if(!empty($message))
+                            <div class="row">
+                                <div class="col col-flex">
+                                        <span class="text-body">
+                                            {{$message}}
+                                        </span>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

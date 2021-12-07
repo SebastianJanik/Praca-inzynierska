@@ -8,6 +8,7 @@
                     <div class="card-header">{{ __('All timetables') }}</div>
 
                     <div class="card-body">
+                        @if($data)
                         @foreach($data as $item)
                             <div class="row">
                                 <div class="card">
@@ -21,6 +22,7 @@
                                 </div>
                             </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

@@ -25,105 +25,105 @@ class StatusesSeeder extends Seeder
             [
                 'id'=>'2',
                 'name' => 'inactive',
-                'completed ' => 'Inactive',
+                'message' => 'Inactive',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'3',
                 'name' => 'blocked',
-                'completed ' => 'Blocked',
+                'message' => 'Blocked',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'4',
                 'name' => 'suspended',
-                'completed ' => 'Suspended',
+                'message' => 'Suspended',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'5',
                 'name' => 'waiting for acceptation by coach',
-                'completed ' => 'Waiting for acceptation by coach',
+                'message' => 'Waiting for acceptation by coach',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'6',
                 'name' => 'accepted by coach',
-                'completed ' => 'Accepted by coach',
+                'message' => 'Accepted by coach',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'7',
                 'name' => 'declined by coach',
-                'completed ' => 'Declined by coach',
+                'message' => 'Declined by coach',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'8',
                 'name' => 'waiting for acceptation by admin',
-                'completed ' => 'Waiting for acceptation by admin',
+                'message' => 'Waiting for acceptation by admin',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'9',
                 'name' => 'accepted by admin',
-                'completed ' => 'Accepted by admin',
+                'message' => 'Accepted by admin',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'10',
                 'name' => 'declined by admin',
-                'completed ' => 'Declined by admin',
+                'message' => 'Declined by admin',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'11',
                 'name' => 'timetable created',
-                'completed ' => 'Timetable created',
+                'message' => 'Timetable created',
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'12',
                 'name' => "timetable doesn't exist",
-                'completed ' => "Timetable doesn't exist",
+                'message' => "Timetable doesn't exist",
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'13',
                 'name' => "assigned to the team",
-                'completed ' => "Assigned to the team",
+                'message' => "Assigned to the team",
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'14',
                 'name' => "apply to be referee",
-                'completed ' => "Apply to be referee",
+                'message' => "Apply to be referee",
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'15',
                 'name' => "incoming",
-                'completed ' => "Incoming",
+                'message' => "Incoming",
             ]
         );
         DB::table('statuses')->insert(
             [
                 'id'=>'16',
                 'name' => "completed ",
-                'completed ' => "Completed ",
+                'message' => "Completed ",
             ]
         );
     }

@@ -28,4 +28,9 @@ class Team extends Model
     {
         return $this->belongsToMany(Matches::class, (new MatchTeams())->getTable(), 'team_id','match_id');
     }
+
+    public function league_season()
+    {
+        return $this->belongsToMany(LeagueSeasons::class, (new TeamLeagueSeasons())->getTable(), "team_id", "league_season_id");
+    }
 }

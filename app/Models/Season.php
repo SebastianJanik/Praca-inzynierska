@@ -22,5 +22,9 @@ class Season extends Model
     {
         return $this->hasMany(LeagueSeasons::class);
     }
+
+    public function teams()
+    {
+        return $this->hasManyThrough(Team::class, TeamLeagueSeasons::class, LeagueSeasons::class, "season_id", "league_season_id", "id");
+    }
 }
-//return $this->belongsToMany(User::class, (new MatchUsers())->getTable(), 'match_id', 'user_id');
