@@ -23,6 +23,7 @@ class Season extends Model
         return $this->hasMany(LeagueSeasons::class);
     }
 
+    //to nie dziala
     public function teams()
     {
         return $this->hasManyThrough(Team::class, TeamLeagueSeasons::class, LeagueSeasons::class, "season_id", "league_season_id", "id");

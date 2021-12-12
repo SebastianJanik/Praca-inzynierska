@@ -19,17 +19,17 @@
                                         @else
                                             {{$match->match_teams[0]->team->name}}
                                         @endif
-                                        @if($match->match_teams[0]->goals == null)
-
-                                        @else
+                                        {{-- @if($match->match_teams[0]->goals == null) --}}
+                                            
+                                        {{-- @else --}}
                                             {{$match->match_teams[0]->goals}}
-                                        @endif
+                                        {{-- @endif --}}
                                         -
-                                        @if($match->match_teams[1]->goals == null)
-
-                                        @else
+                                        {{-- @if($match->match_teams[1]->goals == null)
+                                            
+                                        @else --}}
                                             {{$match->match_teams[1]->goals}}
-                                        @endif
+                                        {{-- @endif --}}
                                         @if($match->match_teams[1]->team->name != 'PAUSE')
                                             <a href="{{route('teams.show', $match->match_teams[1]->team->id)}}">
                                                 {{$match->match_teams[1]->team->name}}

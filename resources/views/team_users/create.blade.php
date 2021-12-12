@@ -35,9 +35,9 @@
                                 <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team') }}</label>
                                 <div class="row">
                                     <select id="team" name="team" required>
-                                        <option value selected disabled>{{__('Select team')}}</option>
+                                        <option value="default" class="option-team-default" selected disabled>{{__('Select team')}}</option>
                                         @foreach($data as $team)
-                                            <option class="hidden option-team" value="{{$team->id}}" data-tag="{{$team->league->id}}">{{$team->name}}</option>
+                                            <option class="hidden option-team" value="{{$team->id}}" @if($team->league) data-tag="{{$team->league->id}}" @else data-tag="none" @endif>{{$team->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

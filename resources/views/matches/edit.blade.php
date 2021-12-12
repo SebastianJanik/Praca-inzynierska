@@ -63,9 +63,10 @@
                                                                         <input class="input_user_{{$user->id}}"
                                                                                type="hidden" name="user_id[]"
                                                                                value="{{$user->id}}">
-                                                                        <input readonly
+                                                                        <a href="{{route ('users.players_show', $user->id)}}">
+                                                                            <input readonly
                                                                                value="{{$user->name}} {{$user->surname}}"
-                                                                               disabled>
+                                                                               disabled></a>
                                                                     </td>
                                                                     <td><input class="input_user_{{$user->id}}"
                                                                                type="number" max="90" min="0"
@@ -106,9 +107,10 @@
                                                                     <input class="input_user_{{$user->id}}"
                                                                            type="hidden" name="user_id[]"
                                                                            value="{{$user->id}}" disabled>
-                                                                    <input readonly
-                                                                           value="{{$user->name}} {{$user->surname}}"
-                                                                           disabled>
+                                                                    <a href="{{route ('users.players_show', $user->id)}}">
+                                                                        <input readonly
+                                                                               value="{{$user->name}} {{$user->surname}}"
+                                                                               disabled></a>
                                                                 </td>
                                                                 <td><input class="input_user_{{$user->id}}"
                                                                            type="number" max="90" min="0"

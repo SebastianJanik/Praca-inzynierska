@@ -31,4 +31,9 @@ class LeagueSeasons extends Model
     {
         return $this->hasManyThrough(Matches::class, Round::class,"league_season_id","round_id")->orderBy("date", "desc");
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, (new TeamLeagueSeasons())->getTable(), 'league_season_id', 'team_id' );
+    }
 }

@@ -23,7 +23,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row-flex">
-                                                <label class="col-form-label" for="name">{{__('Name')}}</label>
+                                                <label class="col-form-label" for="name">{{__('First name')}}</label>
                                                 <input type="text" readonly class="form-control-plaintext" name="name"
                                                        id="name" value="{{$user->name}}">
                                             </div>
