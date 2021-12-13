@@ -18,7 +18,7 @@ class TeamUsersController extends Controller
     public function create()
     {
         $user = User::find(Auth::id());
-        if($user->hasAnyRole(['player', 'coach', 'referre', 'admin'])){
+        if($user->hasAnyRole(['player', 'coach', 'referee', 'admin'])){
             $message = 'Your role is actually assigned';
             return view('team_users.create', compact('message'));
         }

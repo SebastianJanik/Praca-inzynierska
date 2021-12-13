@@ -91,7 +91,7 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
         $message = null;
         $modelStatusy = new Statuses();
-        if($user->hasAnyRole(['player', 'coach', 'referre', 'admin']))
+        if($user->hasAnyRole(['player', 'coach', 'referee', 'admin']))
             $message = 'Your role is actually assigned';
         if($user->status_id == $modelStatusy->getStatus('apply to be referee'))
             $message = 'You have already applied for this position';
