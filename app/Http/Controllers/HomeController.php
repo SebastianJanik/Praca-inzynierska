@@ -7,6 +7,7 @@ use App\Models\LeagueSeasons;
 use App\Models\Matches;
 use Illuminate\Support\Facades\Auth;
 
+
 class HomeController extends Controller
 {
     /**

@@ -50,7 +50,7 @@ class TeamsController extends Controller
         $modelStatusy = new Statuses();
         $data['status_id'] = $modelStatusy->getStatus('inactive');
         Team::create($data);
-        return view('teams.store');
+        return redirect()->route('teams.store');
     }
 
     public function update($team_id)

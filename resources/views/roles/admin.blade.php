@@ -38,6 +38,8 @@
         </a>
         <a href="{{route('team_users.accept_admin')}}">
             <button>{{__('Users awaiting approval by the admin')}}</button>
+        </a><a href="{{route('teams.index')}}">
+            <button>{{__('All teams')}}</button>
         </a>
     </div>
 </div>

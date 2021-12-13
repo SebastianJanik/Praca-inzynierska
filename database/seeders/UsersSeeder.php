@@ -121,11 +121,20 @@ class UsersSeeder extends Seeder
                 'model_id'=>'4'
             ]
         );
-        for ($i = 5; $i < 20; $i++){
+        for ($i = 12; $i < 20; $i++){
             DB::table('model_has_roles')->insert(
                 [
                     'role_id'=>'5',
-                    'model_type'=>'App\Models\user',
+                    'model_type'=>'App\Models\User',
+                    'model_id'=>$i
+                ]
+            );
+        }
+        for ($i = 5; $i <= 11; $i++){
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id'=>'2',
+                    'model_type'=>'App\Models\User',
                     'model_id'=>$i
                 ]
             );

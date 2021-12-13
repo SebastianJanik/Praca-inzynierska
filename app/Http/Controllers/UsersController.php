@@ -16,14 +16,14 @@ class UsersController extends Controller
 {
     public function indexPlayersCoach()
     {
-        $id = Auth::user()->id;
-        $coaches_team = TeamUsers::where('user_id', $id)->get();
-        if($coaches_team->isEmpty())
+        $user = Auth::user();
+        $coaches_team = TeamUsers::where('user_id', $user->id)->get();
+        if($user->hasRole('coach'));
             return 'You are not a coach';
         $team_users = TeamUsers::where('team_id', $coaches_team->pluck('team_id'))
             ->whereIn('status_id', [6, 9])->get();
         $users = User::find($team_users->pluck('user_id'))
-            ->where('id', '!=', $id);
+            ->where('id', '!=', $user->id);
         return view('users.players_index', compact('users'));
     }
 
@@ -90,10 +90,10 @@ class UsersController extends Controller
     {
         $user = User::find(Auth::id());
         $message = null;
-
+        $modelStatusy = new Statuses();
         if($user->hasAnyRole(['player', 'coach', 'referre', 'admin']))
             $message = 'Your role is actually assigned';
-        if($user->status_id == 14)
+        if($user->status_id == $modelStatusy->getStatus('apply to be referee'))
             $message = 'You have already applied for this position';
         return view('users.referee_create', compact('message'));
     }
@@ -103,7 +103,7 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
         $user->status_id = 14;
         $user->save();
-        return redirect()->route('users.referee_create');
+        return redirect()->route('home');
     }
 
 }

@@ -40,7 +40,7 @@
                                         <select id="league" name="league" class="form-select">
                                             <option value="none">{{__('No league')}}</option>
                                         @foreach($leagues as $league)
-                                                <option value="{{$league->id}}" @if($league_season->league_id == $league->id) selected @endif>{{$league->name}}</option>
+                                                <option value="{{$league->id}}" @if($league_season && $league_season->league_id == $league->id) selected @endif>{{$league->name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="row">

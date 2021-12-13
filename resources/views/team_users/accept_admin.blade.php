@@ -39,7 +39,8 @@
                                                 {{$user->email}}
                                             </div>
                                             <div class="form-group row">
-                                                {{$user->role}}
+                                                <input type="text" readonly class="form-control-plaintext" name="role"
+                                                       id="role" value="{{$user->role}}">
                                             </div>
                                             @if(isset($user->team->name))
                                                 <div class="form-group row">

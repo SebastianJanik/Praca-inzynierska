@@ -9,6 +9,7 @@
                     @if($message == null)
                         {{__('Are you sure, you want to become a referee ?')}}
                         <form method="POST" action="{{ route('users.referee_store') }}">
+                            @csrf
                             <input type="submit" class="btn-success" value="Yes">
                             <a href="{{route('home')}}">
                                 <button type="button" class="btn-danger">{{__('No')}}</button>

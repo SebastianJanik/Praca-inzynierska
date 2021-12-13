@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">{{ __('All leagues') }}</div>
+                    <div class="card-header">{{ __('All teams') }}</div>
 
                     <div class="card-body">
                         @foreach($teams as $team)
@@ -22,8 +22,8 @@
                                     </a>
                                 </div>
                                 <div class="card-button">
-                                    <a href="{{route('teams.edit_assign', $team->id)}}">
-                                        <button>{{__('Assign team')}}</button>
+                                    <a href="{{route('teams.show', $team->id)}}">
+                                        <button>{{__('Show team')}}</button>
                                     </a>
                                 </div>
                             </div>

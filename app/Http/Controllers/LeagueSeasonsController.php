@@ -17,8 +17,6 @@ use function PHPUnit\Framework\isEmpty;
 
 class LeagueSeasonsController extends Controller
 {
-    private $status_accepted = 9;
-
     public function index()
     {
         $leagueSeasons = LeagueSeasons::where('status_id', '11')->get();

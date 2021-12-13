@@ -34,6 +34,10 @@ class SeasonsController extends Controller
     }
     public function create()
     {
+        $modelStatuses = new Statuses();
+        $season = Season::where('status_id', $modelStatuses->getStatus('incoming'))->get();
+        if(!empty($season))
+            return 'Exist incoming season';
         return view('seasons.create');
     }
 

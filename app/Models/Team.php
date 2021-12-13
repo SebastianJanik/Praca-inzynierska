@@ -17,6 +17,7 @@ class Team extends Model
         'house_number',
         'postal_code',
         'town',
+        'status_id'
     ];
 
     public function users()
