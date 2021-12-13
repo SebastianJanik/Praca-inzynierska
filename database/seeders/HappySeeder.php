@@ -348,9 +348,10 @@ class HappySeeder extends Seeder
                     'updated_at' => date('Y:m:d H:m:s'),
                 ]
             );
+            $match_id++;
             DB::table('matches')->insert(
                 [
-                    'id' => $match_id++,
+                    'id' => $match_id,
                     'round_id' => $i,
                     'status_id' => 16,
                     'date' => '2021-12-13',
@@ -359,28 +360,39 @@ class HappySeeder extends Seeder
                     'updated_at' => date('Y:m:d H:m:s'),
                 ]
             );
-            DB::table('matches')->insert(
-                [
-                    'id' => $match_id + 12,
-                    'round_id' => $i + 6,
-                    'status_id' => 16,
-                    'date' => '2021-12-13',
-                    'town' => 'town',
-                    'created_at' => date('Y:m:d H:m:s'),
-                    'updated_at' => date('Y:m:d H:m:s'),
-                ]
-            );
-            DB::table('matches')->insert(
-                [
-                    'id' => ($match_id++) + 12,
-                    'round_id' => $i + 6,
-                    'status_id' => 16,
-                    'date' => '2021-12-13',
-                    'town' => 'town',
-                    'created_at' => date('Y:m:d H:m:s'),
-                    'updated_at' => date('Y:m:d H:m:s'),
-                ]
-            );
+            $match_id++;
         }
+        $match_id = 12;
+        for($i = 1; $i <= 6; $i++){
+            DB::table('matches')->insert(
+                [
+                    'id' => $match_id,
+                    'round_id' => $i + 6,
+                    'status_id' => 16,
+                    'date' => '2021-12-13',
+                    'town' => 'town',
+                    'created_at' => date('Y:m:d H:m:s'),
+                    'updated_at' => date('Y:m:d H:m:s'),
+                ]
+            );
+            $match_id++;
+            DB::table('matches')->insert(
+                [
+                    'id' => $match_id,
+                    'round_id' => $i + 6,
+                    'status_id' => 16,
+                    'date' => '2021-12-13',
+                    'town' => 'town',
+                    'created_at' => date('Y:m:d H:m:s'),
+                    'updated_at' => date('Y:m:d H:m:s'),
+                ]
+            );
+            $match_id++;
+        }
+    }
+
+    public function match_team()
+    {
+        // for($i = 1; $i <= 12)
     }
 }
