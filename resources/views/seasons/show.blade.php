@@ -11,7 +11,7 @@
                         @foreach($data as $league)
                             <div class="row-flex">
                                 <span class="text-body">{{$loop->iteration}}.</span>
-                                <span class="text-body"><a href="{{route('league_seasons.show', $league['league_season_id'])}}">{{$league['league']['name']}}</a></span>
+                                <span class="text-body"><a href="{{route('teams.teams_in_league_season', $league['league_season_id'])}}">{{$league['league']['name']}}</a></span>
                             </div>
                         @endforeach
                     </div>

@@ -51,11 +51,11 @@
                             </div>
                             @endif
                         </div>
-                        @if(!empty($message))
+                        @if(session('message'))
                             <div class="row">
                                 <div class="col col-flex">
                                         <span class="text-body">
-                                            {{$message}}
+                                            {{session('message')}}
                                         </span>
                                 </div>
                             </div>
@@ -65,11 +65,11 @@
             </div>
         </div>
     </div>
-    <script>
-        function showForm()
-        {
-            document.getElementById("move-button").style.display = "none"
-            document.getElementById("move-form").style.display = "block"
-        }
-    </script>
 @endsection
+<script>
+    function showForm()
+    {
+        document.getElementById("move-button").style.display = "none"
+        document.getElementById("move-form").style.display = "block"
+    }
+</script>

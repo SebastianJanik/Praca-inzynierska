@@ -9,6 +9,7 @@ use App\Models\Matches;
 use App\Models\MatchTeams;
 use App\Models\Round;
 use App\Models\Season;
+use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class LeagueSeasonsController extends Controller
     public function showTable($league_season_id)
     {
         $matchTeamsHelper = new MatchTeamHelper();
-
+        $modelStatuses = new Statuses();
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
         if($team_league_seasons->isEmpty())
             return "Table doesn't exist";
@@ -70,7 +71,7 @@ class LeagueSeasonsController extends Controller
         if($matches->isEmpty())
             return "Table doesn't exist";
 
-        $matches = $matches->where('status_id', $this->status_accepted);
+        $matches = $matches->where('status_id', $modelStatuses->getStatus('accepted by admin'));
 
         $teams = Team::find($team_league_seasons->pluck('team_id'));
 
@@ -84,7 +85,10 @@ class LeagueSeasonsController extends Controller
                 'points' => 0,
                 'goals_scored' => 0,
                 'goals_conceded' => 0,
-                'goals_diff' => 0
+                'goals_diff' => 0,
+                'wins' => 0,
+                'draws' => 0,
+                'loses' => 0,
             );
             foreach ($matchTeams as $matchTeam){
                 $points = $matchTeamsHelper->matchTeamPoints($matchTeam->match_id, $matchTeam->team_id);

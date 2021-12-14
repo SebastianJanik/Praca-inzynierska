@@ -17,9 +17,13 @@ class LeagueSeasons extends Model
         'status_id'
     ];
 
-    public function leagues()
+    public function league()
     {
         return $this->belongsTo(League::class);
+    }
+    public function season()
+    {
+        return $this->belongsTo(Season::class);
     }
 
     public function rounds()

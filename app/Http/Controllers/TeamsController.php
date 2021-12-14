@@ -9,6 +9,8 @@ use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 
+use function PHPUnit\Framework\isEmpty;
+
 class TeamsController extends Controller
 {
     public function index()
@@ -93,7 +95,7 @@ class TeamsController extends Controller
             ->where('league_id', $data['league'])->first();
         if ($league_season->status_id == $modelStatusy->getStatus('timetable created')){
             $message = "You can't move team, because timetable is already created";
-            return redirect()->route('teams.show', $team_id)->with("message", $message);
+            return redirect()->route('teams.show', $team_id)->with('message', $message);
         }
         $team_league_seasons = TeamLeagueSeasons::where('team_id', $team_id)->get();
         //checking if team is alocated in current season, if is change it's league
@@ -107,5 +109,16 @@ class TeamsController extends Controller
             }
         }
         return redirect()->route('teams.show', $team_id);
+    }
+
+    public function teamsInLeagueSeason($league_season_id)
+    {
+        $league_season = LeagueSeasons::find($league_season_id);
+        $teams = $league_season->teams;
+        $league = $league_season->league;
+        $season = $league_season->season;
+        if($teams->isEmpty())
+            return view('teams.teams_in_league_season', compact('league', 'season'))->with('message', 'There are no teams');
+        return view('teams.teams_in_league_season', compact( 'league', 'teams', 'season'));
     }
 }

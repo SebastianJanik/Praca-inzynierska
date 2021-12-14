@@ -144,8 +144,8 @@ class MatchTeamHelper
             ->where('team_id', '!=', $team_id)->first();
         if(!$match_team)
             return null;
-        if(!isset($match_team->goals) || !isset($match_team2->goals))
-            return null;
+        if(!isset($match_team->goals))
+            return 0;
 
         if(!$match_team2)
             return 0;
@@ -165,7 +165,7 @@ class MatchTeamHelper
         if(!$match_team)
             return null;
         if(!isset($match_team->goals))
-            return null;
+            return 0;
         return $match_team->goals;
     }
     public function matchTeamGoalsConceded($match_id, $team_id)
@@ -173,9 +173,8 @@ class MatchTeamHelper
         $match_team = MatchTeams::where('match_id', $match_id)
             ->where('team_id', '!=', $team_id)->first();
         if(!$match_team)
-            return null;
-        if(!isset($match_team->goals))
-            return null;
+            return 0;
+
         return $match_team->goals;
     }
 

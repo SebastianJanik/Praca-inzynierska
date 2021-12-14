@@ -36,7 +36,7 @@ class SuspensionsController extends Controller
             $user->save();
         }
 
-        return redirect()->route('home');
+        return redirect()->route('users.players_show', $data['user_id']);
     }
 
     public function edit($suspension_id)

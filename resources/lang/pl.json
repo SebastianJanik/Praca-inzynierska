@@ -43,8 +43,8 @@
 	"Archive": "Archiwum",
 	"Logout": "Wyloguj",
 	"View details": "Wyświetl szczegóły",
-	"All seasons": "Wszystkie obecne sezony",
-	"All leagues": "Wszystkie obecne ligi",
+	"All seasons": "Wszystkie sezony",
+	"All leagues": "Wszystkie ligi",
 	"Timetable": "Terminarz",
 	"Season": "Sezon",
 	"All timetables": "Wszystkie terminarze",
@@ -75,5 +75,5 @@
 	"Your current team is": "Twoja obecna drużyna to:",
 	"There are no users ": "Brak oczekujących zawodników",
 	"Add league": "Utwórz nową ligę"
-	
+
 }

@@ -66,7 +66,7 @@
                                 @endforeach
                             @endif
                         </div>
-                            @if($dataEnd != null)
+                            @if(isset($dataEnd) && $dataEnd != null)
                                 <div class="card-header">{{ __($secondtitle) }}</div>
                                 <div class="card-body">
                                     @foreach($dataEnd as $item)
