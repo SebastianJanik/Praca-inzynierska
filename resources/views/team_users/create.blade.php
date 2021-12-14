@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Apply to the team') }}</div>
                     <div class="card-body">
-                        @if(empty($message))
+                        @if(!session('message'))
                         <form method="POST" action="{{ route('team_users.store') }}">
                             @csrf
                             <div class="form-group row">
@@ -51,7 +51,7 @@
                             </div>
                         </form>
                         @else
-                            {{$message}}
+                            {{session('message')}}
                         @endif
                     </div>
                 </div>
