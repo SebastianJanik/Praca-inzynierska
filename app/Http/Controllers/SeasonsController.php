@@ -21,15 +21,21 @@ class SeasonsController extends Controller
 
     public function show($id)
     {
+        $modelStatuses = new Statuses();
         $league_seasons = LeagueSeasons::where('season_id', $id)
             ->whereNotNull('league_id')->get();
         $leagues = League::whereIn('id', $league_seasons->pluck('league_id')->toArray())->get();
         $data = null;
-        foreach ($league_seasons as $key=>$league_season)
+        foreach ($league_seasons as $key=>$league_season) {
+            $timetable = false;
+            if($league_season->status_id == $modelStatuses->getStatus('timetable created'))
+                $timetable = true;
             $data [] = [
-                'league_season_id' => $league_season->id,
-                'league' => $leagues[$key]
+                'league_season' => $league_season,
+                'league' => $leagues[$key],
+                'timetable' => $timetable
             ];
+        }
         return view('seasons.show', compact('data'));
     }
     public function create()

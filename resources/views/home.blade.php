@@ -86,7 +86,7 @@
                                         <span class="text-body">-
                                     </span>
                                         <span class="text-body">
-                                        @if($match->teams[1] != null)
+                                        @if(isset($match->teams[1]))
                                                 {{$match->teams[1]->name}}
                                             @else
                                                 {{__('PAUSE')}}

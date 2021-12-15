@@ -19,8 +19,7 @@ class TeamUsersController extends Controller
     {
         $user = User::find(Auth::id());
         if($user->hasAnyRole(['player', 'coach', 'referee', 'admin'])){
-            $message = 'Your role is actually assigned';
-            return view('team_users.create', compact('message'));
+            return view('team_users.create')->with('message','Your role is actually assigned' );
         }
         $teamHelper = new TeamsHelper();
         $modelStatusy = new Statuses();
@@ -79,6 +78,11 @@ class TeamUsersController extends Controller
         $team_users->left_date = date('Y-m-d');
         $team_users->save();
         $user->status_id = $modelStatuses->getStatus('active');
+        if($user->hasRole('player'))
+            $user->removeRole('player');
+        if($user->hasRole('coach'))
+            $user->removeRole('coach');
+        $user->assignRole('user');
         $user->save();
         return redirect()->route('users.players_index');
     }
@@ -129,7 +133,6 @@ class TeamUsersController extends Controller
                 'role' => 'required',
             ]
         );
-
         $teamUser = TeamUsers::where('user_id', $data['user_id'])->first();
         $user = User::find($data['user_id']);
         switch($data['role']){

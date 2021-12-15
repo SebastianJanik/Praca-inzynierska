@@ -108,6 +108,13 @@ class TeamsController extends Controller
                 }
             }
         }
+        //if not create a new record in database
+        TeamLeagueSeasons::create(
+            [
+                'team_id' => $team_id,
+                'league_season_id' => $league_season->id
+            ]
+        );
         return redirect()->route('teams.show', $team_id);
     }
 

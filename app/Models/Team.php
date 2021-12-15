@@ -34,4 +34,10 @@ class Team extends Model
     {
         return $this->belongsToMany(LeagueSeasons::class, (new TeamLeagueSeasons())->getTable(), "team_id", "league_season_id");
     }
+
+    public function acceptedUsers()
+    {
+        $modelStatuses = new Statuses();
+        return $this->belongsToMany(User::class)->wherePivot('status_id', $modelStatuses->getStatus('accepted by admin'));
+    }
 }

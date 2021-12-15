@@ -10,7 +10,6 @@ use App\Models\TeamUsers;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -18,7 +17,7 @@ class UsersController extends Controller
     {
         $user = Auth::user();
         $coaches_team = TeamUsers::where('user_id', $user->id)->get();
-        if($user->hasRole('coach'));
+        if(!$user->hasRole('coach'))
             return 'You are not a coach';
         $team_users = TeamUsers::where('team_id', $coaches_team->pluck('team_id'))
             ->whereIn('status_id', [6, 9])->get();
@@ -29,7 +28,7 @@ class UsersController extends Controller
 
     public function indexPlayersAdmin($team_id)
     {
-        $users = Team::find($team_id)->users;
+        $users = Team::find($team_id)->acceptedUsers;
         return view('users.players_index', compact('users'));
     }
 
