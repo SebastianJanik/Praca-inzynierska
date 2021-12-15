@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col col-flex">
                                         <span class="text-body">
-                                            {{session('message')}}
+                                            {{ __(session('message'))}}
                                         </span>
                                 </div>
                             </div>

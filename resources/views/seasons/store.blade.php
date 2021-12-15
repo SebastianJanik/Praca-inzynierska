@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        Dodano sezon
+                        {{ ('Dodano sezon') }}
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@
                         <span class="text-body"> {{$league->name}}</span></div>
                     <div class="card-body">
                         @if(isset($message))
-                            <span class="text-body">{{$message}}</span>
+                            <span class="text-body">{{__($message)}}</span>
                         @elseif($teams)
                         @foreach($teams as $team)
                             <div class="row-flex">

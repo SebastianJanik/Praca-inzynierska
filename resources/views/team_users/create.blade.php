@@ -51,7 +51,7 @@
                             </div>
                         </form>
                         @else
-                            {{$message}}
+                            {{__($message)}}
                         @endif
                     </div>
                 </div>

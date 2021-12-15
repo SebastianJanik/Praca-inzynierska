@@ -10,7 +10,7 @@
                     <form method="POST" action="{{ route('matches.update', $match->id) }}">
                         @csrf
                         @method('PATCH')
-                        <div class="row justify-content-center">Match Result</div>
+                        <div class="row justify-content-center">{{ __('Match Result') }}</div>
                         <div class="row-flex">
                             <div class="col-flex">
                                 <div class="col">
@@ -40,13 +40,13 @@
                                         <thead class="thead-dark">
                                         <tr>
                                             <td>{{$team->name}}</td>
-                                            <td>Start</td>
-                                            <td>End</td>
-                                            <td>Goals</td>
-                                            <td>Assists</td>
-                                            <td>Yellow Cards</td>
-                                            <td>Red cards</td>
-                                            <td>Enable</td>
+                                            <td>{{ __('Start') }}</td>
+                                            <td>{{ __('End') }}</td>
+                                            <td>{{ ('Goals') }}</td>
+                                            <td>{{ ('Assists') }}</td>
+                                            <td>{{ ('Yellow cards') }}</td>
+                                            <td>{{ ('Red cards') }}</td>
+                                            <td>{{ ('Odblokuj') }}</td>
                                         </tr>
                                         </thead>
                                         <tbody>

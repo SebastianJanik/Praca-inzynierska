@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        Utworzono lige
+                        {{ __('Utworzono lige') }}
                     </div>
                 </div>
             </div>

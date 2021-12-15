@@ -69,3 +69,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
    - php artisan key:generate
    
 3. Configure your settings with database in .env file
+4. Run migrations
+5. If error occurs SQLSTATE[42S02]: Base table or view not found: 1146 Table 'database_name.seasons' doesn't exist go
+to app/Providers/SidebarProvider.php and comment boot function. When migrations ends with succes uncomment it.

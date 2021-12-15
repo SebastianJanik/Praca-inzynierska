@@ -27,7 +27,7 @@
 
                                         @error('season')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __($message) }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -48,7 +48,7 @@
 
                                         @error('league')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __($message) }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -63,7 +63,7 @@
                             </div>
                         </form>
                         @else
-                        {{$message}}
+                        {{__($message)}}
                         @endif
                     </div>
                 </div>

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Users awaiting approval by the coach') }}</div>
                     @if($users == null)
-                        There are no users
+                    {{ ('There are no users') }}
                     @else
                         @foreach($users as $user)
                             <div class="card-body">
