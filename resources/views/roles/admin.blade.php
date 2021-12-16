@@ -21,7 +21,6 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <li><a class="dropdown-item" href="{{route('seasons.index')}}">{{__('View seasons')}}</a></li>
                 <li><a class="dropdown-item" href="{{route('league_seasons.index')}}">{{__('Show timetables')}}</a></li>
-                <li><a class="dropdown-item" href="{{route('seasons.create')}}">{{__('Add season')}}</a></li>
             </ul>
         </div>
         <div class="card-button">

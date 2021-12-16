@@ -41,8 +41,11 @@ html, body, #app{
     background: rgba(255,255,255, 0.9);
 }
 .accordion-item{
-    background: rgba(255,255,255, 0.9);
+    background: rgba(255,255,255, 0.0);
 }
 .accordion-button{
     background: rgba(255,255,255, 0.0);
+}
+.dropdown-menu.show{
+    background: rgba(255,255,255, 0.7);
 }
