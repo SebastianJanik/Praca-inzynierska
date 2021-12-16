@@ -84,7 +84,9 @@ class TeamUsersController extends Controller
             $user->removeRole('coach');
         $user->assignRole('user');
         $user->save();
-        return redirect()->route('users.players_index');
+        if(Auth::user()->hasRole('coach'))
+            return redirect()->route('users.players_index');
+        return redirect()->route('users.players_index_admin', $team_users->team_id);
     }
 
     public function indexUsersAcceptCoach()

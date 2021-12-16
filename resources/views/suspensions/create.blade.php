@@ -21,7 +21,7 @@
                                 <div class="col">{{$user->surname}}</div>
                             </div>
                             <div class="row">
-                                <div class="col">{{ __('Lenght') }}</div>
+                                <div class="col">{{ __('Length') }}</div>
                                 <div class="col"><input type="number" name="length[{{$user->id}}]" min="0" required></div>
                             </div>
                             <div class="row">

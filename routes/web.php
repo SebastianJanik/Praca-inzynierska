@@ -35,7 +35,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/users/myplayers-index', [UsersController::class, 'indexPlayersCoach'])->name('users.players_index');
 Route::get('/users/{team_id}/players-index', [UsersController::class, 'indexPlayersAdmin'])->name('users.players_index_admin');
 Route::get('/users/referee-create', [UsersController::class, 'createReferee'])->name('users.referee_create');
-Route::get('/users/players-show/{id}', [UsersController::class, 'showPlayers'])->name('users.players_show');
+Route::get('/users/players-show/{id}', [UsersController::class, 'showPlayer'])->name('users.players_show');
 Route::post('/users/referee-store', [UsersController::class, 'storeReferee'])->name('users.referee_store');
 
 Route::get('/leagues/create', [LeaguesController::class, 'create'])->name('leagues.create');

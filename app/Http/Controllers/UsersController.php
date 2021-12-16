@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 
+
 class UsersController extends Controller
 {
     public function indexPlayersCoach()
@@ -32,10 +33,15 @@ class UsersController extends Controller
         return view('users.players_index', compact('users'));
     }
 
-    public function showPlayers($id)
+    public function showPlayer($id)
     {
         $modelStatusy = new Statuses();
+        $logged_user = Auth::user();
+        $logged_user_team = $logged_user->team;
         $user = User::find($id);
+        $canRemove = false;
+        if(($logged_user_team->first() && $user->team->first() && $logged_user_team->first()->id == $user->team->first()->id && $logged_user->hasRole('coach')) || $logged_user->hasRole('admin'))
+            $canRemove = true;
         $status = Statuses::find($user->status_id);
         $match_users = MatchUsers::where('user_id', $id)->get();
         $all_goals = array_sum($match_users->pluck('goals')->toArray());
@@ -81,7 +87,8 @@ class UsersController extends Controller
                 'yellows',
                 'reds',
                 'minutes',
-                'suspension'
+                'suspension',
+                'canRemove'
             )
         );
     }

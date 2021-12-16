@@ -16,22 +16,27 @@
                                 </span>
                                 <span class="text-body">
                                 {{__($season->status->message)}}
-                            </span>
+                                </span>
                                 <span class="text-body">
-                                <form method="POST" action="{{route('seasons.change_status')}}">
-                                    @csrf
-                                    <input type="hidden" value="{{$season->id}}" name="season_id">
-                                    @if($season->status->name != 'active')
-                                        <button type="submit" name="submit" class="btn-success" value="active">{{__('Set active')}}</button>
-                                    @endif
-                                    @if($season->status->name != 'inactive')
-                                        <button type="submit" name="submit" class="btn-warning" value="inactive">{{__('Set inactive')}}</button>
-                                    @endif
-                                    @if($season->status->name != 'incoming')
-                                        <button type="submit" name="submit" class="btn-primary" value="incoming">{{__('Set incoming')}}</button>
-                                    @endif
-                                </form>
-                            </span>
+                                    @role('admin')
+                                    <form method="POST" action="{{route('seasons.change_status')}}">
+                                        @csrf
+                                        <input type="hidden" value="{{$season->id}}" name="season_id">
+                                        @if($season->status->name != 'active')
+                                            <button type="submit" name="submit" class="btn-success"
+                                                    value="active">{{__('Set active')}}</button>
+                                        @endif
+                                        @if($season->status->name != 'inactive')
+                                            <button type="submit" name="submit" class="btn-warning"
+                                                    value="inactive">{{__('Set inactive')}}</button>
+                                        @endif
+                                        @if($season->status->name != 'incoming')
+                                            <button type="submit" name="submit" class="btn-primary"
+                                                    value="incoming">{{__('Set incoming')}}</button>
+                                        @endif
+                                    </form>
+                                    @endrole
+                                </span>
                             </div>
                         @endforeach
                         <div class="row-flex">

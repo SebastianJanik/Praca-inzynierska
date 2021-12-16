@@ -57,9 +57,9 @@
                                             @endrole
                                         </div>
                                         <div class="col">
-                                            <a href="{{route('home')}}">
-                                                <button>{{__('View details')}}</button>
-                                            </a>
+{{--                                            <a href="{{route('home')}}">--}}
+{{--                                                <button>{{__('View details')}}</button>--}}
+{{--                                            </a>--}}
                                             @if($match->match->status_id != 9)
                                                 @role('referee')
                                                 <a href="{{route('matches.edit', $match->match->id)}}">

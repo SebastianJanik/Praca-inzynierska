@@ -1,6 +1,7 @@
 <div class="container">
     <a class="navbar-brand" href="{{ route('home') }}">
-        {{ config('app.name', 'Laravel') }}
+{{--        {{ config('app.name', 'Laravel') }}--}}
+        {{ __('Home') }}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -11,7 +12,21 @@
         <!-- Left Side Of Navbar -->
         @auth()
         <div class="navbar-nav mr-auto">
-        @include('roles.admin')
+            @role('admin')
+                @include('roles.admin')
+            @endrole
+            @unlessrole('player|coach|admin|referee')
+            @include('roles.user')
+            @endrole
+            @role('player')
+            @include('roles.player')
+            @endrole
+            @role('coach')
+            @include('roles.coach')
+            @endrole
+            @role('referee')
+            @include('roles.referee')
+            @endrole
         </div>
         @endauth()
         <!-- Right Side Of Navbar -->

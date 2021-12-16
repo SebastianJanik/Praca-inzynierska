@@ -16,13 +16,13 @@
             </a>
         </div>
         <div class="card-button">
-            <a href="{{route('users.players_index')}}">
-                <button class="btn btn-secondary">{{__('Show my players')}}</button>
+            <a href="{{route('team_users.create')}}">
+                <button class="btn btn-secondary">{{__('Apply to the team')}}</button>
             </a>
         </div>
         <div class="card-button">
-            <a href="{{route('team_users.accept_coach')}}">
-                <button class="btn btn-secondary">{{__('Users awaiting approval by the coach')}}</button>
+            <a href="{{route('users.referee_create')}}">
+                <button class="btn btn-secondary">{{__('Become a referee')}}</button>
             </a>
         </div>
         <div class="card-button">

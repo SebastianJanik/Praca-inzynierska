@@ -16,11 +16,13 @@
                                 <div class="card">
                                     {{__($team->name)}}
                                 </div>
+                                @role('admin')
                                 <div class="card-button">
                                     <a href="{{route('teams.edit', $team->id)}}">
                                         <button>{{__('Edit team')}}</button>
                                     </a>
                                 </div>
+                                @endrole
                                 <div class="card-button">
                                     <a href="{{route('teams.show', $team->id)}}">
                                         <button>{{__('Show team')}}</button>

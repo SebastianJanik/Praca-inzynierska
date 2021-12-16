@@ -95,7 +95,7 @@
                                                 @endif
                                             </div>
                                             <div class="row">
-                                                <div class="col">{{ __('Lenght') }}</div>
+                                                <div class="col">{{ __('Length') }}</div>
                                                 <div class="col"><input type="number"
                                                                         name="length[{{$item->suspension->id}}]"
                                                                         min="0" value="{{$item->suspension->length}}"

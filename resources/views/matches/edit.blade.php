@@ -28,7 +28,7 @@
                                        @if($match_teams[1]->goals) value="{{$match_teams[1]->goals}}"
                                        @else value="0" @endif>
                                 </div>
-                                <div class="col">
+                                <div class="col text-right">
                                 {{$teams[1]->name}}
                                 </div>
                             </div>
@@ -42,11 +42,11 @@
                                             <td>{{$team->name}}</td>
                                             <td>{{ __('Start') }}</td>
                                             <td>{{ __('End') }}</td>
-                                            <td>{{ ('Goals') }}</td>
-                                            <td>{{ ('Assists') }}</td>
-                                            <td>{{ ('Yellow cards') }}</td>
-                                            <td>{{ ('Red cards') }}</td>
-                                            <td>{{ ('Odblokuj') }}</td>
+                                            <td>{{ __('Goals') }}</td>
+                                            <td>{{ __('Assists') }}</td>
+                                            <td>{{ __('Yellow cards') }}</td>
+                                            <td>{{ __('Red cards') }}</td>
+                                            <td>{{ __('Enable') }}</td>
                                         </tr>
                                         </thead>
                                         <tbody>

@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">{{ __('Your players') }}</div>
+                    <div class="card-header">{{ __('Players') }}</div>
                     <div class="card-body">
                         @foreach($users as $user)
                             <div class="row">

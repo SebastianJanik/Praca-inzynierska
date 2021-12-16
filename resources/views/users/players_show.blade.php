@@ -22,7 +22,7 @@
                         </div>
                         <div class="row">
                             <div class="col">{{ __('Status') }}</div>
-                            <div class="col">{{$status->name}}
+                            <div class="col">{{__($status->name)}}
                                 @if($status->id == 4)
                                     <a href="{{route('suspensions.edit', $suspension->id)}}">
                                         <button class="btn-warning">{{__('Edit suspension')}}</button>
@@ -75,6 +75,7 @@
                             </tbody>
                         </table>
                         <div class="float-right">
+                            @if($canRemove)
                             <div class="row">
                                 <form class="remove" method="POST" action="{{route('team_users.remove', $user->id)}}" >
                                     @csrf
@@ -85,6 +86,7 @@
                                     </div>
                                 </form>
                             </div>
+                            @endif
                             @role('admin')
                             <div class="row">
                                 <div class="card-button">

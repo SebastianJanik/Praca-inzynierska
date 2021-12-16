@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Users awaiting approval by the admin') }}</div>
                     @if($data == null)
-                    {{ ('There are no users') }}
+                    {{ __('There are no users') }}
                     @else
                         @foreach($data as $role)
                             @if(!$role == null)
