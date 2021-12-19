@@ -123,8 +123,21 @@
     "Create" : "Tworzenie",
     "Show" : "Podgląd",
     "Move team" : "Przenieś drużynę",
-    "Move" : "Przenieś"
-
+    "Move" : "Przenieś",
+    "Leagues": "Ligi",
+	"There are no teams": "Obecnie nie ma tu żadnych drużyn",
+	"Team info": "Informacje o drużynie",
+	"No league": "Brak ligi",
+	"Closest matches": "Najbliższe rozgrywki",
+	"You can't move team, because timetable is already created": "Nie możesz przenieść drużyny, gdyż został już utworzony terminal",
+    "Table": "Tabela",
+	"Matches": "Mecze",
+	"Points": "Punkty",
+	"Goals scored": "Zdobyte bramki",
+	"Goals conceded": "Stracone bramki",
+	"Goals diff": "Różnice bramek",
+	"Hello": "Witaj",
+	"Remember Me": "Zapamiętaj mnie"
 
 
 }

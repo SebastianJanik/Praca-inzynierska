@@ -33,14 +33,19 @@
                                                        id="surname" value="{{$user->surname}}">
                                             </div>
                                             <div class="form-group row">
-                                                {{$user->date_birth}}
+                                                <label class="col-form-label" for="date_birth">{{__('Date of birth')}}</label>
+                                                <label id="date_birth_waiting_on">{{$user->date_birth}}</label>
                                             </div>
                                             <div class="form-group row">
-                                                {{$user->email}}
+                                                <label class="col-form-label" for="email">{{__('E-mail')}}</label>
+                                                <label id="email_waiting_on">{{$user->email}}<label>
                                             </div>
                                             <div class="form-group row">
-                                                <input type="text" readonly class="form-control-plaintext" name="role"
+                                                <label class="col-form-label" for="role">{{__('Role')}}</label>
+                                                <label id="role_waiting_on">
+												<input type="text" readonly class="form-control-plaintext" name="role"
                                                        id="role" value="{{$user->role}}">
+												</label>	
                                             </div>
                                             @if(isset($user->team->name))
                                                 <div class="form-group row">

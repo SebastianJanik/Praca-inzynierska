@@ -38,7 +38,7 @@ html, body, #app{
 }
 
 .card{
-    background: rgba(255,255,255, 0.9);
+    background: rgba(255,255,255, 95%);
 }
 .accordion-item{
     background: rgba(255,255,255, 0.0);
@@ -47,5 +47,99 @@ html, body, #app{
     background: rgba(255,255,255, 0.0);
 }
 .dropdown-menu.show{
-    background: rgba(255,255,255, 0.7);
+    background: rgba(255,255,255, 95%);
+}
+
+a {
+    color: #6592db;
+}
+
+.text-body{
+	margin-right: 0.5em;
+	margin-bottom: 0.5em;
+}
+#panelsStayOpen-timetables a:link{
+	 display:block;
+	 font-size: 15px;
+	 font-weight: medium;
+	 padding: 10px 18px;
+}
+#panelsStayOpen-tables a:link{
+	 display:block;
+	 font-size: 15px;
+	 font-weight: medium;
+	 padding: 10px 18px;
+}
+#panelsStayOpen-archive a:link{
+	 display:block;
+	 font-size: 15px;
+	 font-weight: medium;
+	 padding: 10px 18px;
+}
+.col-md-6{
+	 margin-bottom: 1em;
+}
+#all_timetables{
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 15px;
+  margin-bottom:15px;
+}
+#all_timetables_row{
+	font-size: 17px;
+	background-color: #a6c8ff;
+	font-weight: medium;
+}
+.card-header{
+	font-size: 20px;
+	font-weight: medium;
+	font-family: Verdana, sans-serif
+}
+#all_teams{
+	font-size: 17px;
+	background-color: #a6c8ff;
+	font-weight: medium;
+	font-family: Verdana, sans-serif
+	
+}
+#all_teams_names{
+	padding: 10px 15px;
+	font-size: 15px;
+	background-color: #d6e6ff;
+	font-weight: medium;
+	margin-top: 2px;
+	text-indent:10px;
+	font-family: Verdana, sans-serif
+}
+#all_teams_button{
+	padding: 3px 20px;
+    text-align: left;
+    font-size: 15px;
+}
+#all_teams_button2{
+	padding: 3px 20px;
+    text-align: left;
+    font-size: 15px;
+	margin-bottom:15px;
+}
+#show_players_button{
+	margin-top:10px;
+	padding: 3px 10px;
+    text-align: left;
+    font-size: 15px;
+}
+#view_player_button{
+	padding: 3px 10px;
+    text-align: left;
+    font-size: 15px;
+	margin-bottom:15px;
+}
+#surname.form-control-plaintext{
+	margin-left: 0.5em;
+}
+#name.form-control-plaintext{
+	margin-left: 0.5em;
+}
+.col-form-label{
+	 font-weight: medium;
 }

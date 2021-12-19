@@ -10,7 +10,7 @@
                         @foreach($users as $user)
                             <div class="row">
                                 <span>{{$user->name}} {{$user->surname}}</span>
-                                <div class="card-button">
+                                <div class="card-button" id="view_player_button">
                                     <a href="{{route('users.players_show', $user->id)}}">
                                         <button>{{__('View player')}}</button>
                                     </a>
