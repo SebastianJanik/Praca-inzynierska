@@ -19,7 +19,7 @@
                                 <span class="text-body">{{__($team->name)}}</span>
                                 <div class="card-button">
                                     <a href="{{route('teams.show', $team->id)}}">
-                                        <button>{{__('Show team')}}</button>
+                                        <button class="btn-primary">{{__('Show team')}}</button>
                                     </a>
                                 </div>
                             </div>

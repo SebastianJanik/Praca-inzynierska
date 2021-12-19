@@ -29,7 +29,7 @@
                             </div>
                             <div class="col">
                                 <div class="row-flex">
-                                    <span class="text-body">{{$data->user->name}}</span>
+                                    <span class="text-body">{{$data->user->name}}&nbsp;</span>
                                     <span class="text-body">{{$data->user->surname}}</span>
                                 </div>
                                 <div class="row-flex">
