@@ -41,7 +41,7 @@
                                             @endif
                                             @role('admin')
                                             @if($match->match->status_id == 15)
-                                                <button class="btn-primary date_change" id="button-date_{{$match->match->id}}" onclick="dateForm({{$match->match->id}})">{{__('Change date')}}</button>
+                                                <button class="btn-sm btn-primary date_change" id="button-date_{{$match->match->id}}" onclick="dateForm({{$match->match->id}})">{{__('Change date')}}</button>
                                                 <form id="change-date-form_{{$match->match->id}}" class="hidden" method="POST"
                                                       action="{{route("matches.change_date", $match->match->id)}}">
                                                     @csrf
@@ -63,13 +63,13 @@
                                             @if($match->match->status_id != 9)
                                                 @role('referee')
                                                 <a href="{{route('matches.edit', $match->match->id)}}">
-                                                    <button>{{__('Edit match')}}</button>
+                                                    <button class="btn-sm btn-primary">{{__('Edit match')}}</button>
                                                 </a>
                                                 @endrole
                                             @endif
                                             @role('admin')
                                             <a href="{{route('matches.edit', $match->match->id)}}">
-                                                <button>{{__('Edit match')}}</button>
+                                                <button class="btn-sm btn-primary">{{__('Edit match')}}</button>
                                             </a>
                                             @endrole
                                         </div>

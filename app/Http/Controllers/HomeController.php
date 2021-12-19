@@ -33,7 +33,7 @@ class HomeController extends Controller
         $team = $user->team->first();
         $today = date("Y-m-d H:m:s");
         $birthday = false;
-        if ($user->date_birth == $today) {
+        if ($user->date_birth == date("Y-m-d")) {
             $birthday = true;
         }
         $datedif = strtotime($today) - strtotime($user->created_at);

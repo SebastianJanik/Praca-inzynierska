@@ -47,18 +47,18 @@ class MatchTeamsController extends Controller
         $leagueSeasons = LeagueSeasons::where('season_id', $data['season'])
             ->where('league_id', $data['league'])->first();
         if($leagueSeasons->status_id == $modelStatusy->getStatus('timetable created'))
-            return 'Timetable already exist';
+            return redirect()->route('match_teams.create')->with("error", 'Timetable already exist');
         $teamLeagueSeasons = TeamLeagueSeasons::where('league_season_id', $leagueSeasons->id)->get()->toArray();
         foreach ($teamLeagueSeasons as $teamLeagueSeason)
             $teams_id [] = $teamLeagueSeason['team_id'];
         if(!isset($teams_id) || count($teams_id) < 2)
-            return 'Number of teams is to less to create timetable';
+            return redirect()->route('match_teams.create')->with("error", 'Number of teams is to less to create timetable');
         $teams = Team::find($teams_id)->toArray();
         $rounds = $matchTeam_helper->createRounds(count($teams), $leagueSeasons->id);
         $matches = $matchTeam_helper->createMatches(count($teams), $rounds);
         $team_pairs = $matchTeam_helper->createMatchTeams($teams, $matches);
         $leagueSeasons->status_id = $modelStatusy->getStatus('timetable created');
         $leagueSeasons->save();
-        return redirect()->route('home');
+        return redirect()->route('match_teams.create')->with("success", 'Timetable created succesfuly');
     }
 }

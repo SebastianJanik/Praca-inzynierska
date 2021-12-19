@@ -20,7 +20,7 @@
                             <div class="col col-flex">
                                 <div class="card-button">
                                     <a href="{{route('users.players_index_admin', $team->id)}}">
-                                        <button class="btn btn-primary" id="show_players_button">{{__('Show players')}}</button>
+                                        <button class="btn btn-primary">{{__('Show players')}}</button>
                                     </a>
                                 </div>
                                 @if(isset($season))
@@ -51,11 +51,20 @@
                             </div>
                             @endif
                         </div>
-                        @if(session('message'))
+                        @if(session('error'))
                             <div class="row">
                                 <div class="col col-flex">
-                                        <span class="text-body">
-                                            {{ __(session('message'))}}
+                                        <span class="text-danger">
+                                            {{ __(session('error'))}}
+                                        </span>
+                                </div>
+                            </div>
+                        @endif
+                        @if(session('success'))
+                            <div class="row">
+                                <div class="col col-flex">
+                                        <span class="text-success">
+                                            {{ __(session('success'))}}
                                         </span>
                                 </div>
                             </div>

@@ -37,7 +37,7 @@
                                 </div>
                                 @if($data->birthday)
                                     <div class="row-flex">
-                                        <span class="text-body">{{__("Happy birthday !")}}</span>
+                                        <span class="text-success">{{__("Happy birthday !")}}</span>
                                     </div>
                                 @endif
                             </div>
@@ -75,7 +75,24 @@
                         @endif
                     </div>
                 </div>
-                <div class="card-footer"></div>
+                @if(session('success'))
+                <div class="card">
+                    <div class="card-body">
+                        <span class="text-success">
+                            {{ __(session('success')) }}
+                        </span>
+                    </div>
+                </div>
+                @endif
+                @if(session('error'))
+                <div class="card">
+                    <div class="card-body">
+                        <span class="text-danger">
+                            {{ __(session('error')) }}
+                        </span>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

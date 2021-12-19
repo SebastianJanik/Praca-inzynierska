@@ -1,4 +1,3 @@
-<aside class="sidebar">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">
@@ -55,4 +54,3 @@
             </div>
         </div>
     </div>
-</aside>

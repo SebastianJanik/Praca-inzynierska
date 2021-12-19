@@ -129,7 +129,7 @@
 	"Team info": "Informacje o drużynie",
 	"No league": "Brak ligi",
 	"Closest matches": "Najbliższe rozgrywki",
-	"You can't move team, because timetable is already created": "Nie możesz przenieść drużyny, gdyż został już utworzony terminal",
+	"You can't move team, because timetable is already created": "Nie możesz przenieść drużyny, gdyż został już utworzony terminarz",
     "Table": "Tabela",
 	"Matches": "Mecze",
 	"Points": "Punkty",
@@ -137,7 +137,27 @@
 	"Goals conceded": "Stracone bramki",
 	"Goals diff": "Różnice bramek",
 	"Hello": "Witaj",
-	"Remember Me": "Zapamiętaj mnie"
+	"Remember Me": "Zapamiętaj mnie",
+    "Your application was created succefuly" : "Twoja aplikacja została pomyślnie utworzona",
+    "You have already applied for this position" : "Już aplikowałeś na tą pozycję",
+    "Referee accepted" : "Zaakceptowano sędziego",
+    "Referee declined" : "Odrzucono sędziego",
+    "Player accepted" : "Zaakceptowano zawodnika",
+    "Player declined" : "Odrzucono zawodnika",
+    "Coach accepted" : "Zaakceptowano trenera",
+    "Coach declined" : "Odrzucono trenera",
+    "Referee" : "Sędzia",
+    "Create suspension" : "Utwórz zawieszenie",
+    "User suspended" : "Użytkownik zawieszony",
+    "User suspension updated" : "Zawieszenie użytkownika zaktualizowane",
+    "User removed from the team" : "Użytkownik usunięty z drużyny",
+    "Happy birthday !" : "Wszystkiego najlepszego z okazji urodzin !",
+    "Only one season can be incoming" : "Możliwy jest tylko jeden nadchodzący sezon",
+    "Only one season can be active" : "Możliwy jest tylko jeden aktywny sezon",
+    "Team moved" : "Drużyna została przeniesiona",
+    "Number of teams is to less to create timetable" : "Zbyt mało drużyn znajduje się w lidze by utworzyć terminarz",
+    "Timetable already exist" : "Terminarz już istnieje",
+    "You can't aply right now" : "Nie możesz teraz aplikować"
 
 
 }

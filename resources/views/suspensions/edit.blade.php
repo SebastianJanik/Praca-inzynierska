@@ -10,6 +10,11 @@
                         @method('PATCH')
                         <div class="card-header">{{ __($title) }}</div>
                         <div class="card-body">
+                            @if (session('success'))
+                            <span class="text-success">
+                                {{ __(session('success')) }}
+                            </span>
+                            @endif
                             @if(isset($match_id))
                                 <input class="hidden" name="match_id" value="{{$match_id}}">
                             @endif
