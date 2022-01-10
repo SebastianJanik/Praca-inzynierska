@@ -4,6 +4,7 @@ use App\Http\Controllers\LeaguesController;
 use App\Http\Controllers\LeagueSeasonsController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\MatchTeamsController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TeamUsersController;
@@ -80,6 +81,10 @@ Route::get('/suspensions/edit/{id}', [SuspensionsController::class, 'edit'])->na
 Route::post('/suspensions/create', [SuspensionsController::class, 'create'])->name('suspensions.create');
 Route::post('/suspensions', [SuspensionsController::class, 'store'])->name('suspensions.store');
 Route::patch('/suspensions/update', [SuspensionsController::class, 'update'])->name('suspensions.update');
+
+Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+Route::get('/notifications/{id}', [NotificationsController::class, 'show'])->name('notifications.show');
+
 
 
 

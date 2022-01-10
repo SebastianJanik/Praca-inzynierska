@@ -13,7 +13,9 @@
                             <div id="panelsStayOpen-tables" class="accordion-collapse collapse" aria-labelledby="tables">
                                 <div class="accordion-body">
                                     @foreach($dataSidebar as $league)
-                                        <a href="{{route('league_seasons.show_table', $league->league_season_id)}}">{{$league->league->name}}</a>
+                                        <div class="row">
+                                            <a href="{{route('league_seasons.show_table', $league->league_season_id)}}">{{$league->league->name}}</a>
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -28,7 +30,9 @@
                                 <div class="accordion-body">
                                     @if($dataSidebar != null)
                                         @foreach($dataSidebar as $league)
-                                            <a href="{{route('league_seasons.show', $league->league_season_id)}}">{{$league->league->name}}</a>
+                                            <div class="row">
+                                                <a href="{{route('league_seasons.show', $league->league_season_id)}}">{{$league->league->name}}</a>
+                                            </div>
                                         @endforeach
                                     @endif
                                 </div>
@@ -44,7 +48,9 @@
                                 <div class="accordion-body">
                                     @if($archive != null)
                                         @foreach($archive as $season)
-                                            <a href="{{route('seasons.show', $season->id)}}">{{$season->name}}</a>
+                                            <div class="row">
+                                                <a href="{{route('seasons.show', $season->id)}}">{{$season->name}}</a>
+                                            </div>
                                         @endforeach
                                     @endif
                                 </div>

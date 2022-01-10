@@ -45,7 +45,15 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown card-button">
+                    <a type="button" class="btn btn-secondary" href="{{route('notifications.index')}}">
+                        {{__('Notifications')}}
+                        @if($navbarNotifications > 0)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$navbarNotifications}}</span>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item dropdown card-button">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle btn-secondary text-white rounded" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
@@ -53,8 +61,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
