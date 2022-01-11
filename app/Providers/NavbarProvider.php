@@ -31,9 +31,12 @@ class NavbarProvider extends ServiceProvider
         view()->composer('*', function ($view)
         {
             $modelStatuses = new Statuses();
-            $notifications = Notifications::where('user_id', Auth::user()->id)
-                ->where('status_id', $modelStatuses->getStatus('active'))->get();
-            $view->with('navbarNotifications', count($notifications));
+            $user = Auth::user();
+            if($user) {
+                $notifications = Notifications::where('user_id', $user->id)
+                    ->where('status_id', $modelStatuses->getStatus('active'))->get();
+                $view->with('navbarNotifications', count($notifications));
+            }
         });
     }
 }
