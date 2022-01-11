@@ -9,6 +9,7 @@ use App\Models\Suspensions;
 use App\Models\TeamUsers;
 use App\Models\User;
 use App\Models\Team;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -110,6 +111,13 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
         $user->status_id = $modelStatuses->getStatus('apply to be referee');
         $user->save();
+        Notification::create(
+            [
+                'user_id' => $user->id,
+                'title' => 'Application to become a referee',
+                'description' => 'Your application is being reviewed'
+            ]
+        );
         return redirect()->route('home')->with('success', 'Your application was created succefuly');
     }
 

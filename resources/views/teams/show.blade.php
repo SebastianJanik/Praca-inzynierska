@@ -18,38 +18,38 @@
                         </div>
                         <div class="row">
                             <div class="col col-flex">
-                                <div class="card-button">
+                                <div class="card-button m-0">
                                     <a href="{{route('users.players_index_admin', $team->id)}}">
-                                        <button class="btn btn-primary">{{__('Show players')}}</button>
+                                        <button class="btn btn-secondary">{{__('Show players')}}</button>
                                     </a>
                                 </div>
                                 @if(isset($season))
                                     <div class="card-button">
-                                        <button class="btn btn-primary" id="move-button" onclick="showForm()">{{__('Move team')}}</button>
+                                        <button class="btn btn-secondary" id="move-button" onclick="showForm()">{{__('Move team')}}</button>
                                     </div>
+                                @endif
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league', $team->id)}}">
-                                        @csrf
-                                        <label for="season">{{__('Season')}}</label>
-                                        <select id="season" name="season" class="form-select">
-                                            <option value="{{$season->id}}">{{$season->name}}</option>
-                                        </select>
-                                        <label for="league">{{__('League')}}</label>
-                                        <select id="league" name="league" class="form-select">
-                                            <option value="none">{{__('No league')}}</option>
-                                        @foreach($leagues as $league)
-                                                <option value="{{$league->id}}" @if($league_season && $league_season->league_id == $league->id) selected @endif>{{$league->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="row">
-                                            <input type="submit" class="btn btn-primary" value="{{__('Move')}}">
-                                        </div>
-                                    </form>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league', $team->id)}}">
+                                    @csrf
+                                    <label for="season">{{__('Season')}}</label>
+                                    <select id="season" name="season" class="form-select">
+                                        <option value="{{$season->id}}">{{$season->name}}</option>
+                                    </select>
+                                    <label for="league">{{__('League')}}</label>
+                                    <select id="league" name="league" class="form-select">
+                                        <option value="none">{{__('No league')}}</option>
+                                    @foreach($leagues as $league)
+                                            <option value="{{$league->id}}" @if($league_season && $league_season->league_id == $league->id) selected @endif>{{$league->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="row">
+                                        <input type="submit" class="btn btn-primary" value="{{__('Move')}}">
+                                    </div>
+                                </form>
                             </div>
-                            @endif
                         </div>
                         @if(session('error'))
                             <div class="row">

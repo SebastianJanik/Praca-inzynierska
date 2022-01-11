@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Statuses;
 use App\Models\Suspensions;
 use App\Models\TeamUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class SuspensionsController extends Controller
 {
+    private $modelStatuses;
+
+    public function __construct()
+    {
+        $this->modelStatuses = new Statuses();
+    }
+
     public function create()
     {
         $users = User::find([Request()->get('user_id')]);
@@ -32,8 +41,15 @@ class SuspensionsController extends Controller
                 ]
             );
             $user = User::find($user_id);
-            $user->status_id = 4;
+            $user->status_id = $this->modelStatuses->getStatus('suspended');
             $user->save();
+            Notification::create(
+                [
+                    'user_id' => $user_id,
+                    'title' => 'Suspension',
+                    'description' => "You've been suspended"
+                ]
+            );
         }
 
         return redirect()->route('users.players_show', $data['user_id'])->with('success', 'User suspended');
@@ -60,17 +76,31 @@ class SuspensionsController extends Controller
             $suspension->reason = $data['reason'][$suspension->id];
             $user = User::find($suspension->user_id);
             if ($suspension->matches_left == 0) {
-                $team_user = TeamUsers::where('user_id', $user->id)->where('status_id', '!=', 2)->get();
+                $team_user = TeamUsers::where('user_id', $user->id)->where('status_id', '!=', $this->modelStatuses->getStatus('inactive'))->get();
                 if (isset($data['match_id']))
                     $suspension->end_match_id = $data['match_id'];
                 if(!$team_user->isEmpty())
-                    $user->status_id = 13;
+                    $user->status_id = $this->modelStatuses->getStatus('assigned to the team');
                 else
-                    $user->status_id = 1;
-                $suspension->status_id = 2;
+                    $user->status_id = $this->modelStatuses->getStatus('active');
+                $suspension->status_id = $this->modelStatuses->getStatus('inactive');
+                Notification::create(
+                    [
+                        'user_id' => $user->id,
+                        'title' => 'Suspension',
+                        'description' => "Your suspension has expired"
+                    ]
+                );
             }else {
-                $suspension->status_id = 1;
-                $user->status_id = 4;
+                $suspension->status_id = $this->modelStatuses->getStatus('active');
+                $user->status_id = $this->modelStatuses->getStatus('suspended');
+                Notification::create(
+                    [
+                        'user_id' => $user->id,
+                        'title' => 'Suspension',
+                        'description' => "Your suspension has been edited"
+                    ]
+                );
             }
             $user->save();
             $suspension->save();

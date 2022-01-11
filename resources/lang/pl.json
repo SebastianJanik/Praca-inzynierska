@@ -157,7 +157,27 @@
     "Team moved" : "Drużyna została przeniesiona",
     "Number of teams is to less to create timetable" : "Zbyt mało drużyn znajduje się w lidze by utworzyć terminarz",
     "Timetable already exist" : "Terminarz już istnieje",
-    "You can't aply right now" : "Nie możesz teraz aplikować"
-
+    "You can't aply right now" : "Nie możesz teraz aplikować",
+    "All notifications" : "Wszystkie powiadomienia",
+    "Notifications" : "Powiadomienia",
+    "Notification" : "Powiadomienie",
+    "Back" : "Powrót",
+    "Application to become a referee" : "Zgłoszenie na stanowisko sędziego",
+    "Application to the team" : "Zgłoszenie do drużyny",
+    "You have been removed from the team" : "Usunięto Cię z drużyny",
+    "Your application is being reviewed" : "Twoje zgłoszenie jest rozpatrywane",
+    "Accepted by coach" : "Zaakceptowano przez trenera",
+    "Declined by coach" : "Odrzucono przez trenera",
+    "Accepted by admin" : "Zaakceptowano przez admina",
+    "Your application was accepted by coach" : "Twoje zgłoszenie zostało zaakceptowane przez trenera",
+    "Your application was declined by coach" : "Twoje zgłoszenie zostało odrzucone przez trenera",
+    "Your application was declined by admin" : "Twoje zgłoszenie zostało odrzucone przez admina",
+    "Congratulations ! You became a referee" : "Gratulacje ! Zostałeś sędzią",
+    "Congratulations ! You became a player" : "Gratulacje ! Zostałeś zawodnikiem",
+    "Congratulations ! You became a coach" : "Gratulacje ! Zostałeś trenerem",
+    "You've been suspended" : "Zostałeś zawieszony",
+    "Suspension" : "Zawieszenie",
+    "Your suspension has expired" : "Twoje zawieszenie wygasło",
+    "Your suspension has been edited" : "Twoje zawieszenie zostało edytowane"
 
 }
