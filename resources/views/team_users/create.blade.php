@@ -10,10 +10,12 @@
                         @if(empty($message))
                         <form method="POST" action="{{ route('team_users.store') }}">
                             @csrf
-                            <div class="form-group row">
-                                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-                                <div class="row">
-                                    <select id="role" name="role" required>
+                            <div class="form-group row flex-display">
+                                <div class="col col-auto">
+                                    <label for="role" class="">{{ __('Role') }}</label>
+                                </div>
+                                <div class="col col-flex">
+                                    <select class="width-100" id="role" name="role" required>
                                         <option value selected disabled>{{__('Select role')}}</option>
                                         <option value="player">{{ __('Player') }}</option>
                                         <option value="coach">{{ __('Coach') }}</option>
@@ -43,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="row">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Apply') }}
                                     </button>

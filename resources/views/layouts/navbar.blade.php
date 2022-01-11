@@ -34,18 +34,18 @@
             <!-- Authentication Links -->
             @guest
                 @if (Route::has('login'))
-                    <li class="nav-item card-button">
+                    <li class="nav-item card-button  m-1">
                         <a class="nav-link btn-secondary text-white rounded" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                 @endif
 
                 @if (Route::has('register'))
-                    <li class="nav-item card-button">
+                    <li class="nav-item card-button  m-1">
                         <a class="nav-link btn-secondary text-white rounded" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown card-button">
+                <li class="nav-item dropdown card-button  m-1">
                     <a type="button" class="btn btn-secondary" href="{{route('notifications.index')}}">
                         {{__('Notifications')}}
                         @if($navbarNotifications > 0)
@@ -53,7 +53,7 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item dropdown card-button">
+                <li class="nav-item dropdown card-button  m-1">
                     <a id="navbarDropdown" class="dropdown-toggle btn btn-secondary text-white" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}

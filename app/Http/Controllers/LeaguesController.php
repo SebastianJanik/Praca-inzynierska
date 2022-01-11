@@ -16,7 +16,7 @@ class LeaguesController extends Controller
     {
         $data = request()->validate(
             [
-                'name' => 'required|unique:seasons',
+                'name' => 'required|unique:leagues',
             ]
         );
         League::create($data);

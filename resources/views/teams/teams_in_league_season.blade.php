@@ -14,12 +14,12 @@
                             <span class="text-body">{{__($message)}}</span>
                         @elseif($teams)
                         @foreach($teams as $team)
-                            <div class="row-flex">
-                                <span class="text-body">{{$loop->iteration}}.</span>
-                                <span class="text-body">{{__($team->name)}}</span>
-                                <div class="card-button">
+                            <div class="row row-flex align-items-center d-flex m-1 p-1 bg-info">
+                                <span class="text-body col-auto">{{$loop->iteration}}.</span>
+                                <span class="text-body font-weight-bold col-auto">{{__($team->name)}}</span>
+                                <div class="card-button col-auto">
                                     <a href="{{route('teams.show', $team->id)}}">
-                                        <button class="btn-primary">{{__('Show team')}}</button>
+                                        <button class="btn btn-secondary">{{__('Show team')}}</button>
                                     </a>
                                 </div>
                             </div>

@@ -8,6 +8,9 @@
                     <div class="card-header">{{ __('Add season') }}</div>
 
                     <div class="card-body">
+                        @if(isset($error))
+                            <span class="text-danger">{{__('Exist incoming season')}}</span>
+                        @else
                         <form method="POST" action="{{ route('seasons.store') }}">
                             @csrf
 
@@ -35,6 +38,7 @@
                                 </div>
                             </div>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -178,6 +178,13 @@
     "You've been suspended" : "Zostałeś zawieszony",
     "Suspension" : "Zawieszenie",
     "Your suspension has expired" : "Twoje zawieszenie wygasło",
-    "Your suspension has been edited" : "Twoje zawieszenie zostało edytowane"
+    "Your suspension has been edited" : "Twoje zawieszenie zostało edytowane",
+    "League created" : "Utworzono ligę",
+    "Season created" : "Utworzono sezon",
+    "The name has already been taken." : "Nazwa jest już zajęta.",
+    "Exist incoming season" : "Istnieje nadchodzący sezon",
+    "PAUSE" : "PAUZA",
+    "Timetable created succesfuly" : "Terminarz utworzono pomyślnie",
+    "Select team" : "Wybierz drużynę"
 
 }

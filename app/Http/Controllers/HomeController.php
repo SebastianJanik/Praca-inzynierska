@@ -31,7 +31,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $role = $user->roles->first();
         $team = $user->team->first();
-        $today = date("Y-m-d H:m:s");
+        $today = date("Y-m-d H:i:s");
         $birthday = false;
         if ($user->date_birth == date("Y-m-d")) {
             $birthday = true;

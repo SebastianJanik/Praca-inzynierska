@@ -24,12 +24,18 @@
                                     </a>
                                 </div>
                                 @if(isset($season))
-                                    <div class="card-button">
+                                    <div class="card-button ml-1">
                                         <button class="btn btn-secondary" id="move-button" onclick="showForm()">{{__('Move team')}}</button>
                                     </div>
                                 @endif
+                                <div class="card-button ml-1">
+                                    <a href="{{route('teams.index')}}">
+                                        <button class="btn btn-secondary">{{__('All teams')}}</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        @if(isset($season))
                         <div class="row">
                             <div class="col">
                                 <form id="move-form" class="hidden" method="POST" action="{{route('teams.change_team_league', $team->id)}}">
@@ -51,6 +57,7 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
                         @if(session('error'))
                             <div class="row">
                                 <div class="col col-flex">

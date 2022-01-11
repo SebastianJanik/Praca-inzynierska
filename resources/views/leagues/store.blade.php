@@ -6,9 +6,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
-
                     <div class="card-body">
-                        {{ __('Utworzono lige') }}
+                        <span class="text-success">{{ __('League created') }}</span>
                     </div>
                 </div>
             </div>
