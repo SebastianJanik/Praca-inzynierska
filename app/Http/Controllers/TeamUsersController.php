@@ -47,6 +47,9 @@ class TeamUsersController extends Controller
     {
         $modelStatuses = new Statuses();
         $user = User::find(auth()->id());
+        if($user->status_id != $modelStatuses->getStatus('active'))
+            return redirect()->route('home')->with('error', "You can't aply right now");
+
         $data = request()->validate(
             [
                 'team' => 'required',
@@ -65,7 +68,7 @@ class TeamUsersController extends Controller
         $user->status_id = $modelStatuses->getStatus('assigned to the team');
         $user->save();
         TeamUsers::create($data);
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Your application was created succefuly');
     }
 
     public function remove($id)
@@ -85,8 +88,8 @@ class TeamUsersController extends Controller
         $user->assignRole('user');
         $user->save();
         if(Auth::user()->hasRole('coach'))
-            return redirect()->route('users.players_index');
-        return redirect()->route('users.players_index_admin', $team_users->team_id);
+            return redirect()->route('users.players_index')->with('success', 'User removed from the team');
+        return redirect()->route('users.players_index_admin', $team_users->team_id)->with('success', 'User removed from the team');
     }
 
     public function indexUsersAcceptCoach()
@@ -115,12 +118,21 @@ class TeamUsersController extends Controller
                 'accept' => '',
             ]
         );
-        $user = TeamUsers::where('user_id', $data['user_id'])->first();
-        if(isset($data['accept']))
-            $user->status_id = $modelStatuses->getStatus('accepted by coach');
-        if(isset($data['decline']))
-            $user->status_id = $modelStatuses->getStatus('declined by coach');
-        $user->save();
+        $user = User::find($data['user_id']);
+        $team_user = TeamUsers::where('user_id', $data['user_id'])->first();
+        if(isset($data['accept'])){
+            $team_user->status_id = $modelStatuses->getStatus('accepted by coach');
+            $team_user->save();
+            return redirect()->route('team_users.accept_coach')->with('success', 'Player accepted');
+        }
+        if(isset($data['decline'])){
+            $team_user->status_id = $modelStatuses->getStatus('declined by coach');
+            $team_user->save();
+            $user->status_id = $modelStatuses->getStatus('active');
+            $user->save();
+            $team_user->forceDelete();
+            return redirect()->route('team_users.accept_coach')->with('success', 'Player declined');
+        }
         return redirect()->route('team_users.accept_coach');
     }
 
@@ -141,27 +153,40 @@ class TeamUsersController extends Controller
             case 'Referee' :
                 $user->status_id = $modelStatuses->getStatus('active');
                 $user->save();
-                if(isset($data['accept']))
+                if(isset($data['accept'])){
                     $user->assignRole('referee');
-                return redirect()->route('team_users.accept_admin');
+                    return redirect()->route('team_users.accept_admin')->with('success', 'Referee accepted');
+                }
+                if(isset($data['decline'])){
+                    return redirect()->route('team_users.accept_admin')->with('warning', 'Referee declined');
+                }
                 break;
             case 'Player' :
                 if(isset($data['accept'])){
                     $teamUser->status_id = $modelStatuses->getStatus('accepted by admin');
                     $user->assignRole('player');
+                    $teamUser->save();
+                    return redirect()->route('team_users.accept_admin')->with('success', 'Player accepted');
                 }
-                if(isset($data['decline']))
+                if(isset($data['decline'])){
                     $teamUser->status_id = $modelStatuses->getStatus('waiting for acceptation by coach');
-                $teamUser->save();
+                    $teamUser->save();
+                    return redirect()->route('team_users.accept_admin')->with('warning', 'Player declined');
+                }
                 break;
             case 'Coach' :
                 if(isset($data['accept'])){
                     $teamUser->status_id = $modelStatuses->getStatus('accepted by admin');
                     $user->assignRole('coach');
+                    $teamUser->save();
+                    return redirect()->route('team_users.accept_admin')->with('success', 'Coach accepted');
                 }
                 if(isset($data['decline']))
                     $teamUser->status_id = $modelStatuses->getStatus('active');
-                $teamUser->save();
+                    $teamUser->save();
+                    $user->status_id = $modelStatuses->getStatus('active');
+                    $user->save();
+                    return redirect()->route('team_users.accept_admin')->with('warning', 'Coach declined');
                 break;
         }
         return redirect()->route('team_users.accept_admin');

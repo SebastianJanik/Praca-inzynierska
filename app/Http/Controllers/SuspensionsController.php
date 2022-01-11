@@ -36,7 +36,7 @@ class SuspensionsController extends Controller
             $user->save();
         }
 
-        return redirect()->route('users.players_show', $data['user_id']);
+        return redirect()->route('users.players_show', $data['user_id'])->with('success', 'User suspended');
     }
 
     public function edit($suspension_id)
@@ -77,7 +77,7 @@ class SuspensionsController extends Controller
         }
         if (isset($data['match_id']))
             return redirect()->route('matches.edit', $data['match_id']);
-        return redirect()->route('suspensions.edit', $data['suspension_id']);
+        return redirect()->route('suspensions.edit', $data['suspension_id'])->with('success', 'User suspension updated');
     }
 
 }

@@ -11,13 +11,13 @@
                         @if($data)
                         @foreach($data as $item)
                             <div class="row">
-                                <div class="card">
+                                <div class="card" id="all_timetables_row">
                                     {{$item['season']->name}}
                                     {{$item['league']->name}}
                                 </div>
-                                <div class="card-button">
+                                <div class="card-button" id="all_timetables" >
                                     <a href="{{route('league_seasons.show', $item['league_season_id'])}}">
-                                        <button>{{__('Show timetable')}}</button>
+                                        <button class="btn btn-primary">{{__('Show timetable')}}</button>
                                     </a>
                                 </div>
                             </div>

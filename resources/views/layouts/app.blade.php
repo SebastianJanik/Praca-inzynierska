@@ -32,11 +32,15 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             @include('layouts.navbar')
         </nav>
-        <div id ="main">
-            @auth
+        <div id="main">
+        @auth
+        <aside id="sidebar">
             @include('layouts.sidebar')
-            @endauth
+        </aside>
+        @endauth
+        <div id ="content">
             @yield('content')
+        </div>
         </div>
     </div>
 </body>

@@ -94,8 +94,7 @@ class TeamsController extends Controller
         $league_season = LeagueSeasons::where('season_id', $data['season'])
             ->where('league_id', $data['league'])->first();
         if ($league_season->status_id == $modelStatusy->getStatus('timetable created')){
-            $message = "You can't move team, because timetable is already created";
-            return redirect()->route('teams.show', $team_id)->with('message', $message);
+            return redirect()->route('teams.show', $team_id)->with('error', "You can't move team, because timetable is already created");
         }
         $team_league_seasons = TeamLeagueSeasons::where('team_id', $team_id)->get();
         //checking if team is alocated in current season, if is change it's league
@@ -104,7 +103,7 @@ class TeamsController extends Controller
                 if ($team_league_season->league_season_id == $league_in_season->id){
                     $team_league_season->league_season_id = $league_season->id;
                     $team_league_season->save();
-                    return redirect()->route('teams.show', $team_id);
+                    return redirect()->route('teams.show', $team_id)->with('success', 'Team moved');
                 }
             }
         }
@@ -115,7 +114,7 @@ class TeamsController extends Controller
                 'league_season_id' => $league_season->id
             ]
         );
-        return redirect()->route('teams.show', $team_id);
+        return redirect()->route('teams.show', $team_id)->with('success', 'Team moved');
     }
 
     public function teamsInLeagueSeason($league_season_id)

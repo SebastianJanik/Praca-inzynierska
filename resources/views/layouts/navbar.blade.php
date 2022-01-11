@@ -45,6 +45,7 @@
                     </li>
                 @endif
             @else
+<<<<<<< HEAD
                 <li class="nav-item dropdown card-button">
                     <a type="button" class="btn btn-secondary" href="{{route('notifications.index')}}">
                         {{__('Notifications')}}
@@ -53,8 +54,9 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item dropdown card-button">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle btn-secondary text-white rounded" href="#" role="button"
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-secondary text-white" href="#" role="button"
+>>>>>>> origin/Bootstrap
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>

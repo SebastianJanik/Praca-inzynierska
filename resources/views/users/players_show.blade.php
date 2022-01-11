@@ -7,6 +7,11 @@
                 <div class="card">
                     <div class="card-header">{{ __('Show player') }}</div>
                     <div class="card-body">
+                        @if (session('success'))
+                        <span class="text-success">
+                            {{ __(session('success')) }}
+                        </span>
+                        @endif
                         <div class="card-title">{{ __('Player info') }}</div>
                         <div class="row">
                             <div class="col">{{ __('Player name') }}</div>

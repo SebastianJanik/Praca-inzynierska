@@ -6,6 +6,16 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">{{ __('Users awaiting approval by the coach') }}</div>
+                    @if (session('warning'))
+                    <span class="text-info">
+                        {{ __(session('warning')) }}
+                    </span>
+                    @endif
+                    @if (session('success'))
+                    <span class="text-success">
+                        {{ __(session('success')) }}
+                    </span>
+                    @endif
                     @if($users == null)
                     {{ __('There are no users') }}
                     @else

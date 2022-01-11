@@ -42,7 +42,7 @@
                         <div class="row-flex">
                             <span class="text-danger">
                                 @if(session('message'))
-                                    {{session('message')}}
+                                    {{__(session('message'))}}
                                 @endif
                             </span>
                         </div>

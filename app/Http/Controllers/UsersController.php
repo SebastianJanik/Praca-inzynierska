@@ -98,18 +98,19 @@ class UsersController extends Controller
         $message = null;
         $modelStatusy = new Statuses();
         if($user->hasAnyRole(['player', 'coach', 'referee', 'admin']))
-            $message = 'Your role is actually assigned';
+            return view('users.referee_create')->with('error', 'Your role is actually assigned');
         if($user->status_id == $modelStatusy->getStatus('apply to be referee'))
-            $message = 'You have already applied for this position';
-        return view('users.referee_create', compact('message'));
+            return view('users.referee_create')->with('error', 'You have already applied for this position');
+        return view('users.referee_create');
     }
 
     public function storeReferee()
     {
+        $modelStatuses = new Statuses();
         $user = User::find(Auth::id());
-        $user->status_id = 14;
+        $user->status_id = $modelStatuses->getStatus('apply to be referee');
         $user->save();
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Your application was created succefuly');
     }
 
 }

@@ -63,7 +63,13 @@
                             </div>
                         </form>
                         @else
-                        {{__($message)}}
+                        <span class="text-danger">{{__($message)}}</span>
+                        @endif
+                        @if(session('error'))
+                        <span class="text-danger">{{__(session('error'))}}</span>
+                        @endif
+                        @if(session('success'))
+                        <span class="text-success">{{__(session('success'))}}</span>
                         @endif
                     </div>
                 </div>
