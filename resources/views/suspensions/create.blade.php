@@ -30,7 +30,7 @@
                             </div>
                             @endforeach
                             <div class="row">
-                                <div class="col"><button class="btn-warning">{{__('Suspend')}}</button></div>
+                                <div class="col"><button class="btn btn-warning">{{__('Suspend')}}</button></div>
                             </div>
                         </form>
                     </div>

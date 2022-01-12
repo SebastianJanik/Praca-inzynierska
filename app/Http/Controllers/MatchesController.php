@@ -17,9 +17,11 @@ class MatchesController extends Controller
     public function edit($match_id)
     {
         $match = Matches::find($match_id);
-        if (!isset($match)) {
-            return "Match doesn't exist";
-        }
+        if (!isset($match)) 
+            return view('matches.edit')->with('error', "Match doesn't exist");
+        if(!$match->date)
+            return view('matches.edit')->with('error', 'You cannot edit a match without a match date set');
+
         $teams = $match->teams;
         $match_teams = MatchTeams::where('match_id', $match_id)->get();
         $team_users = TeamUsers::whereIn('team_id', $teams->pluck('id'))
@@ -124,7 +126,7 @@ class MatchesController extends Controller
     {
         $data = request()->validate(
             [
-                'date' => 'required|date|after:today',
+                'date'=> 'required|date|after:today',
                 'league_season_id' => 'required'
             ]
         );

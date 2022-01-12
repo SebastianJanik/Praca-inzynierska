@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
                     <div class="card-body">
-                        <span class="text-success">{{ ('Season created') }}</span>
+                        <span class="text-success">{{ __('Season created') }}</span>
                     </div>
                 </div>
             </div>

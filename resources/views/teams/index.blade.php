@@ -14,8 +14,8 @@
                                     <span class="text-body font-weight-bold">{{$team->name}}</span>
                                 </div>
                                 <div class="col-auto">
-                                    @role('admin')
                                     <div class="col-flex">
+                                        @role('admin')
                                         <div class="card-button">
                                             <a href="{{route('teams.edit', $team->id)}}">
                                                 <button class="btn-sm btn-secondary">{{__('Edit team')}}</button>

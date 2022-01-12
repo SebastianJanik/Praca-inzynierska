@@ -13,11 +13,13 @@
                             </span>
                         @endif
                         @foreach($users as $user)
-                            <div class="row">
-                                <span>{{$user->name}} {{$user->surname}}</span>
-                                <div class="card-button" id="view_player_button">
+                            <div class="row row-flex bg-info align-items-center d-flex m-1 p-1">
+                                <div class="col-auto">
+                                    <span class="text-body">{{$user->name}} {{$user->surname}}</span>
+                                </div>
+                                <div class="card-button col-auto" id="view_player_button">
                                     <a href="{{route('users.players_show', $user->id)}}">
-                                        <button class="btn-sm btn-primary">{{__('View player')}}</button>
+                                        <button class="btn btn-secondary">{{__('View player')}}</button>
                                     </a>
                                 </div>
                             </div>

@@ -10,22 +10,20 @@
                         @if(empty($message))
                         <form method="POST" action="{{ route('team_users.store') }}">
                             @csrf
-                            <div class="form-group row flex-display">
-                                <div class="col col-auto">
-                                    <label for="role" class="">{{ __('Role') }}</label>
-                                </div>
-                                <div class="col col-flex">
-                                    <select class="width-100" id="role" name="role" required>
+                            <div class="form-group row m-1">
+                                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                                <div class="col-md-6">
+                                    <select id="role" class="form-control" name="role" required>
                                         <option value selected disabled>{{__('Select role')}}</option>
                                         <option value="player">{{ __('Player') }}</option>
                                         <option value="coach">{{ __('Coach') }}</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row m-1">
                                 <label for="league" class="col-md-4 col-form-label text-md-right">{{ __('League') }}</label>
-                                <div class="row">
-                                    <select id="league" name="league" onchange="teams()" required>
+                                <div class="col-md-6">
+                                    <select id="league" class="form-control" name="league" onchange="teams()" required>
                                         <option value selected disabled>{{__('Select league')}}</option>
                                         @foreach($leagues as $league)
                                         <option value="{{$league->id}}" data-tag>{{$league->name}}</option>
@@ -33,10 +31,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="select-team" class="form-group row hidden">
+                            <div id="select-team" class="form-group row hidden m-1">
                                 <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team') }}</label>
-                                <div class="row">
-                                    <select id="team" name="team" required>
+                                <div class="col-md-6">
+                                    <select id="team" class="form-control" name="team" required>
                                         <option value="default" class="option-team-default" selected disabled>{{__('Select team')}}</option>
                                         @foreach($data as $team)
                                             <option class="hidden option-team" value="{{$team->id}}" @if($team->league) data-tag="{{$team->league->id}}" @else data-tag="none" @endif>{{$team->name}}</option>
@@ -44,9 +42,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row mb-0">
-                                <div class="row">
-                                    <button type="submit" class="btn btn-primary">
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary form-control">
                                         {{ __('Apply') }}
                                     </button>
                                 </div>

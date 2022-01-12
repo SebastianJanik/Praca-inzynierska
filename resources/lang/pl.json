@@ -57,7 +57,7 @@
 	"Player surname": "Nazwisko zawodnika",
 	"Birth date": "Data urodzenia",
 	"Status": "Status zawodnika",
-	"assigned to the team ": "Przypisany do drużyny",
+	"Assigned to the team": "Przypisany do drużyny",
 	"Stats": "Statystyki",
 	"This season": "Obecny sezon",
 	"Goals": "Bramki",
@@ -92,7 +92,6 @@
     "Suspend" : "Zawieś",
     "Suspended" : "Zawieszony",
     "Edit suspension" : "Edytuj zawieszenie",
-    "assigned to the team" : "przypisany do drużyny",
     "Length" : "Długość",
     "Reason" : "Powód",
     "Matches left" : "Pozostałe mecze",
@@ -169,6 +168,7 @@
     "Accepted by coach" : "Zaakceptowano przez trenera",
     "Declined by coach" : "Odrzucono przez trenera",
     "Accepted by admin" : "Zaakceptowano przez admina",
+    "Declined by admin" : "Odrzucono przez admina",
     "Your application was accepted by coach" : "Twoje zgłoszenie zostało zaakceptowane przez trenera",
     "Your application was declined by coach" : "Twoje zgłoszenie zostało odrzucone przez trenera",
     "Your application was declined by admin" : "Twoje zgłoszenie zostało odrzucone przez admina",
@@ -185,6 +185,13 @@
     "Exist incoming season" : "Istnieje nadchodzący sezon",
     "PAUSE" : "PAUZA",
     "Timetable created succesfuly" : "Terminarz utworzono pomyślnie",
-    "Select team" : "Wybierz drużynę"
+    "Select team" : "Wybierz drużynę",
+    "You cannot edit a match without a match date set" : "Nie można edytować meczu bez ustawionej daty spotkania",
+    "The date must be a date after today." : "Data musi przypadać po dniu dzisiejszym.",
+    "The date field is required." : "Pole z datą jest wymagane",
+    "Suspensions that were imposed after this match" : "Zawieszania nałożone po tym meczu",
+    "Suspensions expired after this match" : "Zawieszenia które wygasły po tym meczu",
+    "Position" : "Pozycja",
+    "Removed from the team" : "Usunięty z drużyny"
 
 }

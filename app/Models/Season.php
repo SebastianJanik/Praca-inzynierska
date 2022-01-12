@@ -9,6 +9,7 @@ class Season extends Model
 {
     use HasFactory;
 
+    
     protected $fillable = [
         'name',
         'status_id'
@@ -27,5 +28,10 @@ class Season extends Model
     public function teams()
     {
         return $this->hasManyThrough(Team::class, TeamLeagueSeasons::class, LeagueSeasons::class, "season_id", "league_season_id", "id");
+    }
+
+    public function active_season()
+    {
+        return $this->where('status_id', (new Statuses())->getStatus('active'))->first();
     }
 }

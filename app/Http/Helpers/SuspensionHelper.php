@@ -3,9 +3,8 @@
 namespace App\Http\Helpers;
 
 use App\Models\Statuses;
-use App\Models\Suspensions;
+use App\Models\Notifications;
 use App\Models\User;
-use Illuminate\Notifications\Notification;
 
 class SuspensionHelper
 {
@@ -29,7 +28,7 @@ class SuspensionHelper
             else
                 $user->status_id = $this->modelStatuses->getStatus('active');
             $user->save();
-            Notification::create(
+            Notifications::create(
                 [
                     'user_id' => $user->id,
                     'title' => 'Suspension',

@@ -128,22 +128,22 @@
                                 </div>
                             @endif
                             <div class="row">
-                                <div class="col">
+                                <div class="col-auto card-button">
                                     @if(!isset($match_id))
-                                        <button class="btn-warning">{{__('Suspend')}}</button>
+                                        <button class="btn btn-warning">{{__('Suspend')}}</button>
                                     @else
-                                        <button class="btn-warning">{{__('Update')}}</button>
+                                        <button class="btn btn-warning">{{__('Update')}}</button>
                                     @endif
                                 </div>
+                                @if(!isset($match_id))
+                                    <div class="col-auto card-button">
+                                        <a href="{{route('users.players_show', $data[0]->user->id)}}">
+                                            <button type="button" class="btn btn-secondary">{{__('Back')}}</button>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                     </form>
-                    @if(!isset($match_id))
-                        <div class="row">
-                            <a href="{{route('users.players_show', $data[0]->user->id)}}">
-                                <button class="btn-primary">{{__('Back')}}</button>
-                            </a>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>

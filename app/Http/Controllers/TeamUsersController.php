@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\TeamsHelper;
 use App\Http\Helpers\TeamUsersHelper;
 use App\Models\League;
+use App\Models\Notifications;
 use App\Models\Statuses;
 use App\Models\Season;
 use App\Models\TeamUsers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -69,7 +69,7 @@ class TeamUsersController extends Controller
         $user->status_id = $modelStatuses->getStatus('assigned to the team');
         $user->save();
         TeamUsers::create($data);
-        Notification::create(
+        Notifications::create(
             [
                 'user_id' => $user->id,
                 'title' => 'Application to the team',
@@ -95,7 +95,7 @@ class TeamUsersController extends Controller
             $user->removeRole('coach');
         $user->assignRole('user');
         $user->save();
-        Notification::create(
+        Notifications::create(
             [
                 'user_id' => $user->id,
                 'title' => 'Removed from the team',
@@ -138,7 +138,7 @@ class TeamUsersController extends Controller
         if(isset($data['accept'])){
             $team_user->status_id = $modelStatuses->getStatus('accepted by coach');
             $team_user->save();
-            Notification::create(
+            Notifications::create(
                 [
                     'user_id' => $user->id,
                     'title' => 'Accepted by coach',
@@ -153,7 +153,7 @@ class TeamUsersController extends Controller
             $user->status_id = $modelStatuses->getStatus('active');
             $user->save();
             $team_user->forceDelete();
-            Notification::create(
+            Notifications::create(
                 [
                     'user_id' => $user->id,
                     'title' => 'Declined by coach',
@@ -184,7 +184,7 @@ class TeamUsersController extends Controller
                 $user->save();
                 if(isset($data['accept'])){
                     $user->assignRole('referee');
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Accepted by admin',
@@ -194,7 +194,7 @@ class TeamUsersController extends Controller
                     return redirect()->route('team_users.accept_admin')->with('success', 'Referee accepted');
                 }
                 if(isset($data['decline'])){
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Declined by admin',
@@ -209,7 +209,7 @@ class TeamUsersController extends Controller
                     $teamUser->status_id = $modelStatuses->getStatus('accepted by admin');
                     $user->assignRole('player');
                     $teamUser->save();
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Accepted by admin',
@@ -221,7 +221,7 @@ class TeamUsersController extends Controller
                 if(isset($data['decline'])){
                     $teamUser->status_id = $modelStatuses->getStatus('waiting for acceptation by coach');
                     $teamUser->save();
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Declined by admin',
@@ -236,7 +236,7 @@ class TeamUsersController extends Controller
                     $teamUser->status_id = $modelStatuses->getStatus('accepted by admin');
                     $user->assignRole('coach');
                     $teamUser->save();
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Accepted by admin',
@@ -246,11 +246,10 @@ class TeamUsersController extends Controller
                     return redirect()->route('team_users.accept_admin')->with('success', 'Coach accepted');
                 }
                 if(isset($data['decline'])) {
-                    $teamUser->status_id = $modelStatuses->getStatus('active');
-                    $teamUser->save();
+                    $teamUser->delete();
                     $user->status_id = $modelStatuses->getStatus('active');
                     $user->save();
-                    Notification::create(
+                    Notifications::create(
                         [
                             'user_id' => $user->id,
                             'title' => 'Declined by admin',

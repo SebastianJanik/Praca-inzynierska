@@ -9,10 +9,16 @@ use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
 
-use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends Controller
 {
+    private $modelStatuses;
+
+    public function __construct()
+    {
+        $this->modelStatuses = new Statuses();
+    }
+
     public function index()
     {
         $teams = Team::all();
@@ -21,9 +27,8 @@ class TeamsController extends Controller
 
     public function show($id)
     {
-        $modelStatusy = new Statuses();
         $team = Team::find($id);
-        $season = Season::where("status_id", $modelStatusy->getStatus('incoming'))->first();
+        $season = Season::where("status_id", $this->modelStatuses->getStatus('incoming'))->first();
         if($season) {
             $league_season = $team->league_season->where('season_id', $season->id)->first();
             $leagues = $season->leagues;
@@ -49,8 +54,7 @@ class TeamsController extends Controller
                 'town' => 'required',
             ]
         );
-        $modelStatusy = new Statuses();
-        $data['status_id'] = $modelStatusy->getStatus('inactive');
+        $data['status_id'] = $this->modelStatuses->getStatus('inactive');
         Team::create($data);
         return redirect()->route('teams.store');
     }
@@ -78,7 +82,6 @@ class TeamsController extends Controller
 
     public function changeTeamLeague($team_id)
     {
-        $modelStatusy = new Statuses();
         $data = request()->validate(
             [
                 'league' => 'required',
@@ -89,21 +92,26 @@ class TeamsController extends Controller
             $data['league'] = null;
 
         $season = Season::find($data['season']);
+        $team = Team::find($team_id);
         $leagues_in_season = $season->league_seasons;
         //league season passed by form
         $league_season = LeagueSeasons::where('season_id', $data['season'])
             ->where('league_id', $data['league'])->first();
-        if ($league_season->status_id == $modelStatusy->getStatus('timetable created')){
-            return redirect()->route('teams.show', $team_id)->with('error', "You can't move team, because timetable is already created");
-        }
-        $team_league_seasons = TeamLeagueSeasons::where('team_id', $team_id)->get();
+
+        if ($league_season->status_id == $this->modelStatuses->getStatus('timetable created'))
+            return redirect()->route('teams.show', $team->id)->with('error', "You can't move team, because timetable is already created");
+
+        if($team->league_seasonBySeasonId($season->id) && $team->league_seasonBySeasonId($season->id)->status_id == $this->modelStatuses->getStatus('timetable created'))
+            return redirect()->route('teams.show', $team->id)->with('error', "You can't move team, because timetable is already created");
+
+        $team_league_seasons = TeamLeagueSeasons::where('team_id', $team->id)->get();
         //checking if team is alocated in current season, if is change it's league
         foreach ($team_league_seasons as $team_league_season) {
             foreach ($leagues_in_season as $league_in_season){
                 if ($team_league_season->league_season_id == $league_in_season->id){
                     $team_league_season->league_season_id = $league_season->id;
                     $team_league_season->save();
-                    return redirect()->route('teams.show', $team_id)->with('success', 'Team moved');
+                    return redirect()->route('teams.show', $team->id)->with('success', 'Team moved');
                 }
             }
         }

@@ -12,9 +12,7 @@ use App\Models\Season;
 use App\Models\Statuses;
 use App\Models\Team;
 use App\Models\TeamLeagueSeasons;
-use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isEmpty;
 
 class LeagueSeasonsController extends Controller
 {

@@ -6,8 +6,8 @@ use App\Models\Statuses;
 use App\Models\Suspensions;
 use App\Models\TeamUsers;
 use App\Models\User;
+use App\Models\Notifications;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
 
 class SuspensionsController extends Controller
 {
@@ -43,7 +43,7 @@ class SuspensionsController extends Controller
             $user = User::find($user_id);
             $user->status_id = $this->modelStatuses->getStatus('suspended');
             $user->save();
-            Notification::create(
+            Notifications::create(
                 [
                     'user_id' => $user_id,
                     'title' => 'Suspension',
@@ -84,7 +84,7 @@ class SuspensionsController extends Controller
                 else
                     $user->status_id = $this->modelStatuses->getStatus('active');
                 $suspension->status_id = $this->modelStatuses->getStatus('inactive');
-                Notification::create(
+                Notifications::create(
                     [
                         'user_id' => $user->id,
                         'title' => 'Suspension',
@@ -94,7 +94,7 @@ class SuspensionsController extends Controller
             }else {
                 $suspension->status_id = $this->modelStatuses->getStatus('active');
                 $user->status_id = $this->modelStatuses->getStatus('suspended');
-                Notification::create(
+                Notifications::create(
                     [
                         'user_id' => $user->id,
                         'title' => 'Suspension',

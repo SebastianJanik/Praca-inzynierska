@@ -19,7 +19,8 @@ class NotificationsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $notifications = Notifications::where('user_id', $user->id)->get();
+        $notifications = Notifications::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')->get();
         foreach ($notifications as $notification){
             $notification->status = 'inactive';
             if($notification->status_id == $this->modelStatuses->getStatus('active'))

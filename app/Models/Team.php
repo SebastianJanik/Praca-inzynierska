@@ -35,6 +35,12 @@ class Team extends Model
         return $this->belongsToMany(LeagueSeasons::class, (new TeamLeagueSeasons())->getTable(), "team_id", "league_season_id");
     }
 
+    public function league_seasonBySeasonId($season_id)
+    {
+        return $this->belongsToMany(LeagueSeasons::class, (new TeamLeagueSeasons())->getTable(), "team_id", "league_season_id")
+            ->where('season_id', $season_id)->first();
+    }
+
     public function acceptedUsers()
     {
         $modelStatuses = new Statuses();

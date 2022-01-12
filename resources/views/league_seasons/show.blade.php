@@ -6,6 +6,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">{{ __('Timetable') }}</div>
+                        @error('date')
+                        <div class="row text-center">
+                            <span class="text-danger">{{ __($message) }}</span>
+                        </div>
+                        @enderror
                     @foreach($data as $round)
                         <div class="card-header">{{$loop->iteration}}</div>
                         <div class="card-body">
@@ -31,29 +36,23 @@
                                         @endif
                                     </div>
                                     @if($match->match_teams[0]->team->name != 'PAUSE' && $match->match_teams[1]->team->name != 'PAUSE')
-                                        <div class="col col-flex">
+                                        <div class="col col-flex align-items-center d-flex">
                                             @if($match->match->date)
-                                                <span class="text-body font-weight-bold">
-                                                {{$match->match->date}}
-                                            </span>
+                                                <span class="text-body font-weight-bold mr-4">{{$match->match->date}}</span>
                                             @else
                                                 <span class="text-body"></span>
                                             @endif
                                             @role('admin')
-                                            @if($match->match->status_id == 15)
                                                 <button class="btn btn-secondary date_change" id="button-date_{{$match->match->id}}" onclick="dateForm({{$match->match->id}})">{{__('Change date')}}</button>
                                                 <form id="change-date-form_{{$match->match->id}}" class="hidden" method="POST"
                                                       action="{{route("matches.change_date", $match->match->id)}}">
                                                     @csrf
-                                                    <label>
-                                                        <input name="date" type="date">
-                                                    </label>
-                                                    <label>
+                                                    <label for="date"></label>
+                                                        <input id="date" name="date" class="@error('date') is-invalid @enderror" type="date">
+                                                    <label for="league_season_id"></label>
                                                         <input name="league_season_id" type="hidden" value="{{$league_season_id}}">
-                                                    </label>
                                                     <input class="btn btn-primary" type="submit" value="{{__("Change")}}">
                                                 </form>
-                                            @endif
                                             @endrole
                                         </div>
                                         <div class="col">

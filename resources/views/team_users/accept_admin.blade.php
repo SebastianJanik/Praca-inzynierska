@@ -29,37 +29,35 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="form-group row hidden">
-                                                <div class="col-md-6">
-                                                    <label for="user_id"></label>
-                                                    <input id="user_id" class="" name="user_id" value="{{$user['id']}}">
-                                                </div>
+                                                <input type="text" class="hidden" name="user_id" id="user_id" value="{{$user['id']}}">
+                                                <input type="text" class="hidden" name="name" id="name" value="{{$user->name}}">
+                                                <input type="text" class="hidden" name="surname" id="surname" value="{{$user->surname}}">
                                             </div>
                                             <div class="form-group row-flex">
-                                                <label class="col-form-label" for="name">{{__('First name')}}</label>
-                                                <input type="text" readonly class="form-control-plaintext ml-1" name="name"
-                                                       id="name" value="{{$user->name}}">
+                                                <span class="text-body col-md-2">{{__('First name')}}</span>
+                                                <span class="text-body font-weight-bold">{{$user->name}}</span>
                                             </div>
                                             <div class="form-group row-flex">
-                                                <label class="col-form-label" for="surname">{{__('Surname')}}</label>
-                                                <input type="text" readonly class="form-control-plaintext ml-1" name="surname"
-                                                       id="surname" value="{{$user->surname}}">
+                                                <span class="text-body col-md-2">{{__('Surname')}}</span>
+                                                <span class="text-body font-weight-bold">{{$user->surname}}</span>
                                             </div>
                                             <div class="form-group row-flex">
-                                                <span class="text-body">{{__('Date of birth')}}</span>
-                                                <span class="text-body ml-1">{{$user->date_birth}}</span>
+                                                <span class="text-body col-md-2">{{__('Date of birth')}}</span>
+                                                <span class="text-body font-weight-bold">{{$user->date_birth}}</span>
                                             </div>
                                             <div class="form-group row-flex">
-                                                <span class="text-body">{{__('E-mail')}}</span>
-                                                <span class="text-body ml-1">{{$user->email}}<span>
+                                                <span class="text-body col-md-2">{{__('E-mail')}}</span>
+                                                <span class="text-body font-weight-bold">{{$user->email}}<span>
                                             </div>
                                             <div class="form-group row-flex">
-                                                <span class="text-body">{{__('Role')}}</span>
-                                                <span class="text-body ml-1">{{__($user->role)}}</span>
+                                                <span class="text-body col-md-2">{{__('Role')}}</span>
+                                                <span class="text-body font-weight-bold">{{__($user->role)}}</span>
 												<input class="hidden" name="role" id="role" value="{{$user->role}}">
                                             </div>
                                             @if(isset($user->team->name))
-                                                <div class="form-group row">
-                                                    {{$user->team->name}}
+                                                <div class="form-group row-flex">
+                                                    <span class="text-body col-md-2">{{__('Team')}}</span>
+                                                    <span class="text-body font-weight-bold">{{$user->team->name}}</span>
                                                 </div>
                                             @endif
                                             <div class="form-group row ">

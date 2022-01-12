@@ -9,7 +9,7 @@ use App\Models\Suspensions;
 use App\Models\TeamUsers;
 use App\Models\User;
 use App\Models\Team;
-use Illuminate\Notifications\Notification;
+use App\Models\Notifications;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -111,7 +111,7 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
         $user->status_id = $modelStatuses->getStatus('apply to be referee');
         $user->save();
-        Notification::create(
+        Notifications::create(
             [
                 'user_id' => $user->id,
                 'title' => 'Application to become a referee',

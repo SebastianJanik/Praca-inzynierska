@@ -25,12 +25,13 @@
                             <div class="col">{{ __('Birth date') }}</div>
                             <div class="col">{{$user->date_birth}}</div>
                         </div>
-                        <div class="row">
+                        <div class="row align-items-center d-flex">
                             <div class="col">{{ __('Status') }}</div>
-                            <div class="col">{{__($status->name)}}
+                            <div class="col">
+                                <span class="text-body">{{__($status->message)}}</span>
                                 @if($status->id == 4)
                                     <a href="{{route('suspensions.edit', $suspension->id)}}">
-                                        <button class="btn-warning">{{__('Edit suspension')}}</button>
+                                        <button class="btn btn-warning ml-1">{{__('Edit suspension')}}</button>
                                     </a>
                                 @endif
                             </div>
@@ -79,30 +80,26 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="float-right">
+                        <div class="row">
                             @if($canRemove)
-                            <div class="row">
+                            <div class="card-button col-auto">
                                 <form class="remove" method="POST" action="{{route('team_users.remove', $user->id)}}" >
                                     @csrf
                                     <div class="card-button">
-                                        <a href=>
-                                            <button class="btn-danger">{{__('Remove')}}</button>
-                                        </a>
+                                        <button class="btn btn-danger">{{__('Remove')}}</button>
                                     </div>
                                 </form>
                             </div>
-                            @endif
                             @role('admin')
-                            <div class="row">
-                                <div class="card-button">
-                                    <form class="suspend" method="POST" action="{{route('suspensions.create')}}">
-                                    @csrf
-                                        <input name="user_id" class="hidden" value="{{$user->id}}">
-                                        <button class="btn-warning">{{__('Suspend')}}</button>
-                                    </form>
-                                </div>
+                            <div class="card-button col-auto">
+                                <form class="suspend" method="POST" action="{{route('suspensions.create')}}">
+                                @csrf
+                                    <input name="user_id" class="hidden" value="{{$user->id}}">
+                                    <button class="btn btn-warning">{{__('Suspend')}}</button>
+                                </form>
                             </div>
                             @endrole
+                            @endif
                         </div>
                     </div>
                 </div>
