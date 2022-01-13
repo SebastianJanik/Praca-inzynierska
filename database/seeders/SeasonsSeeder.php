@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Statuses;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,19 +13,24 @@ class SeasonsSeeder extends Seeder
      *
      * @return void
      */
+    private $modelStatuses;
+
+    public function __construct()
+    {
+        $this->modelStatuses = new Statuses();
+    }
     public function run()
     {
+
         DB::table('seasons')->insert(
             [
-                'id'=>'1',
-                'status_id' => '1',
+                'status_id' => $this->modelStatuses->getStatus('inactive'),
                 'name' => 'Sezon pierwszy',
             ]
         );
         DB::table('seasons')->insert(
             [
-                'id'=>'2',
-                'status_id' => '2',
+                'status_id' => $this->modelStatuses->getStatus('active'),
                 'name' => 'Sezon drugi',
             ]
         );

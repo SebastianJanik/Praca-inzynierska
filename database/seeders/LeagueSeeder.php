@@ -16,14 +16,17 @@ class LeagueSeeder extends Seeder
     {
         DB::table('leagues')->insert(
             [
-                'id'=>'1',
-                'name' => 'Ekstraklasa',
+                'name' => 'Ekstraliga',
             ]
         );
         DB::table('leagues')->insert(
             [
-                'id'=>'2',
                 'name' => 'Druga liga',
+            ]
+        );
+        DB::table('leagues')->insert(
+            [
+                'name' => 'Trzecia liga',
             ]
         );
     }
