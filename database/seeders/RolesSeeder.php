@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class RolesSeeder extends Seeder
 {
@@ -12,43 +13,26 @@ class RolesSeeder extends Seeder
      *
      * @return void
      */
+
+    private $name;
+    private $roles;
+
+    public function __construct()
+    {
+        $this->name = (new Role())->getTable();
+        $this->roles = ['admin', 'player', 'coach', 'referee', 'user'];
+    }
+
     public function run()
     {
-        DB::table('roles')->insert(
-            [
-                'id' => '1',
-                'name' => 'admin',
-                'guard_name' => 'web'
-            ]
-        );
-        DB::table('roles')->insert(
-            [
-                'id' => '2',
-                'name' => 'player',
-                'guard_name' => 'web'
-            ]
-        );
-        DB::table('roles')->insert(
-            [
-                'id' => '3',
-                'name' => 'coach',
-                'guard_name' => 'web'
-            ]
-        );
-        DB::table('roles')->insert(
-            [
-                'id' => '4',
-                'name' => 'referee',
-                'guard_name' => 'web'
-            ]
-        );
-        DB::table('roles')->insert(
-            [
-                'id' => '5',
-                'name' => 'user',
-                'guard_name' => 'web'
-            ]
-        );
+        foreach ($this->roles as $role){
+            DB::table($this->name)->insert(
+                [
+                    'name' => $role,
+                    'guard_name' => 'web'
+                ]
+            );
+        }
     }
 
 }

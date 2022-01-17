@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\League;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,22 +13,24 @@ class LeagueSeeder extends Seeder
      *
      * @return void
      */
+
+    private $leagues;
+    private $name;
+
+    public function __construct()
+    {
+        $this->name = (new League())->getTable();
+        $this->leagues = ['Ekstraliga', 'Druga liga', 'Trzecia liga'];
+    }
+
     public function run()
     {
-        DB::table('leagues')->insert(
-            [
-                'name' => 'Ekstraliga',
-            ]
-        );
-        DB::table('leagues')->insert(
-            [
-                'name' => 'Druga liga',
-            ]
-        );
-        DB::table('leagues')->insert(
-            [
-                'name' => 'Trzecia liga',
-            ]
-        );
+        foreach ($this->leagues as $league){
+            DB::table($this->name)->insert(
+                [
+                    'name' => $league,
+                ]
+            );
+        }
     }
 }

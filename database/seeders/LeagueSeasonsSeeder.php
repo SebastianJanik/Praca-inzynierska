@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\League;
+use App\Models\LeagueSeasons;
+use App\Models\Season;
 use App\Models\Statuses;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,71 +17,37 @@ class LeagueSeasonsSeeder extends Seeder
      * @return void
      */
     private $modelStatuses;
+    private $name;
 
     public function __construct()
     {
         $this->modelStatuses = new Statuses();
+        $this->name = (new LeagueSeasons())->getTable();
     }
 
     public function run()
     {
         $created = $this->modelStatuses->getStatus('timetable created');
-        $notCreated = $this->modelStatuses->getStatus('timetable created');
-        DB::table('league_season')->insert(
-            [
-                'id' => '1',
-                'season_id' => '1',
-                'league_id' => '1',
-                'status_id' => $created
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '2',
-                'season_id' => '1',
-                'league_id' => '2',
-                'status_id' => $created
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '3',
-                'season_id' => '1',
-                'league_id' => '3',
-                'status_id' => $created
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '4',
-                'season_id' => '1',
-                'league_id' => null,
-                'status_id' => $notCreated
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '4',
-                'season_id' => '2',
-                'league_id' => '1',
-                'status_id' => '12'
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '5',
-                'season_id' => '2',
-                'league_id' => '2',
-                'status_id' => '12'
-            ]
-        );
-        DB::table('league_season')->insert(
-            [
-                'id' => '6',
-                'season_id' => '2',
-                'league_id' => null,
-                'status_id' => '12'
-            ]
-        );
+        $notCreated = $this->modelStatuses->getStatus("timetable doesn't exist");
+        $seasons = Season::all();
+        $leagues = League::all();
+        foreach ($seasons as $season){
+            foreach ($leagues as $league){
+                DB::table($this->name)->insert(
+                    [
+                        'season_id' => $season->id,
+                        'league_id' => $league->id,
+                        'status_id' => $created
+                    ]
+                );
+            }
+            DB::table($this->name)->insert(
+                [
+                    'season_id' => $season->id,
+                    'league_id' => null,
+                    'status_id' => $notCreated
+                ]
+            );
+        }
     }
 }
