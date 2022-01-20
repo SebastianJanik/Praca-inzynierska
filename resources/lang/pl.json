@@ -192,6 +192,7 @@
     "Suspensions that were imposed after this match" : "Zawieszania nałożone po tym meczu",
     "Suspensions expired after this match" : "Zawieszenia które wygasły po tym meczu",
     "Position" : "Pozycja",
-    "Removed from the team" : "Usunięty z drużyny"
+    "Removed from the team" : "Usunięty z drużyny",
+    "You don't have a team yet" : "Nie posiadasz jeszcze drużyny"
 
 }
