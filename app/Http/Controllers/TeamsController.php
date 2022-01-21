@@ -29,12 +29,19 @@ class TeamsController extends Controller
     {
         $team = Team::find($id);
         $season = Season::where("status_id", $this->modelStatuses->getStatus('incoming'))->first();
+        $teamsSeasons = $team->league_season;
+        foreach ($teamsSeasons as $teamsSeason)
+        {
+            $teamsSeason->seasonName = Season::find($teamsSeason->season_id)->name;
+            $teamsSeason->leagueName =  League::find($teamsSeason->league_id) ? League::find($teamsSeason->league_id)->name : 'None';
+            $teamsSeason->league_season_id = LeagueSeasons::where('season_id', $teamsSeason->season_id)->where('league_id', $teamsSeason->league_id)->first();
+        }
         if($season) {
             $league_season = $team->league_season->where('season_id', $season->id)->first();
             $leagues = $season->leagues;
-            return view('teams.show', compact('team', 'season', 'leagues', 'league_season'));
+            return view('teams.show', compact('team', 'season', 'leagues', 'league_season', 'teamsSeasons'));
         }
-        return view('teams.show', compact('team'));
+        return view('teams.show', compact('team', 'teamsSeasons'));
     }
 
     public function create()

@@ -24,15 +24,22 @@
                                     </a>
                                 </div>
                                 @if(isset($season))
+                                    @role('admin')
                                     <div class="card-button ml-1">
-                                        <button class="btn btn-secondary" id="move-button" onclick="showForm()">{{__('Move team')}}</button>
+                                        <button class="btn btn-secondary" id="move_button" onclick="showForm()">{{__('Move team')}}</button>
                                     </div>
+                                    @endrole
                                 @endif
                                 <div class="card-button ml-1">
                                     <a href="{{route('teams.index')}}">
                                         <button class="btn btn-secondary">{{__('All teams')}}</button>
                                     </a>
                                 </div>
+                                @if($teamsSeasons)
+                                <div class="card-button ml-1">
+                                    <button class="btn btn-secondary" id="history_button" onclick="showHistory()">{{__('Performances history')}}</button>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         @if(isset($season))
@@ -57,6 +64,28 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
+                        @if($teamsSeasons)
+                            <div class="row hidden" id="history">
+                                @foreach($teamsSeasons as $teamsSeason)
+                                    <div class="row row-flex bg-info m-1 p-1 d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <span class="text-body font-weight-bold">{{__($teamsSeason->seasonName)}} -</span>
+                                            <span class="text-body font-weight-bold">{{__($teamsSeason->leagueName)}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="{{route('league_seasons.show', $teamsSeason->league_season_id)}}">
+                                                <button class="btn btn-secondary">{{__("Timetable")}}</button>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="{{route('league_seasons.show_table', $teamsSeason->league_season_id)}}">
+                                                <button class="btn btn-secondary">{{__("Table")}}</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         @endif
                         @if(session('error'))
                             <div class="row">
@@ -85,7 +114,12 @@
 <script>
     function showForm()
     {
-        document.getElementById("move-button").style.display = "none"
+        document.getElementById("move_button").style.display = "none"
         document.getElementById("move-form").style.display = "block"
+    }
+    function showHistory()
+    {
+        document.getElementById("history_button").style.display = "none"
+        document.getElementById("history").style.display = "block"
     }
 </script>

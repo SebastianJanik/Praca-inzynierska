@@ -151,6 +151,7 @@
     "Coach accepted" : "Zaakceptowano trenera",
     "Coach declined" : "Odrzucono trenera",
     "Referee" : "Sędzia",
+    "referee" : "Sędzia",
     "Create suspension" : "Utwórz zawieszenie",
     "User suspended" : "Użytkownik zawieszony",
     "User suspension updated" : "Zawieszenie użytkownika zaktualizowane",
@@ -201,6 +202,8 @@
     "You don't have a team yet" : "Nie posiadasz jeszcze drużyny",
     "Timetable doesn't exist" : "Terminarz nie istnieje",
     "Table doesn't exist" : "Tabela nie istnieje",
-    "You didn't choose any user" : "Żaden gracz nie wystąpił w meczu"
+    "You didn't choose any user" : "Żaden gracz nie wystąpił w meczu",
+    "Performances history" : "Historia występów",
+    "None" : "Brak"
 
 }
