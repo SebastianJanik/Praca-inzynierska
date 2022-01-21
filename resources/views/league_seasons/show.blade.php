@@ -11,6 +11,11 @@
                             <span class="text-danger">{{ __($message) }}</span>
                         </div>
                         @enderror
+                    @if(isset($error))
+                        <div class="card-body">
+                            <span class="text-danger">{{__($error)}}</span>
+                        </div>
+                    @else
                     @foreach($data as $round)
                         <div class="card-header">{{$loop->iteration}}</div>
                         <div class="card-body">
@@ -91,6 +96,7 @@
                             @endforeach
                         </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
         </div>

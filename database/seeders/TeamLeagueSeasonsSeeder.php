@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\LeagueSeasons;
+use App\Models\Season;
+use App\Models\Team;
+use App\Models\TeamLeagueSeasons;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,39 +16,47 @@ class TeamLeagueSeasonsSeeder extends Seeder
      *
      * @return void
      */
+
+    private $teamsNumber;
+    private $name;
+
+    public function __construct()
+    {
+        $this->name = (new TeamLeagueSeasons())->getTable();
+        $this->teamsNumber = 7;
+    }
+
     public function run()
     {
-        DB::table('league_season_team')->insert(
-            [
-                'team_id' => '1',
-                'league_season_id' => '1'
-            ]
-        );
-        DB::table('league_season_team')->insert(
-            [
-                'team_id' => '1',
-                'league_season_id' => '4'
-            ]
-        );
-        DB::table('league_season_team')->insert(
-            [
-                'team_id' => '2',
-                'league_season_id' => '3'
-            ]
-        );
-        DB::table('league_season_team')->insert(
-            [
-                'team_id' => '2',
-                'league_season_id' => '4'
-            ]
-        );
-        for($i= 4; $i<10; $i++){
-            DB::table('league_season_team')->insert(
-                [
-                    'team_id' => $i,
-                    'league_season_id' => '1'
-                ]
-            );
+        $teams = Team::all()->toArray();
+        $seasons = Season::all();
+        foreach ($seasons as $season)
+        {
+            $league_seasons = LeagueSeasons::where('season_id', $season->id)->where('league_id', '!=', null)->get();
+            $index = 0;
+            foreach ($league_seasons as $league_season)
+            {
+                for($i=0; $i < $this->teamsNumber; $i++) {
+                    DB::table($this->name)->insert(
+                        [
+                            'team_id' => $teams[$index]['id'],
+                            'league_season_id' => $league_season->id
+                        ]
+                    );
+                    $index++;
+                }
+            }
+            $league_season = LeagueSeasons::where('season_id', $season->id)->whereNull('league_id')->first();
+            for ($index; $index < count($teams); $index++)
+            {
+                DB::table($this->name)->insert(
+                    [
+                        'team_id' => $teams[$index]['id'],
+                        'league_season_id' => $league_season->id
+                    ]
+                );
+            }
         }
+
     }
 }

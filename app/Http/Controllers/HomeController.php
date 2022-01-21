@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\League;
 use App\Models\LeagueSeasons;
 use App\Models\Matches;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 

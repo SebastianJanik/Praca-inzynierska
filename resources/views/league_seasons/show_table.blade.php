@@ -8,6 +8,9 @@
                     <div class="card-header">{{ __('Table') }}</div>
 
                     <div class="card-body">
+                        @if(isset($error))
+                            <span class="text-danger">{{__($error)}}</span>
+                        @else
                         <div class="row m-1 p-1 text-center">
                             <div class="col text-left">{{ __('Position') }}</div>
                             <div class="col">{{ __('Team') }}</div>
@@ -34,6 +37,7 @@
                             <div class="col">{{$team->goals_diff}}</div>
                         </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

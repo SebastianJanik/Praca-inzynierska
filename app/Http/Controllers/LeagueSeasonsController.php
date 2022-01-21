@@ -36,15 +36,14 @@ class LeagueSeasonsController extends Controller
 
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
         if($team_league_seasons->isEmpty())
-            return "Table doesn't exist";
-
+            return view('league_seasons.show')->with('error',"Timetable doesn't exist");
         $rounds = Round::where('league_season_id', $league_season_id)->get();
         if($rounds->isEmpty())
-            return "Table doesn't exist";
+            return view('league_seasons.show')->with('error',"Timetable doesn't exist");
 
         $matches = Matches::whereIn('round_id', $rounds->pluck('id'))->get();
         if($matches->isEmpty())
-            return "Table doesn't exist";
+            return view('league_seasons.show')->with('error',"Timetable doesn't exist");
 
         foreach ($rounds as $round)
             $data [] = (object)array (
@@ -59,15 +58,15 @@ class LeagueSeasonsController extends Controller
         $modelStatuses = new Statuses();
         $team_league_seasons = TeamLeagueSeasons::where('league_season_id', $league_season_id)->get();
         if($team_league_seasons->isEmpty())
-            return "Table doesn't exist";
+            return view('league_seasons.show_table')->with('error',"Table doesn't exist");
 
         $rounds = Round::where('league_season_id', $league_season_id)->get();
         if($rounds->isEmpty())
-            return "Table doesn't exist";
+            return view('league_seasons.show_table')->with('error',"Table doesn't exist");
 
         $matches = Matches::whereIn('round_id', $rounds->pluck('id'))->get();
         if($matches->isEmpty())
-            return "Table doesn't exist";
+            return view('league_seasons.show_table')->with('error',"Table doesn't exist");
 
         $matches = $matches->where('status_id', $modelStatuses->getStatus('accepted by admin'));
 

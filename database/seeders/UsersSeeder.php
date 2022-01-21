@@ -25,6 +25,7 @@ class UsersSeeder extends Seeder
     private $numberOfCoaches;
     private $numberOfUsers;
     private $today;
+    private $userRole;
 
     public function __construct()
     {
@@ -38,6 +39,7 @@ class UsersSeeder extends Seeder
         $this->numberOfReferees = 5;
         $this->numberOfCoaches = 23;
         $this->numberOfUsers = 5;
+        $this->userRole = Role::findByName('user');
     }
 
     public function run()
@@ -53,7 +55,7 @@ class UsersSeeder extends Seeder
     {
         $role = Role::findByName('player');
         for($i=1; $i <= $this->numberOfPlayers; $i++) {
-            DB::table($this->name)->insert(
+            $id = DB::table($this->name)->insertGetId(
                 [
                     'name' => $this->firstnames[array_rand($this->firstnames)],
                     'surname' => $this->surnames[array_rand($this->surnames)],
@@ -71,7 +73,14 @@ class UsersSeeder extends Seeder
                 [
                     'role_id' => $role->id,
                     'model_type' => 'App\Models\user',
-                    'model_id' => $i+1
+                    'model_id' => $id
+                ]
+            );
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id' => $this->userRole->id,
+                    'model_type' => 'App\Models\user',
+                    'model_id' => $id
                 ]
             );
         }
@@ -97,6 +106,13 @@ class UsersSeeder extends Seeder
         DB::table('model_has_roles')->insert(
             [
                 'role_id' => $role->id,
+                'model_type' => 'App\Models\user',
+                'model_id' => $id
+            ]
+        );
+        DB::table('model_has_roles')->insert(
+            [
+                'role_id' => $this->userRole->id,
                 'model_type' => 'App\Models\user',
                 'model_id' => $id
             ]
@@ -128,6 +144,13 @@ class UsersSeeder extends Seeder
                     'model_id' => $id
                 ]
             );
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id' => $this->userRole->id,
+                    'model_type' => 'App\Models\user',
+                    'model_id' => $id
+                ]
+            );
         }
     }
 
@@ -152,6 +175,13 @@ class UsersSeeder extends Seeder
             DB::table('model_has_roles')->insert(
                 [
                     'role_id' => $role->id,
+                    'model_type' => 'App\Models\user',
+                    'model_id' => $id
+                ]
+            );
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id' => $this->userRole->id,
                     'model_type' => 'App\Models\user',
                     'model_id' => $id
                 ]

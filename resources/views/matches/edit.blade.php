@@ -12,6 +12,11 @@
                                 <span class="text-danger">{{ __($error) }}</span>
                             </div>
                         @else
+                            @if(session('error'))
+                                <div class="row text-center">
+                                    <span class="text-danger">{{ __(session('error')) }}</span>
+                                </div>
+                            @endif
                         <form method="POST" action="{{ route('matches.update', $match->id) }}">
                             @csrf
                             @method('PATCH')

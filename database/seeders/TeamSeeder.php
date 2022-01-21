@@ -26,7 +26,7 @@ class TeamSeeder extends Seeder
     {
         $this->name = (new Team())->getTable();
         $this->modelStatuses = new Statuses();
-        $this->teamNames = ['Motor', 'Huragan', 'Górnik', 'Powiślak', 'POM', 'Sparta', 'Lewart', 'Lutnia', 'Kryształ', 'Stal', 'Granit', 'Gryf', 'Grom', 'Huczwa', 'Kłos', 'Igors', 'Start'];
+        $this->teamNames = ['Motor', 'Huragan', 'Górnik', 'Powiślak', 'POM', 'Sparta', 'Lewart', 'Lutnia', 'Kryształ', 'Stal', 'Granit', 'Gryf', 'Grom', 'Huczwa', 'Kłos', 'Igros', 'Start'];
         $this->towns = ['Bychawa', 'Kraśnik', 'Świdnik', 'Lublin', 'Zamość', 'Chełm', 'Krasnystaw', 'Krasnobród', 'Łęczna', 'Końskowola', 'Piotrowice', 'Łóków', 'Lubartów', 'Włodawa', 'Piszczac', 'Zakrzówek', 'Wilkołaz', 'Puławy', 'Nałęczów'];
         $this->streets = ['1 Maja', 'Bazylianów', 'Cicha', 'Długa', 'Fabryczna', 'Groszkowa', 'Hugo Kołłątaja', 'Ignacego Mościckiego', 'Jana Matejki', 'Krochmalna', 'Leopolda Staffa', 'Marii Curie-Skłodowskiej', 'Niepodległości', 'Okopowa', 'Plażowa', 'Robotnicza', 'Siewna', 'Tadeusza Kościuszki', 'Westerplatte', 'Zamojska'];
         $this->number = 23;

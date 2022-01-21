@@ -25,6 +25,10 @@
                             <div class="col">{{ __('Birth date') }}</div>
                             <div class="col">{{$user->date_birth}}</div>
                         </div>
+                            <div class="row">
+                                <div class="col">{{ __('Roles') }}</div>
+                                <div class="col">@foreach($roles as $role){{__($role)}} @endforeach</div>
+                            </div>
                         <div class="row align-items-center d-flex">
                             <div class="col">{{ __('Status') }}</div>
                             <div class="col">

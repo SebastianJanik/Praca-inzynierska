@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Round extends Model
 {
     use HasFactory;
+
+    protected $table = 'rounds';
+
     protected $fillable = [
         'name',
         'league_season_id'

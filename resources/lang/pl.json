@@ -26,8 +26,13 @@
     "Apply": "Dołącz",
     "Apply to the team": "Dołącz do drużyny",
     "Player": "Zawodnik",
+    "player": "Zawodnik",
     "Coach": "Trener",
+    "coach": "Trener",
+    "User": "Użytkownik",
+    "user": "Użytkownik",
     "Role": "Rola",
+    "Roles": "Role",
     "Users awaiting approval by the coach": "Użytkownicy oczekujący na akceptację trenera",
     "Users awaiting approval by the admin": "Użytkownicy oczekujący na akceptację admina",
     "Accept": "Akceptuj",
@@ -193,6 +198,9 @@
     "Suspensions expired after this match" : "Zawieszenia które wygasły po tym meczu",
     "Position" : "Pozycja",
     "Removed from the team" : "Usunięty z drużyny",
-    "You don't have a team yet" : "Nie posiadasz jeszcze drużyny"
+    "You don't have a team yet" : "Nie posiadasz jeszcze drużyny",
+    "Timetable doesn't exist" : "Terminarz nie istnieje",
+    "Table doesn't exist" : "Tabela nie istnieje",
+    "You didn't choose any user" : "Żaden gracz nie wystąpił w meczu"
 
 }

@@ -22,11 +22,14 @@ class DatabaseSeeder extends Seeder
 
     public function notHappySeeders()
     {
-        $this->call(SeasonsSeeder::class);
-        $this->call(LeagueSeeder::class);
+        $this->call(SeasonsSeeder::class);//Change count of seasons
+        $this->call(LeagueSeeder::class);//Change count of leagues
         $this->call(LeagueSeasonsSeeder::class);
-        $this->call(TeamSeeder::class);
-        $this->call(UsersSeeder::class);
+        $this->call(TeamSeeder::class);//Change count of teams
+        $this->call(UsersSeeder::class);//Change count of users
+        $this->call(TeamLeagueSeasonsSeeder::class);//Change count of teams in each league
+        $this->call(MatchTeamsSeeder::class);
+        $this->call(TeamUsersSeeder::class);//Change count of users in team
 
 //        $this->call(TeamLeagueSeasonsSeeder::class);
 //        $this->call(TeamUsersSeeder::class);

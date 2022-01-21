@@ -40,6 +40,7 @@ class UsersController extends Controller
         $logged_user = Auth::user();
         $logged_user_team = $logged_user->team;
         $user = User::find($id);
+        $roles = $user->getRoleNames();
         $canRemove = false;
         if(($logged_user_team->first() && $user->team->first() && $logged_user_team->first()->id == $user->team->first()->id && $logged_user->hasRole('coach')) || $logged_user->hasRole('admin'))
             $canRemove = true;
@@ -77,6 +78,7 @@ class UsersController extends Controller
             compact
             (
                 'user',
+                'roles',
                 'status',
                 'all_goals',
                 'all_assists',

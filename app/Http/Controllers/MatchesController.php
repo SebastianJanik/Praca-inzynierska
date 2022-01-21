@@ -17,7 +17,7 @@ class MatchesController extends Controller
     public function edit($match_id)
     {
         $match = Matches::find($match_id);
-        if (!isset($match)) 
+        if (!isset($match))
             return view('matches.edit')->with('error', "Match doesn't exist");
         if(!$match->date)
             return view('matches.edit')->with('error', 'You cannot edit a match without a match date set');
@@ -36,7 +36,7 @@ class MatchesController extends Controller
     {
         $data = request()->all();
         if (!isset($data['user_id'])) {
-            return 'There are no users';
+            return redirect()->route('matches.edit', ['id' => $match_id])->with('error', "You didn't choose any user");
         }
         foreach ($data['user_id'] as $id) {
             $users_id [] = $id;
