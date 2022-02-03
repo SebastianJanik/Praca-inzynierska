@@ -54,9 +54,9 @@ class MatchTeamsController extends Controller
         if(!isset($teams_id) || count($teams_id) < 2)
             return redirect()->route('match_teams.create')->with("error", 'Number of teams is to less to create timetable');
         $teams = Team::find($teams_id)->toArray();
-        $rounds = $matchTeam_helper->createRounds(count($teams), $leagueSeasons->id);
-        $matches = $matchTeam_helper->createMatches(count($teams), $rounds);
-        $team_pairs = $matchTeam_helper->createMatchTeams($teams, $matches);
+//        $rounds = $matchTeam_helper->createRounds(count($teams), $leagueSeasons->id);
+//        $matches = $matchTeam_helper->createMatches(count($teams), $rounds);
+        $team_pairs = $matchTeam_helper->createMatchTeams($teams, null);
         $leagueSeasons->status_id = $modelStatusy->getStatus('timetable created');
         $leagueSeasons->save();
         return redirect()->route('match_teams.create')->with("success", 'Timetable created succesfuly');

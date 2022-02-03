@@ -75,6 +75,8 @@ class MatchTeamHelper
 
     public function teamsPairs($teams)
     {
+        $teams = null;
+        $teams = [1,2,3,4,5,6,7,8];
         if (count($teams) % 2 != 0)
             $teams[] = null; //null means pause
         $max = count($teams);
@@ -101,7 +103,25 @@ class MatchTeamHelper
                 }
             }
         }
+        $this->test();
+        dd($tab);
         return $tab;
+    }
+
+    public function test()
+    {
+        $teams = [1,2,3,4,5,6,7,8];
+        $teamsCopy = $teams;
+        $max = count($teams);
+        $half = $max / 2;
+        $size = $max - 1;
+        for ($z = 0; $z < $max - 1 ; $z ++) {
+            for ($i = 0; $i < $half; $i++) {
+                $tab[] = array($teamsCopy[$i], $teamsCopy[$size - $i]);
+            }
+            array_splice($teamsCopy, 1, 0, $teamsCopy[$size]);
+            unset($teamsCopy[$max]);
+        }
     }
 
     public function matchesBelongsToRound($round_id)
