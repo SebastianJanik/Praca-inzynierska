@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -48,25 +50,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function allTeams()
+    public function allTeams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class, (new Team())->getTable());
     }
 
-    /*
-     * Return user's actual team
-     */
-    public function team()
+//    Return user's actual team
+    public function team(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class)
-            ->wherePivot('status_id', 9);
+        return $this->belongsToMany(Team::class, (new Team())->getTable())
+            ->wherePivot('status_id', (new Statuses())->getStatus('accepted by admin'));
     }
-    public function matches()
+
+    public function matches(): BelongsToMany
     {
         return $this->belongsToMany(Matches::class, (new MatchUsers())->getTable(), 'user_id','match_id');
     }
-    public function suspensions()
+
+    public function suspensions(): HasMany
     {
-        return $this->hasMany(Suspensions::class);
+        return $this->hasMany(Suspensions::class, (new Suspensions())->getTable());
     }
 }
