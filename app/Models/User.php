@@ -52,13 +52,13 @@ class User extends Authenticatable
 
     public function allTeams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, (new Team())->getTable());
+        return $this->belongsToMany(Team::class);
     }
 
 //    Return user's actual team
     public function team(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, (new Team())->getTable())
+        return $this->belongsToMany(Team::class, (new TeamUsers())->getTable(), 'user_id')
             ->wherePivot('status_id', (new Statuses())->getStatus('accepted by admin'));
     }
 
@@ -69,6 +69,6 @@ class User extends Authenticatable
 
     public function suspensions(): HasMany
     {
-        return $this->hasMany(Suspensions::class, (new Suspensions())->getTable());
+        return $this->hasMany(Suspensions::class);
     }
 }
