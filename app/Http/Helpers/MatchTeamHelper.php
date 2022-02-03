@@ -73,32 +73,31 @@ class MatchTeamHelper
         return $match_teams;
     }
 
-    public function teamsPairs($temp)
+    public function teamsPairs($teams)
     {
-        // $temp = ['1', '2', '3', '4', '5','6','7', '8', '9','10','11','12','13','14'];
-        if (count($temp) % 2 != 0)
-            $temp[] = null; //null means pause
-        $max = count($temp);
+        if (count($teams) % 2 != 0)
+            $teams[] = null; //null means pause
+        $max = count($teams);
         $size = $max - 1;
         $half = $max / 2;
-        $index = 0;
+        $tab = array();
         // first iteration
         for ($i = 0; $i < $half; $i++) {
-            $tab[] = array($temp[$i], $temp[$size - $i]);
+            $tab[] = array($teams[$i], $teams[$size - $i]);
         }
         // repeated iterations
         $index = 0;
         for ($i = 0; $i < $size - 1; $i++) {
-            $tab[] = array($temp[0], $temp[$size - $i - 1]);
+            $tab[] = array($teams[0], $teams[$size - $i - 1]);
             for ($j = 0; ($size - $i + $j <= $size) && ($j < $half - 1); $j++) {
                 $index = $size - $i - $j - 2;
                 if ($index <= 0)
                     $index = $size + $index;
-                $tab[] = array($temp[$size - $i + $j], $temp[$index]);
+                $tab[] = array($teams[$size - $i + $j], $teams[$index]);
             }
             if ($j < $half - 1) {
                 for ($k = 1; $j < $half - 1; $j++ && $k++) {
-                    $tab[] = array($temp[$k], $temp[$index - $k]);
+                    $tab[] = array($teams[$k], $teams[$index - $k]);
                 }
             }
         }
