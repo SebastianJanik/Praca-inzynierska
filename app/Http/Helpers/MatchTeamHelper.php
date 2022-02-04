@@ -50,7 +50,7 @@ class MatchTeamHelper
         foreach ($teams as $team) {
             $teams_id[] = $team['id'];
         }
-        $teams_pairs = $this->teamsPairs($teams_id);
+        $teams_pairs = $this->roundRobin($teams_id);
         foreach($teams_pairs as $team_pair){
             $teams_pairs [] = array($team_pair[1], $team_pair[0]);
         }
@@ -103,25 +103,25 @@ class MatchTeamHelper
                 }
             }
         }
-        $this->test();
-        dd($tab);
         return $tab;
     }
 
-    public function test()
+    public function roundRobin($teams): array
     {
-        $teams = [1,2,3,4,5,6,7,8];
-        $teamsCopy = $teams;
+        if (count($teams) % 2 != 0)
+            $teams[] = null; //null for pause
         $max = count($teams);
-        $half = $max / 2;
         $size = $max - 1;
-        for ($z = 0; $z < $max - 1 ; $z ++) {
-            for ($i = 0; $i < $half; $i++) {
-                $tab[] = array($teamsCopy[$i], $teamsCopy[$size - $i]);
+        $tab = array();
+
+        for ($z = 0; $z < $size ; $z ++) {
+            for ($i = 0; $i < $max/2; $i++) {
+                $tab[] = array($teams[$i], $teams[$size - $i]);
             }
-            array_splice($teamsCopy, 1, 0, $teamsCopy[$size]);
-            unset($teamsCopy[$max]);
+            array_splice($teams, 1, 0, $teams[$size]);
+            unset($teams[$max]);
         }
+        return $tab;
     }
 
     public function matchesBelongsToRound($round_id)
