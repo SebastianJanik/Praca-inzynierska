@@ -91,8 +91,7 @@ class LeagueSeasonsController extends Controller
                 $points = $matchTeamsHelper->matchTeamPoints($matchTeam->match_id, $matchTeam->team_id);
                 $goals_scored = $matchTeamsHelper->matchTeamGoalsScored($matchTeam->match_id, $matchTeam->team_id);
                 $goals_conceded = $matchTeamsHelper->matchTeamGoalsConceded($matchTeam->match_id, $matchTeam->team_id);
-                if(!is_int($points) || !is_int($goals_scored) || !is_int($goals_conceded))
-                    return 'Whoops something goes wrong';
+                if(!is_int($points) || !is_int($goals_scored) || !is_int($goals_conceded)) return null;
                 $goals_diff = $goals_scored - $goals_conceded;
                 $data[$key]->points += $points;
                 $data[$key]->goals_scored += $goals_scored;
@@ -102,10 +101,10 @@ class LeagueSeasonsController extends Controller
         }
         usort($data, function ($a, $b) : int {
             return
-                ($b->points <=> $a->points) * 1000 +// price ASC
-                ($b->goals_diff <=> $a->goals_diff) * 100 +// price ASC
-                ($b->goals_scored <=> $a->goals_scored) * 10 +// inStock DESC
-                ($a->goals_conceded <=> $b->goals_conceded); // isRecommended DESC
+                ($b->points <=> $a->points) * 1000 +
+                ($b->goals_diff <=> $a->goals_diff) * 100 +
+                ($b->goals_scored <=> $a->goals_scored) * 10 +
+                ($a->goals_conceded <=> $b->goals_conceded);
         });
         return view('league_seasons.show_table', compact('data'));
     }
