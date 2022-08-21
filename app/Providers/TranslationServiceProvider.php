@@ -16,18 +16,18 @@ class TranslationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::rememberForever('translations', function () {
-            $translations = collect();
-
-            foreach (['en', 'pl'] as $locale) { // suported locales
-                $translations[$locale] = [
-                    'php' => $this->phpTranslations($locale),
-                    'json' => $this->jsonTranslations($locale),
-                ];
-            }
-
-            return $translations;
-        });
+//        Cache::rememberForever('translations', function () {
+//            $translations = collect();
+//
+//            foreach (['en', 'pl'] as $locale) { // suported locales
+//                $translations[$locale] = [
+//                    'php' => $this->phpTranslations($locale),
+//                    'json' => $this->jsonTranslations($locale),
+//                ];
+//            }
+//
+//            return $translations;
+//        });
     }
 
     private function phpTranslations($locale)

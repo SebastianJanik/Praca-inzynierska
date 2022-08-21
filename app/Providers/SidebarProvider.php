@@ -28,25 +28,25 @@ class SidebarProvider extends ServiceProvider
      */
     public function boot()
     {
-        $modelStatuses = new Statuses();
-        $season = Season::where('status_id', $modelStatuses->getStatus('active'))->first();
-        $data = null;
-        if($season) {
-            $leagueSeasons = LeagueSeasons::where('status_id', $modelStatuses->getStatus('timetable created'))
-                ->where('season_id', $season->id)->get();
-            foreach ($leagueSeasons as $leagueSeason) {
-                $data [] = (object)array(
-                    'league_season_id' => $leagueSeason->id,
-                    'league' => League::find($leagueSeason->league_id)
-                );
-            }
-        }
-        View::share(
-            [
-                'seasons' => Season::all(),
-                'dataSidebar' => (object)$data,
-                'archive' => Season::where('status_id', $modelStatuses->getStatus('inactive'))->get()
-            ]
-        );
+//        $modelStatuses = new Statuses();
+//        $season = Season::where('status_id', $modelStatuses->getStatus('active'))->first();
+//        $data = null;
+//        if($season) {
+//            $leagueSeasons = LeagueSeasons::where('status_id', $modelStatuses->getStatus('timetable created'))
+//                ->where('season_id', $season->id)->get();
+//            foreach ($leagueSeasons as $leagueSeason) {
+//                $data [] = (object)array(
+//                    'league_season_id' => $leagueSeason->id,
+//                    'league' => League::find($leagueSeason->league_id)
+//                );
+//            }
+//        }
+//        View::share(
+//            [
+//                'seasons' => Season::all(),
+//                'dataSidebar' => (object)$data,
+//                'archive' => Season::where('status_id', $modelStatuses->getStatus('inactive'))->get()
+//            ]
+//        );
     }
 }
